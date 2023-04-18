@@ -17,6 +17,8 @@
 		7208215829EAC5AD00D36AF3 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7208215729EAC5AD00D36AF3 /* LoginView.swift */; };
 		7276F5DE29EAD77200A937DD /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7276F5DD29EAD77200A937DD /* Onboarding.swift */; };
 		7276F5E129EADAF200A937DD /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7276F5E029EADAF200A937DD /* Utils.swift */; };
+		7276F5E329EC02BB00A937DD /* Linkman.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7276F5E229EC02BB00A937DD /* Linkman.swift */; };
+		7276F5E729EC35D200A937DD /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7276F5E629EC35D200A937DD /* Account.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,8 @@
 		7208215729EAC5AD00D36AF3 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		7276F5DD29EAD77200A937DD /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		7276F5E029EADAF200A937DD /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		7276F5E229EC02BB00A937DD /* Linkman.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Linkman.swift; sourceTree = "<group>"; };
+		7276F5E629EC35D200A937DD /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +151,8 @@
 		7208215629EAC59400D36AF3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7276F5E229EC02BB00A937DD /* Linkman.swift */,
+				7276F5E629EC35D200A937DD /* Account.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -302,6 +308,8 @@
 				7208215829EAC5AD00D36AF3 /* LoginView.swift in Sources */,
 				7276F5DE29EAD77200A937DD /* Onboarding.swift in Sources */,
 				7208212E29E951B200D36AF3 /* ContentView.swift in Sources */,
+				7276F5E729EC35D200A937DD /* Account.swift in Sources */,
+				7276F5E329EC02BB00A937DD /* Linkman.swift in Sources */,
 				7208212C29E951B200D36AF3 /* orange_acceleratorApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,6 +9,10 @@ import SwiftUI
 
 @main
 struct orange_acceleratorApp: App {
+    init() {
+        Linkman.shared.presentation = true
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

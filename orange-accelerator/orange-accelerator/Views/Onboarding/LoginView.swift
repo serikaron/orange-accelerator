@@ -8,18 +8,22 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State var account: String = ""
+    @EnvironmentObject var account: Account
+    @State var phone: String = ""
     @State var password: String = ""
     
     var body: some View {
         VStack {
             OnboardingHeader()
             Spacer().frame(height: 75)
-            OnboardingInput(title: "登录帐号", inputText: $account)
+            OnboardingInput(title: "登录帐号", inputText: $phone)
             Spacer().frame(height: 35)
             OnboardingSecureInput(title: "登录密码", inputText: $password)
             Spacer().frame(height: 44)
             Button("登录"){
+                    Task {
+                        await account.login(phone: phone, password: password)
+                    }
             }
             .buttonStyle(OnboardingButton())
             Spacer().frame(height: 27)
