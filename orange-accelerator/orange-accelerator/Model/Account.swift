@@ -35,14 +35,14 @@ extension Account {
         }
         
         do {
-            guard let r = try await Request(
-                path: "/login",
-                method: .GET,
-                body: LoginBody(phone: phone, password: password),
-                mockResponse: LoginResponse(token: "mockToken")
-            )
-                .make()?
-                .decode() as LoginResponse?
+            guard
+                let r = try await Request()
+                    .with(\.path, setTo: "/login")
+                    .with(\.method, setTo: .GET)
+                    .with(\.body, setTo: LoginBody(phone: phone, password: password))
+                    .with(\.mockResponse, setTo: LoginResponse(token: "mockToken"))
+                    .make()?
+                    .decoded() as LoginResponse?
             else {
                 error = LoginError.loginFailed
                 return

@@ -18,7 +18,7 @@ class Linkman {
     func make(request: Request) async throws -> Data? {
         if (presentation || request.forceMock),
             let mockResponse = request.mockResponse {
-            return try JSONEncoder().encode(mockResponse)
+            return try mockResponse.encoded()
         }
         
         let r = try request.urlRequest(with: baseURL)
@@ -32,11 +32,11 @@ enum HTTPMethod: String {
 }
 
 // MARK: - Request
-struct Request {
+class Request: Withable {
     typealias QueryList = [String]
     
-    var path: String
-    var method: HTTPMethod
+    var path: String = ""
+    var method: HTTPMethod = .GET
     var query: [String: String]?
     var body: Encodable?
     var headers: [String: String]?
@@ -72,8 +72,7 @@ fileprivate extension Request {
         out.httpMethod = method.rawValue
         if let body = body {
             do {
-                let encoded = try JSONEncoder().encode(body)
-                out.httpBody = encoded
+                out.httpBody = try body.encoded()
             } catch {
                 print("invalid body \(body)")
                 throw RequestError.invalidBody
@@ -94,8 +93,3 @@ extension Request {
     }
 }
 
-extension Data {
-    func decode<T: Decodable>() throws -> T {
-        return try JSONDecoder().decode(T.self, from: self)
-    }
-}
