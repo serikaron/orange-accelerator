@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var account = Account()
+    @EnvironmentObject var model: Model
     
     var body: some View {
-        if account.isLogged {
+        if model.isLogged {
             Text("Loggined")
         } else {
             LoginView()
-                .environmentObject(account)
+            .environmentObject(model)
         }
     }
 }
