@@ -14,28 +14,38 @@ extension Model {
         case invalidPhone
         case invalidPassword
         case loginFailed
+        
+        var message: String {
+            switch self {
+            case .invalidPhone: return "phone"
+            case .invalidPassword: return "password"
+            case .loginFailed: return "loginFailed"
+            }
+        }
     }
     
     func login(phone: String, password: String) async {
         if (phone.isEmpty) {
-            error = LoginError.invalidPhone
+            errorMessage = LoginError.invalidPhone.message
             return
         }
         
         if (password.isEmpty) {
-            error = LoginError.invalidPassword
+            errorMessage = LoginError.invalidPassword.message
             return
         }
         
+        isLoading = true
         do {
             let loginRsp = try await makeLogin(phone: phone, password: password)
             token = loginRsp.token
-            isLogged = true
-            error = nil
+            isLoggedIn = true
+            errorMessage = nil
         } catch {
             print("make login request failed: \(error)")
-            self.error = LoginError.loginFailed
+            self.errorMessage = LoginError.loginFailed.message
         }
+        isLoading = false
     }
 }
 

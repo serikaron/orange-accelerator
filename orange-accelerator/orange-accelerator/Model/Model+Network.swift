@@ -41,6 +41,7 @@ extension Model {
 private extension Model {
     func make(request: Request) async throws -> Data {
         if (standalone || request.forceStandalone) {
+            try await Task.sleep(nanoseconds: UInt64.random(in: 10_000_000...200_000_000))
             return try (request.standaloneRessponse ?? EmptyResponse()).encoded()
         }
         
