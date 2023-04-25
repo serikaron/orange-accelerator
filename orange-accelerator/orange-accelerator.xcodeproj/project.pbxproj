@@ -8,11 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		72022A5029F3DB1B00DC9012 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72022A4F29F3DB1B00DC9012 /* Model.swift */; };
-		72022A5229F3DCCF00DC9012 /* Model+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72022A5129F3DCCF00DC9012 /* Model+Network.swift */; };
+		72022A5229F3DCCF00DC9012 /* Linkman.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72022A5129F3DCCF00DC9012 /* Linkman.swift */; };
 		72022A5429F3FF6400DC9012 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72022A5329F3FF6400DC9012 /* RegisterView.swift */; };
 		72022A5629F409B300DC9012 /* View+erase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72022A5529F409B300DC9012 /* View+erase.swift */; };
 		72022A5A29F418A100DC9012 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72022A5929F418A100DC9012 /* ErrorView.swift */; };
-		72022A5E29F4273100DC9012 /* Model+ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72022A5D29F4273100DC9012 /* Model+ErrorView.swift */; };
+		72022A5E29F4273100DC9012 /* ErrorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72022A5D29F4273100DC9012 /* ErrorService.swift */; };
+		72022AC029F7C23C00DC9012 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72022ABF29F7C23C00DC9012 /* Box.swift */; };
+		72022AC229F7C68A00DC9012 /* String+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72022AC129F7C68A00DC9012 /* String+Error.swift */; };
 		7208212C29E951B200D36AF3 /* orange_acceleratorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7208212B29E951B200D36AF3 /* orange_acceleratorApp.swift */; };
 		7208212E29E951B200D36AF3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7208212D29E951B200D36AF3 /* ContentView.swift */; };
 		7208213029E951B300D36AF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7208212F29E951B300D36AF3 /* Assets.xcassets */; };
@@ -47,11 +49,13 @@
 
 /* Begin PBXFileReference section */
 		72022A4F29F3DB1B00DC9012 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		72022A5129F3DCCF00DC9012 /* Model+Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Model+Network.swift"; sourceTree = "<group>"; };
+		72022A5129F3DCCF00DC9012 /* Linkman.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Linkman.swift; sourceTree = "<group>"; };
 		72022A5329F3FF6400DC9012 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		72022A5529F409B300DC9012 /* View+erase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+erase.swift"; sourceTree = "<group>"; };
 		72022A5929F418A100DC9012 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
-		72022A5D29F4273100DC9012 /* Model+ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Model+ErrorView.swift"; sourceTree = "<group>"; };
+		72022A5D29F4273100DC9012 /* ErrorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorService.swift; sourceTree = "<group>"; };
+		72022ABF29F7C23C00DC9012 /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
+		72022AC129F7C68A00DC9012 /* String+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Error.swift"; sourceTree = "<group>"; };
 		7208212829E951B200D36AF3 /* orange-accelerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "orange-accelerator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7208212B29E951B200D36AF3 /* orange_acceleratorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = orange_acceleratorApp.swift; sourceTree = "<group>"; };
 		7208212D29E951B200D36AF3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -166,10 +170,11 @@
 		7208215629EAC59400D36AF3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				72022A5129F3DCCF00DC9012 /* Model+Network.swift */,
+				72022A5129F3DCCF00DC9012 /* Linkman.swift */,
 				7276F5E629EC35D200A937DD /* Model+Account.swift */,
 				72022A4F29F3DB1B00DC9012 /* Model.swift */,
-				72022A5D29F4273100DC9012 /* Model+ErrorView.swift */,
+				72022A5D29F4273100DC9012 /* ErrorService.swift */,
+				72022ABF29F7C23C00DC9012 /* Box.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -199,6 +204,7 @@
 				7276F5E929EE20C400A937DD /* Codable+JSON.swift */,
 				7276F5EB29EE215900A937DD /* Withable.swift */,
 				72022A5529F409B300DC9012 /* View+erase.swift */,
+				72022AC129F7C68A00DC9012 /* String+Error.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -336,15 +342,17 @@
 				72022A5429F3FF6400DC9012 /* RegisterView.swift in Sources */,
 				7276F5E129EADAF200A937DD /* Utils.swift in Sources */,
 				7208215829EAC5AD00D36AF3 /* LoginView.swift in Sources */,
-				72022A5E29F4273100DC9012 /* Model+ErrorView.swift in Sources */,
+				72022A5E29F4273100DC9012 /* ErrorService.swift in Sources */,
 				7276F5EC29EE215900A937DD /* Withable.swift in Sources */,
 				7276F5DE29EAD77200A937DD /* Onboarding.swift in Sources */,
 				7208212E29E951B200D36AF3 /* ContentView.swift in Sources */,
 				72022A5029F3DB1B00DC9012 /* Model.swift in Sources */,
 				7276F5EA29EE20C400A937DD /* Codable+JSON.swift in Sources */,
+				72022AC229F7C68A00DC9012 /* String+Error.swift in Sources */,
+				72022AC029F7C23C00DC9012 /* Box.swift in Sources */,
 				7276F5E729EC35D200A937DD /* Model+Account.swift in Sources */,
 				72022A5629F409B300DC9012 /* View+erase.swift in Sources */,
-				72022A5229F3DCCF00DC9012 /* Model+Network.swift in Sources */,
+				72022A5229F3DCCF00DC9012 /* Linkman.swift in Sources */,
 				72022A5A29F418A100DC9012 /* ErrorView.swift in Sources */,
 				7208212C29E951B200D36AF3 /* orange_acceleratorApp.swift in Sources */,
 			);

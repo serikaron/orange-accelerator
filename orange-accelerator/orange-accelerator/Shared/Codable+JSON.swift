@@ -18,3 +18,10 @@ extension Data {
         return try JSONDecoder().decode(T.self, from: self)
     }
 }
+
+typealias JSONDict = [String: Any]
+extension JSONDict {
+    func encoded() throws -> Data {
+        try JSONSerialization.data(withJSONObject: self)
+    }
+}

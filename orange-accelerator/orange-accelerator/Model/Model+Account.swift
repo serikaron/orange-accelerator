@@ -37,7 +37,7 @@ extension Model {
         
         isLoading = true
         do {
-            let loginRsp = try await makeLogin(phone: phone, password: password)
+            let loginRsp = try await Linkman.shared.login(phone: phone, password: password)
             token = loginRsp.token
             isLoggedIn = true
             errorMessage = nil

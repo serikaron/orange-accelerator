@@ -34,3 +34,13 @@ extension Model {
             })
     }
 }
+
+@MainActor
+class ErrorService: ObservableObject {
+    @Published var showError = false
+    @Published var errorMessage: String = ""
+    
+    init() {
+        
+    }
+}
