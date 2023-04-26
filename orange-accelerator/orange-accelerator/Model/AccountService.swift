@@ -8,44 +8,39 @@
 import Foundation
 
 
-// MARK: - login
-extension Model {
-    enum LoginError: Error {
-        case invalidPhone
-        case invalidPassword
-        case loginFailed
+class AccountService: ObservableObject {
+    enum AccountError: Error {
+        case emptyPhone
+        case emptyPassword
         
         var message: String {
             switch self {
-            case .invalidPhone: return "phone"
-            case .invalidPassword: return "password"
-            case .loginFailed: return "loginFailed"
+            case.emptyPhone: return "手机不能为空"
+            case .emptyPassword: return "密码不能为空"
             }
         }
     }
     
     func login(phone: String, password: String) async {
         if (phone.isEmpty) {
-            errorMessage = LoginError.invalidPhone.message
+            Box.sendError(AccountError.emptyPhone)
             return
         }
         
         if (password.isEmpty) {
-            errorMessage = LoginError.invalidPassword.message
+            Box.sendError(AccountError.emptyPassword)
             return
         }
         
-        isLoading = true
+        Box.setLoading(true)
         do {
             let loginRsp = try await Linkman.shared.login(phone: phone, password: password)
-            token = loginRsp.token
-            isLoggedIn = true
-            errorMessage = nil
+            // TODO: set token
+            // TODO: set login
         } catch {
             print("make login request failed: \(error)")
-            self.errorMessage = LoginError.loginFailed.message
         }
-        isLoading = false
+        Box.setLoading(false)
     }
 }
 

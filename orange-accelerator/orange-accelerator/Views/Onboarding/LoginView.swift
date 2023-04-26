@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @EnvironmentObject var model: Model
+    @EnvironmentObject var service: AccountService
     @State var phone: String = ""
     @State var password: String = ""
     
@@ -22,7 +22,7 @@ struct LoginView: View {
             Spacer().frame(height: 44)
             Button("登录"){
                     Task {
-                        await model.login(phone: phone, password: password)
+                        await service.login(phone: phone, password: password)
                     }
             }
             .buttonStyle(OnboardingButton())

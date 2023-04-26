@@ -14,3 +14,13 @@ class Box {
     let errorSubject = CurrentValueSubject<Error?, Never>(nil)
     let loadingSubject = CurrentValueSubject<Bool, Never>(false)
 }
+
+extension Box {
+    static func sendError(_ error: Error?) {
+        Box.shared.errorSubject.send(error)
+    }
+    
+    static func setLoading(_ loading: Bool) {
+        Box.shared.loadingSubject.send(loading)
+    }
+}

@@ -14,13 +14,6 @@ class Model: ObservableObject {
     // Account
     @Published var isLoggedIn: Bool = false
     
-    // overlay
-    @Published var isLoading = false
-    @Published var errorMessage: String? = nil
-    @Published var errorViewAlpha: Double = 0
-    var vanTimer: Timer?
-    var cleanTimer: Timer?
-    
     // network
     var standalone = false
     var token: String? = nil

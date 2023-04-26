@@ -35,25 +35,7 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
             .environmentObject(Model())
             .previewDisplayName("MainContent")
-        ContentView()
-            .environmentObject(
-                Model().withErrorMessage(Model.LoginError.invalidPassword.message)
-            )
-            .previewDisplayName("Error")
-        ContentView()
-            .environmentObject(Model().withLoading())
-            .previewDisplayName("Loading")
     }
 }
 
-fileprivate extension Model {
-    func withErrorMessage(_ errorMessage: String) -> Model {
-        self.errorMessage = errorMessage
-        return self
-    }
-    func withLoading() -> Model {
-        self.isLoading = true
-        return self
-    }
-}
 

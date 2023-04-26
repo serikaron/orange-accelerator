@@ -103,7 +103,7 @@ private extension Linkman {
             request._response = rsp
         } catch {
             if request.sendError {
-                Box.shared.errorSubject.send(error)
+                Box.sendError(error)
             }
             if request.throwError {
                 throw error
