@@ -8,23 +8,21 @@
 import SwiftUI
 
 struct ErrorView: View {
-    @EnvironmentObject var model: Model
+    @StateObject private var service = ErrorService()
+    
+    @State private var alpha: Double = 0
     
     var body: some View {
-        Text(model.errorMessage ?? "")
+        Text(service.errorMessage ?? "")
             .padding(15)
             .background(Color.black.opacity(0.5))
             .foregroundColor(.white)
             .cornerRadius(15)
-            .opacity(model.errorViewAlpha)
-            .onAppear {
-                model.onErrorViewAppear()
-                model.resetErrorViewTimer()
-            }
-            .onReceive(model.$errorMessage) { msg in
-                print("onReceive, msg: \(msg)")
-                if msg != nil {
-                    model.resetErrorViewTimer()
+            .opacity(alpha)
+            .onReceive(service.$showError) { show in
+                print("onChange")
+                withAnimation {
+                    alpha = show ? 1 : 0
                 }
             }
     }
@@ -33,6 +31,5 @@ struct ErrorView: View {
 struct ErrorView_Previews: PreviewProvider {
     static var previews: some View {
         ErrorView()
-            .environmentObject(Model.shared)
     }
 }

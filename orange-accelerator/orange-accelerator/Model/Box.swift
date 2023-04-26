@@ -12,4 +12,5 @@ class Box {
     static let shared = Box()
     
     let errorSubject = CurrentValueSubject<Error?, Never>(nil)
+    let loadingSubject = CurrentValueSubject<Bool, Never>(false)
 }

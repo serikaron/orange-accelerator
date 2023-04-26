@@ -38,20 +38,10 @@ extension Color {
     }
 }
 
-struct OrangeProgress: View {
-    var body: some View {
-        ProgressView()
-            .scaleEffect(1.5)
-            .progressViewStyle(CircularProgressViewStyle(tint: .main))
-    }
-}
-
 struct Utils_Previews: PreviewProvider {
     static var previews: some View {
         Color.main
             .frame(width: 20, height: 20)
             .previewDisplayName("Color")
-        OrangeProgress()
-            .previewDisplayName("OrangeProgress")
     }
 }

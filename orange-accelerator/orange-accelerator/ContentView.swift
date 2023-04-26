@@ -13,19 +13,8 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             content
-            if model.isLoading {
-                OrangeProgress()
-                    .background(
-                        Color.black
-                            .opacity(0.15)
-                            .frame(width: 100, height: 100)
-                            .cornerRadius(15)
-                    )
-            }
-            if model.errorMessage != nil {
-                ErrorView()
-                    .environmentObject(model)
-            }
+            LoadingView()
+            ErrorView()
         }
     }
     
