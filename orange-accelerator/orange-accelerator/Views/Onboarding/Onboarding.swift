@@ -13,10 +13,11 @@ struct OnboardingHeader: View {
             Image("logo")
             Spacer().frame(height: 36)
             Text("橙子加速器")
-                .font(.system(size: 30).bold())
+                .orangeText(size: 30, color: .c000000, weight: .bold)
+//                .font(.system(size: 30).bold())
             Spacer().frame(height: 14.5)
             Text("开启橙子加速器，立即实现真正的在线隐私")
-                .font(.system(size: 15))
+                .orangeText(size: 15, color: .c000000)
         }
     }
 }
@@ -49,18 +50,18 @@ struct OnboardingSecureInput: View {
     var body: some View {
         VStack {
             Text(title)
-            .font(.system(size: 15))
+                .orangeText(size: 15, color: .c000000)
                 .frame(maxWidth: .infinity, alignment: .leading)
             HStack {
                 ZStack {
                     Group {
                         if show {
                             TextField("", text: $inputText)
-                                .font(.system(size: 15))
+                                .orangeText(size: 15, color: .c000000)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         } else {
                             SecureField("", text: $inputText)
-                                .font(.system(size: 15))
+                                .orangeText(size: 15, color: .c000000)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         }
                     }
@@ -85,8 +86,7 @@ struct OnboardingButton: ButtonStyle {
         configuration.label
             .frame(maxWidth: .infinity)
             .frame(height: 50)
-            .font(.system(size: 16))
-            .foregroundColor(.white)
+            .orangeText(size: 16, color: .white)
             .background(Color.main)
             .cornerRadius(25)
     }

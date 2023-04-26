@@ -17,6 +17,7 @@
 		72022AC229F7C68A00DC9012 /* String+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72022AC129F7C68A00DC9012 /* String+Util.swift */; };
 		72022AC429F8FF8300DC9012 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72022AC329F8FF8300DC9012 /* LoadingView.swift */; };
 		72022AC629F9086700DC9012 /* TokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72022AC529F9086700DC9012 /* TokenService.swift */; };
+		72022AC829F9198F00DC9012 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72022AC729F9198F00DC9012 /* OnboardingView.swift */; };
 		7208212C29E951B200D36AF3 /* orange_acceleratorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7208212B29E951B200D36AF3 /* orange_acceleratorApp.swift */; };
 		7208212E29E951B200D36AF3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7208212D29E951B200D36AF3 /* ContentView.swift */; };
 		7208213029E951B300D36AF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7208212F29E951B300D36AF3 /* Assets.xcassets */; };
@@ -60,6 +61,7 @@
 		72022AC129F7C68A00DC9012 /* String+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Util.swift"; sourceTree = "<group>"; };
 		72022AC329F8FF8300DC9012 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		72022AC529F9086700DC9012 /* TokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenService.swift; sourceTree = "<group>"; };
+		72022AC729F9198F00DC9012 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		7208212829E951B200D36AF3 /* orange-accelerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "orange-accelerator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7208212B29E951B200D36AF3 /* orange_acceleratorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = orange_acceleratorApp.swift; sourceTree = "<group>"; };
 		7208212D29E951B200D36AF3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				7208215729EAC5AD00D36AF3 /* LoginView.swift */,
 				72022A5329F3FF6400DC9012 /* RegisterView.swift */,
 				7276F5DD29EAD77200A937DD /* Onboarding.swift */,
+				72022AC729F9198F00DC9012 /* OnboardingView.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 				72022A5029F3DB1B00DC9012 /* Model.swift in Sources */,
 				72022AC629F9086700DC9012 /* TokenService.swift in Sources */,
 				7276F5EA29EE20C400A937DD /* Codable+JSON.swift in Sources */,
+				72022AC829F9198F00DC9012 /* OnboardingView.swift in Sources */,
 				72022AC229F7C68A00DC9012 /* String+Util.swift in Sources */,
 				72022AC029F7C23C00DC9012 /* Box.swift in Sources */,
 				7276F5E729EC35D200A937DD /* AccountService.swift in Sources */,

@@ -23,7 +23,7 @@ struct ContentView: View {
             if model.isLoggedIn {
                 Text("Loggined")
             } else {
-                LoginView()
+                OnboardingView()
                     .environmentObject(model)
             }
         }
