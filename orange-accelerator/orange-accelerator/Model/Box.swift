@@ -13,6 +13,8 @@ class Box {
     
     let errorSubject = CurrentValueSubject<Error?, Never>(nil)
     let loadingSubject = CurrentValueSubject<Bool, Never>(false)
+    
+    let tokenSubject = CurrentValueSubject<String?, Never>(UserDefaults.token)
 }
 
 extension Box {
@@ -21,6 +23,12 @@ extension Box {
     }
     
     static func setLoading(_ loading: Bool) {
-        Box.shared.loadingSubject.send(loading)
+        DispatchQueue.main.async {
+            Box.shared.loadingSubject.send(loading)
+        }
+    }
+    
+    static func setToken(_ token: String?) {
+        Box.shared.tokenSubject.send(token)
     }
 }

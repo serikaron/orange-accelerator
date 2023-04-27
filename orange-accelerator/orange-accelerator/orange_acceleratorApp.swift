@@ -9,20 +9,14 @@ import SwiftUI
 
 @main
 struct orange_acceleratorApp: App {
-    @StateObject var model = Model.shared
-        .withStandalone()
+    init() {
+        Linkman.shared.standalone = true
+    }
     
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(model)
         }
     }
 }
 
-extension Model {
-    func withStandalone() -> Model {
-        self.standalone = true
-        return self
-    }
-}

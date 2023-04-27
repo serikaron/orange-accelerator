@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var model: Model
+    @StateObject private var tokenService = TokenService()
     
     var body: some View {
         ZStack {
@@ -20,11 +20,14 @@ struct ContentView: View {
     
     private var content: some View {
         Group {
-            if model.isLoggedIn {
-                Text("Loggined")
+            if tokenService.isLoggedIn {
+                Button {
+                    Box.setToken(nil)
+                } label: {
+                    Text("Logout")
+                }
             } else {
                 OnboardingView()
-                    .environmentObject(model)
             }
         }
     }
@@ -33,7 +36,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environmentObject(Model())
             .previewDisplayName("MainContent")
     }
 }

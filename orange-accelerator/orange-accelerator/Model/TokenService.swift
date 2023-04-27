@@ -2,19 +2,39 @@
 //  TokenService.swift
 //  orange-accelerator
 //
-//  Created by serika on 2023/4/26.
+//  Created by serika on 2023/4/27.
 //
 
-import SwiftUI
+import Foundation
+import Combine
 
-struct TokenService: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+@MainActor
+class TokenService: ObservableObject {
+    @Published var isLoggedIn: Bool = false
+    
+    var cancelable: Cancellable?
+    
+    init() {
+        Box.shared.tokenSubject
+            .map { $0 != nil }
+            .receive(on: RunLoop.main)
+            .assign(to: &$isLoggedIn)
+        
+        cancelable = Box.shared.tokenSubject
+            .dropFirst()
+            .sink(receiveValue: { token in
+                UserDefaults.token = token
+            })
     }
 }
 
-struct TokenService_Previews: PreviewProvider {
-    static var previews: some View {
-        TokenService()
+extension UserDefaults {
+    static var token: String? {
+        get {
+            UserDefaults.orange.string(forKey: "token")
+        }
+        set(token) {
+            UserDefaults.orange.setValue(token, forKey: "token")
+        }
     }
 }

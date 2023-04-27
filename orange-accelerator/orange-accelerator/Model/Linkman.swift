@@ -19,12 +19,12 @@ private extension URLComponents {
 }
 
 enum NetworkError: Error, LocalizedError {
-    case domainError(Int, String)
+    case domainError(Int)
     
     var errorDescription: String? {
         switch self {
-        case let .domainError(code, msg):
-            return "DomainError:{code:\(code), msg:\(msg)}"
+        case let .domainError(code):
+            return "DomainError:{code:\(code)}"
         }
     }
 }
@@ -36,18 +36,33 @@ class Linkman{
     var token: String? = nil
     
     struct LoginResponse: Codable {
-        let token: String
+        let access_token: String
     }
     
     func login(phone: String, password: String) async throws -> LoginResponse {
         return try await Request()
             .with(\.path, setTo: "/login")
-            .with(\.method, setTo: .GET)
+            .with(\.method, setTo: .POST)
             .with(\.body, setTo: ["phone": phone, "password": password])
-            .with(\.standaloneResponse, setTo: LoginResponse(token: "mockToken"))
+            .with(\.standaloneResponse, setTo: LoginResponse(access_token: "mockToken"))
             .make()
             .response()
             .decodedData() as LoginResponse
+    }
+    
+    struct RegisterResponse: Codable {
+        let access_token: String
+    }
+    
+    func register(phone: String, password: String) async throws -> RegisterResponse {
+        return try await Request()
+            .with(\.path, setTo: "/register")
+            .with(\.method, setTo: .POST)
+            .with(\.body, setTo: ["phone": phone, "password": password])
+            .with(\.standaloneResponse, setTo: RegisterResponse(access_token: "mockToken"))
+            .make()
+            .response()
+            .decodedData() as RegisterResponse
     }
 }
 
@@ -55,7 +70,7 @@ private extension Linkman {
     func make(request: Request) async throws {
         do {
             if (standalone || request.forceStandalone) {
-                request._response = Response(code: 200, message: "success", data: try request.standaloneResponse?.encoded())
+                request._response = Response(err_code: 0, data: try request.standaloneResponse?.encoded())
                 try await Task.sleep(nanoseconds: UInt64.random(in: 10_000_000...200_000_000))
                 return
             }
@@ -95,8 +110,8 @@ private extension Linkman {
             
             let rsp = try data.decoded() as Response
             
-            guard rsp.code == 0 else {
-                throw NetworkError.domainError(rsp.code, rsp.message)
+            guard rsp.err_code == 0 else {
+                throw NetworkError.domainError(rsp.err_code)
             }
             
             
@@ -154,8 +169,7 @@ private class Request: Withable {
 
 // MARK: - Response
 private struct Response: Decodable {
-    let code: Int
-    let message: String
+    let err_code: Int
     let data: Data?
     
     func decodedData<T: Decodable>() throws -> T {

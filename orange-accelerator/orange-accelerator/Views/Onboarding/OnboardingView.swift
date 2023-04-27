@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct OnboardingView: View {
+    @StateObject private var service = AccountService()
+    
     enum Page {
         case login, register
     }
@@ -15,10 +17,13 @@ struct OnboardingView: View {
     @State private var page = Page.login
     
     var body: some View {
-        switch page {
-        case .login: LoginView(page: $page)
-        case .register: RegisterView(page: $page)
+        Group {
+            switch page {
+            case .login: LoginView(page: $page)
+            case .register: RegisterView(page: $page)
+            }
         }
+        .environmentObject(service)
     }
 }
 

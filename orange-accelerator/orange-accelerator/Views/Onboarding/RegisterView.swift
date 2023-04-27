@@ -30,7 +30,7 @@ struct RegisterView: View {
             Spacer().frame(height: 41.5)
             Button("立即注册"){
                     Task {
-                        await service.login(phone: phone, password: password)
+                        await service.register(phone: phone, password: password, password1: password2)
                     }
             }
             .buttonStyle(OnboardingButton())
@@ -38,6 +38,7 @@ struct RegisterView: View {
             HStack(spacing: 2) {
                 Toggle(isOn: $checked, label: {})
                     .toggleStyle(OrangeCheckBoxStyle())
+                    .frame(width: 20, height: 20)
                 Spacer().frame(width: 5)
                 Text("已阅读并同意")
                     .orangeText(size: 13, color: .c000000)
