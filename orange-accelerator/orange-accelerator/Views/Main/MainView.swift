@@ -1,0 +1,102 @@
+//
+//  MainView.swift
+//  orange-accelerator
+//
+//  Created by serika on 2023/4/27.
+//
+
+import SwiftUI
+
+struct MainView: View {
+    @StateObject private var v2Service = V2Service()
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            title
+            Color(hex: "#EDEDED")
+                .frame(height: 1)
+            Spacer().frame(height: 45)
+            Group {
+                nodeSection
+                    .pickerStyle(.segmented)
+            Spacer().frame(height: 45)
+                ModePickerView()
+                    .padding(.horizontal)
+            Spacer().frame(height: 45)
+                Image("button.main.connected")
+                    .padding(.top, 20)
+            Spacer().frame(height: 45)
+                HStack {
+                    Text("链接状态：")
+                        .orangeText(size: 15, color: .c000000)
+                    Text("已连接")
+                        .orangeText(size: 15, color: .hex("#02C91E"))
+                }
+            Spacer().frame(height: 45)
+                Text("02：26：17")
+                    .orangeText(size: 15, color: .c000000)
+                    .padding(.top, -20)
+            }
+            Spacer()
+            Button {
+            } label: {
+                HStack {
+                    Image("button.member")
+                    VStack(alignment: .leading) {
+                        Text("开通会员")
+                            .orangeText(size: 18, color: .white, weight: .bold)
+                        Text("立即解锁高速连接")
+                            .orangeText(size: 15, color: .white)
+                    }
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .foregroundColor(.white)
+                        .padding(.trailing)
+                }
+                .padding(.horizontal)
+                .frame(height: 82)
+                .frame(maxWidth: .infinity)
+                .background(Color.main)
+                .cornerRadius(10)
+                .padding(.horizontal)
+                .padding(.bottom, 40)
+            }
+        }
+        .environmentObject(v2Service)
+    }
+    
+    var title: some View {
+        ZStack {
+            HStack {
+                Image("main.menu")
+                Spacer()
+            }
+            Text("橙子加速器")
+                .orangeText(size: 16, color: .c000000)
+        }
+        .padding(.horizontal)
+        .frame(height: 44)
+    }
+    
+    var nodeSection: some View {
+        HStack {
+            Image("main.ball")
+            Spacer().frame(width: 12)
+            VStack(alignment: .leading) {
+                Text("自动匹配最快网路")
+                    .orangeText(size: 16, color: .c000000)
+                Text("随时随刻为您选择当前最快网路连接")
+                    .orangeText(size: 12, color: .hex("#999999"))
+            }
+            Spacer().frame(width: 15)
+            Text("更换")
+                .orangeText(size: 15, color: .main)
+        }
+    }
+}
+
+struct MainView_Previews: PreviewProvider {
+    static var previews: some View {
+        MainView()
+    }
+}

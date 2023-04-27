@@ -18,6 +18,9 @@
 		72022AC829F9198F00DC9012 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72022AC729F9198F00DC9012 /* OnboardingView.swift */; };
 		72022ACA29FA078900DC9012 /* TokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72022AC929FA078900DC9012 /* TokenService.swift */; };
 		72022ACC29FA081600DC9012 /* UserDefault+Orange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72022ACB29FA081600DC9012 /* UserDefault+Orange.swift */; };
+		72022ACF29FA206200DC9012 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72022ACE29FA206200DC9012 /* MainView.swift */; };
+		72022AD129FA2A1E00DC9012 /* ModePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72022AD029FA2A1E00DC9012 /* ModePickerView.swift */; };
+		72022AD529FA2B5700DC9012 /* V2Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72022AD429FA2B5700DC9012 /* V2Service.swift */; };
 		7208212C29E951B200D36AF3 /* orange_acceleratorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7208212B29E951B200D36AF3 /* orange_acceleratorApp.swift */; };
 		7208212E29E951B200D36AF3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7208212D29E951B200D36AF3 /* ContentView.swift */; };
 		7208213029E951B300D36AF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7208212F29E951B300D36AF3 /* Assets.xcassets */; };
@@ -62,6 +65,9 @@
 		72022AC729F9198F00DC9012 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		72022AC929FA078900DC9012 /* TokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenService.swift; sourceTree = "<group>"; };
 		72022ACB29FA081600DC9012 /* UserDefault+Orange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault+Orange.swift"; sourceTree = "<group>"; };
+		72022ACE29FA206200DC9012 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		72022AD029FA2A1E00DC9012 /* ModePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModePickerView.swift; sourceTree = "<group>"; };
+		72022AD429FA2B5700DC9012 /* V2Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V2Service.swift; sourceTree = "<group>"; };
 		7208212829E951B200D36AF3 /* orange-accelerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "orange-accelerator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7208212B29E951B200D36AF3 /* orange_acceleratorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = orange_acceleratorApp.swift; sourceTree = "<group>"; };
 		7208212D29E951B200D36AF3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -105,6 +111,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		72022ACD29FA1D3E00DC9012 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				72022ACE29FA206200DC9012 /* MainView.swift */,
+				72022AD029FA2A1E00DC9012 /* ModePickerView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		7208211F29E951B200D36AF3 = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +182,7 @@
 		7208215529EAC56E00D36AF3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				72022ACD29FA1D3E00DC9012 /* Main */,
 				7276F5DF29EADAC700A937DD /* Shared */,
 				7276F5D829EAD2C100A937DD /* Onboarding */,
 			);
@@ -181,6 +197,7 @@
 				72022A5D29F4273100DC9012 /* ErrorService.swift */,
 				72022ABF29F7C23C00DC9012 /* Box.swift */,
 				72022AC929FA078900DC9012 /* TokenService.swift */,
+				72022AD429FA2B5700DC9012 /* V2Service.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -352,6 +369,8 @@
 				7276F5E129EADAF200A937DD /* Utils.swift in Sources */,
 				7208215829EAC5AD00D36AF3 /* LoginView.swift in Sources */,
 				72022A5E29F4273100DC9012 /* ErrorService.swift in Sources */,
+				72022AD129FA2A1E00DC9012 /* ModePickerView.swift in Sources */,
+				72022AD529FA2B5700DC9012 /* V2Service.swift in Sources */,
 				72022AC429F8FF8300DC9012 /* LoadingView.swift in Sources */,
 				7276F5EC29EE215900A937DD /* Withable.swift in Sources */,
 				7276F5DE29EAD77200A937DD /* Onboarding.swift in Sources */,
@@ -361,6 +380,7 @@
 				72022ACA29FA078900DC9012 /* TokenService.swift in Sources */,
 				72022AC829F9198F00DC9012 /* OnboardingView.swift in Sources */,
 				72022AC229F7C68A00DC9012 /* String+Util.swift in Sources */,
+				72022ACF29FA206200DC9012 /* MainView.swift in Sources */,
 				72022AC029F7C23C00DC9012 /* Box.swift in Sources */,
 				7276F5E729EC35D200A937DD /* AccountService.swift in Sources */,
 				72022A5629F409B300DC9012 /* View+erase.swift in Sources */,

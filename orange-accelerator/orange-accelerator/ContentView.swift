@@ -24,7 +24,7 @@ struct ContentView: View {
                 Button {
                     Box.setToken(nil)
                 } label: {
-                    Text("Logout")
+                    MainView()
                 }
             } else {
                 OnboardingView()
