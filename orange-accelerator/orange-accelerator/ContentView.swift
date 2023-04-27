@@ -21,11 +21,7 @@ struct ContentView: View {
     private var content: some View {
         Group {
             if tokenService.isLoggedIn {
-                Button {
-                    Box.setToken(nil)
-                } label: {
-                    MainView()
-                }
+                MainView()
             } else {
                 OnboardingView()
             }

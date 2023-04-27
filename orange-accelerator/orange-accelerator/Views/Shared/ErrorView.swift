@@ -20,7 +20,6 @@ struct ErrorView: View {
             .cornerRadius(15)
             .opacity(alpha)
             .onReceive(service.$showError) { show in
-                print("onChange")
                 withAnimation {
                     alpha = show ? 1 : 0
                 }

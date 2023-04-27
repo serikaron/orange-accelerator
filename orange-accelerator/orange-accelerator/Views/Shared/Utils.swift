@@ -12,6 +12,7 @@ extension Color {
     static var c000000: Color { .hex("000000") }
     static var c333333: Color { .hex("33333") }
     static var c666666: Color { .hex("666666") }
+    static var c999999: Color { .hex("999999") }
     
     static func hex(_ s: String) -> Color {
         Color(hex: s)
