@@ -1,0 +1,30 @@
+{
+    "outbounds": [
+        {
+            "protocol": "vmess",
+            "settings": {
+                "vnext": [
+                    {
+                        "name": "v1 美国03 V2x1 原生",
+                        "address": "us.60cdn.com",
+                        "port": 10233,
+                        "users": [
+                            {
+                                "id": "073c3ae5-4868-3da4-8d8d-ff1e29ed974f",
+                                "alterId": 0
+                            }
+                        ]
+                    }
+                ]
+            },
+            "streamSettings": {
+              "network": "tcp"
+            },
+            "mux": {
+                "enabled": true
+            }
+        }
+    ]
+    
+    
+}

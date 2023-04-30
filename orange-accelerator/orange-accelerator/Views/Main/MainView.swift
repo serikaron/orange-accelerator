@@ -14,6 +14,7 @@ struct MainView: View {
     
     @State private var maskAlpha: Double = 0
     @State private var sideMenuOffset: CGFloat = -MENU_WIDTH
+    
     var body: some View {
         ZStack {
             MainContentView(showSideMenu: $showSideMenu)

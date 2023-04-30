@@ -25,6 +25,7 @@ struct MainContentView: View {
                 ModePickerView()
                     .padding(.horizontal)
             Spacer().frame(height: 45)
+            statusButton
                 Image("button.main.connected")
                     .padding(.top, 20)
             Spacer().frame(height: 45)
@@ -65,6 +66,11 @@ struct MainContentView: View {
             }
         }
         .environmentObject(v2Service)
+        .onAppear {
+            Task {
+                await v2Service.loadConfig()
+            }
+        }
     }
     
     var title: some View {
@@ -97,6 +103,26 @@ struct MainContentView: View {
             Spacer().frame(width: 15)
             Text("更换")
                 .orangeText(size: 15, color: .main)
+        }
+    }
+    
+    var statusButton: some View {
+        Button {
+            Task {
+                switch v2Service.state {
+                case .initial: await v2Service.inatallProfile()
+                case .installed: await v2Service.enable()
+                case .enabled: v2Service.sayHelloToTunnel()
+                case .ready: v2Service.start()
+                }
+            }
+        } label: {
+            switch v2Service.state {
+            case .initial: Text("install")
+            case .installed: Text("enable")
+            case .enabled: Text("say hello")
+            case .ready: Text("connect")
+            }
         }
     }
 }
