@@ -42,7 +42,7 @@
 		7275E59A2A062F850091FA7A /* VPNService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5992A062F850091FA7A /* VPNService.swift */; };
 		7276F5DE29EAD77200A937DD /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7276F5DD29EAD77200A937DD /* Onboarding.swift */; };
 		7276F5E129EADAF200A937DD /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7276F5E029EADAF200A937DD /* Utils.swift */; };
-		7276F5E729EC35D200A937DD /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7276F5E629EC35D200A937DD /* AccountService.swift */; };
+		7276F5E729EC35D200A937DD /* OnboardingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7276F5E629EC35D200A937DD /* OnboardingService.swift */; };
 		7276F5EA29EE20C400A937DD /* Codable+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7276F5E929EE20C400A937DD /* Codable+JSON.swift */; };
 		7276F5EC29EE215900A937DD /* Withable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7276F5EB29EE215900A937DD /* Withable.swift */; };
 /* End PBXBuildFile section */
@@ -127,7 +127,7 @@
 		7275E5992A062F850091FA7A /* VPNService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNService.swift; sourceTree = "<group>"; };
 		7276F5DD29EAD77200A937DD /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		7276F5E029EADAF200A937DD /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		7276F5E629EC35D200A937DD /* AccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
+		7276F5E629EC35D200A937DD /* OnboardingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingService.swift; sourceTree = "<group>"; };
 		7276F5E929EE20C400A937DD /* Codable+JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+JSON.swift"; sourceTree = "<group>"; };
 		7276F5EB29EE215900A937DD /* Withable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Withable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -275,7 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				72022A5129F3DCCF00DC9012 /* Linkman.swift */,
-				7276F5E629EC35D200A937DD /* AccountService.swift */,
+				7276F5E629EC35D200A937DD /* OnboardingService.swift */,
 				72022A5D29F4273100DC9012 /* ErrorService.swift */,
 				72022ABF29F7C23C00DC9012 /* Box.swift */,
 				72022AC929FA078900DC9012 /* TokenService.swift */,
@@ -512,7 +512,7 @@
 				72022AC229F7C68A00DC9012 /* String+Util.swift in Sources */,
 				72022ACF29FA206200DC9012 /* MainContentView.swift in Sources */,
 				72022AC029F7C23C00DC9012 /* Box.swift in Sources */,
-				7276F5E729EC35D200A937DD /* AccountService.swift in Sources */,
+				7276F5E729EC35D200A937DD /* OnboardingService.swift in Sources */,
 				72022A5629F409B300DC9012 /* View+erase.swift in Sources */,
 				72022A5229F3DCCF00DC9012 /* Linkman.swift in Sources */,
 				72022A5A29F418A100DC9012 /* ErrorView.swift in Sources */,

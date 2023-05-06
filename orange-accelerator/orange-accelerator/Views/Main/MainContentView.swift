@@ -10,7 +10,6 @@ import V2orange
 
 struct MainContentView: View {
     @StateObject private var v2Service = V2Service()
-    @StateObject private var endpointService = EndpointService()
     
     @Binding var showSideMenu: Bool
     
@@ -27,17 +26,7 @@ struct MainContentView: View {
                 ModePickerView()
                     .padding(.horizontal)
                 Spacer().frame(height: 45)
-                Group {
-                    statusButton
-                    Button {
-                        var err: NSError?
-                        let msg = V2orangeProPing("us.60cdn.com", &err)
-                        print("msg: \(msg)")
-                        print(err)
-                    } label: {
-                        Text("testGo")
-                    }
-                }
+                statusButton
                 Image("button.main.connected")
                     .padding(.top, 20)
                 Spacer().frame(height: 45)
@@ -81,7 +70,6 @@ struct MainContentView: View {
         .onAppear {
             Task {
                 await v2Service.loadConfig()
-                await endpointService.loadEndpoints()
             }
         }
     }

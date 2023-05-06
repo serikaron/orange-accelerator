@@ -8,8 +8,8 @@
 import Foundation
 
 
-class AccountService: ObservableObject {
-    enum AccountError: Error {
+class OnboardingService: ObservableObject {
+    enum OnboardingError: Error {
         case emptyPhone
         case emptyPassword
         
@@ -23,12 +23,12 @@ class AccountService: ObservableObject {
     
     func login(phone: String, password: String) async {
         if (phone.isEmpty) {
-            Box.sendError(AccountError.emptyPhone)
+            Box.sendError(OnboardingError.emptyPhone)
             return
         }
         
         if (password.isEmpty) {
-            Box.sendError(AccountError.emptyPassword)
+            Box.sendError(OnboardingError.emptyPassword)
             return
         }
         
@@ -44,12 +44,12 @@ class AccountService: ObservableObject {
     
     func register(phone: String, password: String, password1: String) async {
         if (phone.isEmpty) {
-            Box.sendError(AccountError.emptyPhone)
+            Box.sendError(OnboardingError.emptyPhone)
             return
         }
         
         if (password.isEmpty) {
-            Box.sendError(AccountError.emptyPassword)
+            Box.sendError(OnboardingError.emptyPassword)
             return
         }
         

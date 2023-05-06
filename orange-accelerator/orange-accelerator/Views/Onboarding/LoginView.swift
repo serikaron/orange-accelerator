@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @EnvironmentObject var service: AccountService
+    @EnvironmentObject var service: OnboardingService
     
     @State var phone: String = ""
     @State var password: String = ""

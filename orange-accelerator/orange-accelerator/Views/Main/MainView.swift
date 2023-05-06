@@ -10,7 +10,7 @@ import SwiftUI
 private let MENU_WIDTH: CGFloat = 275
 
 struct MainView: View {
-    @StateObject private var accountService = AccountService()
+    @StateObject private var onboardingService = OnboardingService()
     
     @State private var showSideMenu = false
     
@@ -41,7 +41,7 @@ struct MainView: View {
                 sideMenuOffset = isShow ? 0 : -MENU_WIDTH
             }
         }
-        .environmentObject(accountService)
+        .environmentObject(onboardingService)
     }
 }
 

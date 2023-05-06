@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OnboardingView: View {
-    @StateObject private var service = AccountService()
+    @StateObject private var service = OnboardingService()
     
     enum Page {
         case login, register

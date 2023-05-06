@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RegisterView: View {
-    @EnvironmentObject var service: AccountService
+    @EnvironmentObject var service: OnboardingService
     
     @State var phone: String = ""
     @State var password: String = ""
@@ -76,6 +76,6 @@ struct RegisterView: View {
 struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
         RegisterView(page: .constant(.register))
-            .environmentObject(AccountService())
+            .environmentObject(OnboardingService())
     }
 }
