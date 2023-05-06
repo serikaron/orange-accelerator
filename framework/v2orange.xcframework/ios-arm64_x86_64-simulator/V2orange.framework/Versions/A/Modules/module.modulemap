@@ -1,0 +1,8 @@
+framework module "V2orange" {
+	header "ref.h"
+    header "V2orange.objc.h"
+    header "Universe.objc.h"
+    header "V2orange.h"
+
+    export *
+}

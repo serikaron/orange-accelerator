@@ -6,7 +6,7 @@
 //
 
 import NetworkExtension
-import VDemoCore
+import V2orange
 
 class PacketTunnelProvider: NEPacketTunnelProvider {
 
@@ -17,7 +17,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         weak var weakSelf = self
         self.packetFlow.readPackets { (packets: [Data], protocols: [NSNumber]) in
             for packet in packets {
-                VDemoCoreInputPacket(packet)
+                V2orangeInputPacket(packet)
                 
             }
             
@@ -62,8 +62,11 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                 let data = try Data(contentsOf: url)
 //                NSLog(data.description)
                 NSLog("description :\(data.description)")
-                VDemoCoreStartV2Ray(self, data)
-
+                let out = V2orangeLoadConfig(data)
+                NSLog("out: %s", out)
+                var err: NSError?
+                V2orangeStartV2Ray(self, data, &err)
+                print("err: \(err)")
             } catch let err {
                 print("error:\(err)")
             }
@@ -106,7 +109,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
 //    }
 }
 
-extension PacketTunnelProvider: VDemoCorePacketFlowProtocol{
+extension PacketTunnelProvider: V2orangePacketFlowProtocol{
     func writePacket(_ packet: Data?) {
         guard let packet = packet else {
             return

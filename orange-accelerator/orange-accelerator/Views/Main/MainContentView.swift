@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import V2orange
 
 struct MainContentView: View {
     @StateObject private var v2Service = V2Service()
@@ -21,21 +22,31 @@ struct MainContentView: View {
             Group {
                 nodeSection
                     .pickerStyle(.segmented)
-            Spacer().frame(height: 45)
+                Spacer().frame(height: 45)
                 ModePickerView()
                     .padding(.horizontal)
-            Spacer().frame(height: 45)
-            statusButton
+                Spacer().frame(height: 45)
+                Group {
+                    statusButton
+                    Button {
+                        var err: NSError?
+                        let msg = V2orangeProPing("us.60cdn.com", &err)
+                        print("msg: \(msg)")
+                        print(err)
+                    } label: {
+                        Text("testGo")
+                    }
+                }
                 Image("button.main.connected")
                     .padding(.top, 20)
-            Spacer().frame(height: 45)
+                Spacer().frame(height: 45)
                 HStack {
                     Text("链接状态：")
                         .orangeText(size: 15, color: .c000000)
                     Text("已连接")
                         .orangeText(size: 15, color: .hex("#02C91E"))
                 }
-            Spacer().frame(height: 45)
+                Spacer().frame(height: 45)
                 Text("02：26：17")
                     .orangeText(size: 15, color: .c000000)
                     .padding(.top, -20)

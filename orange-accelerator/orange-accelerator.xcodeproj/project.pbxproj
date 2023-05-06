@@ -37,7 +37,8 @@
 		7273D89429FE40D80006BDA4 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7273D89329FE40D80006BDA4 /* PacketTunnelProvider.swift */; };
 		7273D89929FE40D80006BDA4 /* orange-tunnel.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 7273D89029FE40D80006BDA4 /* orange-tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7273D89E29FE43780006BDA4 /* v2ray.json in Resources */ = {isa = PBXBuildFile; fileRef = 7273D89D29FE43780006BDA4 /* v2ray.json */; };
-		7273D89F29FE43BF0006BDA4 /* vDemoCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72022ADB29FCD89300DC9012 /* vDemoCore.xcframework */; };
+		7275E5952A0537270091FA7A /* v2orange.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7275E5942A0537270091FA7A /* v2orange.xcframework */; };
+		7275E5962A0538940091FA7A /* v2orange.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7275E5942A0537270091FA7A /* v2orange.xcframework */; };
 		7276F5DE29EAD77200A937DD /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7276F5DD29EAD77200A937DD /* Onboarding.swift */; };
 		7276F5E129EADAF200A937DD /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7276F5E029EADAF200A937DD /* Utils.swift */; };
 		7276F5E729EC35D200A937DD /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7276F5E629EC35D200A937DD /* AccountService.swift */; };
@@ -121,6 +122,7 @@
 		7273D89529FE40D80006BDA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7273D89629FE40D80006BDA4 /* orange_tunnel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = orange_tunnel.entitlements; sourceTree = "<group>"; };
 		7273D89D29FE43780006BDA4 /* v2ray.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = v2ray.json; sourceTree = "<group>"; };
+		7275E5942A0537270091FA7A /* v2orange.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = v2orange.xcframework; path = ../../framework/v2orange.xcframework; sourceTree = "<group>"; };
 		7276F5DD29EAD77200A937DD /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		7276F5E029EADAF200A937DD /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		7276F5E629EC35D200A937DD /* AccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				72022AF729FE2F7600DC9012 /* NetworkExtension.framework in Frameworks */,
+				7275E5962A0538940091FA7A /* v2orange.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,8 +158,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7273D89F29FE43BF0006BDA4 /* vDemoCore.xcframework in Frameworks */,
 				7273D89129FE40D80006BDA4 /* NetworkExtension.framework in Frameworks */,
+				7275E5952A0537270091FA7A /* v2orange.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,6 +180,7 @@
 		72022ADA29FCD87700DC9012 /* frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7275E5942A0537270091FA7A /* v2orange.xcframework */,
 				72022ADB29FCD89300DC9012 /* vDemoCore.xcframework */,
 			);
 			path = frameworks;
