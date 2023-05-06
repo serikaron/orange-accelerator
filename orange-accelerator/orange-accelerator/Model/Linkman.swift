@@ -80,6 +80,22 @@ class Linkman{
             .make()
             .response() as ServerListResponse
     }
+    
+    struct UserInfoResponse: Codable {
+        let id: Int
+        let username: String
+        let uuid: String
+        let is_vip: Bool
+        let expire_time: Int
+    }
+    
+    func getUserInfo() async throws -> UserInfoResponse {
+        return try await Request()
+            .with(\.path, setTo: "/v1/api/user/info")
+            .with(\.method, setTo: .GET)
+            .make()
+            .response() as UserInfoResponse
+    }
 }
 
 private extension Linkman {

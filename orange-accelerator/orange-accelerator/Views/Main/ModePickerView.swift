@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ModePickerView: View {
-    @EnvironmentObject var service: V2Service
+    @Binding var routeMode: RouteMode
     
     var body: some View {
         HStack(spacing: 0) {
@@ -17,11 +17,11 @@ struct ModePickerView: View {
         }
     }
     
-    fileprivate func makeButton(mode: RouteMode, position: ModeButtonNormal.Position) -> some View {
+    fileprivate func makeButton(mode: RouteMode, position: ModeButtonStyle.Position) -> some View {
         Button(mode.buttonTittle) {
-            service.mode = mode
+            RouteMode.mode = mode
         }
-            .buttonStyle(ModeButtonNormal(position: position, selected: service.mode == mode))
+            .buttonStyle(ModeButtonStyle(position: position, selected: routeMode == mode))
     }
 }
 
@@ -34,7 +34,7 @@ fileprivate extension RouteMode {
     }
 }
 
-fileprivate struct ModeButtonNormal: ButtonStyle {
+fileprivate struct ModeButtonStyle: ButtonStyle {
     enum Position {
         case left, right
         
@@ -56,10 +56,11 @@ fileprivate struct ModeButtonNormal: ButtonStyle {
             .frame(maxWidth: .infinity)
             .background(
                 GeometryReader { geometry in
-                    if selected {
-                        RoundedCorner(radius: 20, corners: position.roundedCorners)
-                            .fill(Color.main)
-                    } else {
+                    ZStack {
+                        if selected {
+                            RoundedCorner(radius: 20, corners: position.roundedCorners)
+                                .fill(Color.main)
+                        }
                         RoundedCorner(radius: 20, corners: position.roundedCorners)
                             .stroke(Color.main, lineWidth: 1)
                     }
@@ -81,7 +82,11 @@ fileprivate struct RoundedCorner: Shape {
 
 struct ModePickerView_Previews: PreviewProvider {
     static var previews: some View {
-        ModePickerView()
-            .environmentObject(V2Service())
+        VStack {
+            ModePickerView(routeMode: .constant(.global))
+                .previewLayout(.sizeThatFits)
+            ModePickerView(routeMode: .constant(.intellegent))
+                .previewLayout(.sizeThatFits)
+        }
     }
 }

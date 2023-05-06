@@ -11,7 +11,9 @@ import Combine
 class Box {
     static let shared = Box()
     
+    @MainActor
     let errorSubject = CurrentValueSubject<Error?, Never>(nil)
+    @MainActor
     let loadingSubject = CurrentValueSubject<Bool, Never>(false)
     
     let tokenSubject = CurrentValueSubject<String?, Never>(UserDefaults.token)
@@ -19,15 +21,11 @@ class Box {
 
 extension Box {
     static func sendError(_ error: Error?) {
-        DispatchQueue.main.async {
-            Box.shared.errorSubject.send(error)
-        }
+        Box.shared.errorSubject.send(error)
     }
     
     static func setLoading(_ loading: Bool) {
-        DispatchQueue.main.async {
-            Box.shared.loadingSubject.send(loading)
-        }
+        Box.shared.loadingSubject.send(loading)
     }
     
     static func setToken(_ token: String?) {

@@ -7,11 +7,11 @@
 
 import SwiftUI
 import V2orange
+import NetworkExtension
 
 struct MainContentView: View {
-    @StateObject private var v2Service = V2Service()
-    
     @Binding var showSideMenu: Bool
+    @State private var routeMode = RouteMode.mode
     
     var body: some View {
         VStack(spacing: 0) {
@@ -23,12 +23,15 @@ struct MainContentView: View {
                 nodeSection
                     .pickerStyle(.segmented)
                 Spacer().frame(height: 45)
-                ModePickerView()
+                ModePickerView(routeMode: $routeMode)
                     .padding(.horizontal)
                 Spacer().frame(height: 45)
-                statusButton
-                Image("button.main.connected")
-                    .padding(.top, 20)
+                Button {
+                    connect()
+                } label: {
+                    Image("button.main.connected")
+                        .padding(.top, 20)
+                }
                 Spacer().frame(height: 45)
                 HStack {
                     Text("链接状态：")
@@ -66,10 +69,10 @@ struct MainContentView: View {
                 .padding(.bottom, 40)
             }
         }
-        .environmentObject(v2Service)
         .onAppear {
             Task {
-                await v2Service.loadConfig()
+                routeMode = RouteMode.mode
+                await NETunnelProviderManager.requestPermission()
             }
         }
     }
@@ -107,22 +110,15 @@ struct MainContentView: View {
         }
     }
     
-    var statusButton: some View {
-        Button {
-            Task {
-                switch v2Service.state {
-                case .initial: await v2Service.inatallProfile()
-                case .installed: await v2Service.enable()
-                case .enabled: v2Service.sayHelloToTunnel()
-                case .ready: v2Service.start()
-                }
-            }
-        } label: {
-            switch v2Service.state {
-            case .initial: Text("install")
-            case .installed: Text("enable")
-            case .enabled: Text("say hello")
-            case .ready: Text("connect")
+    private func connect() {
+        Task {
+            do {
+                try await EndpointList.all
+                    .filtered(isVip: try await Account.current.isVip)
+                    .fastest()?
+                    .connect(routeMode: routeMode)
+            } catch {
+                
             }
         }
     }

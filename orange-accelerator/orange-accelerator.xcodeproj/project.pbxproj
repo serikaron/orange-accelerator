@@ -20,7 +20,6 @@
 		72022ACC29FA081600DC9012 /* UserDefault+Orange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72022ACB29FA081600DC9012 /* UserDefault+Orange.swift */; };
 		72022ACF29FA206200DC9012 /* MainContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72022ACE29FA206200DC9012 /* MainContentView.swift */; };
 		72022AD129FA2A1E00DC9012 /* ModePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72022AD029FA2A1E00DC9012 /* ModePickerView.swift */; };
-		72022AD529FA2B5700DC9012 /* V2Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72022AD429FA2B5700DC9012 /* V2Service.swift */; };
 		72022AD729FA61FF00DC9012 /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72022AD629FA61FF00DC9012 /* SideMenuView.swift */; };
 		72022AD929FA724C00DC9012 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72022AD829FA724C00DC9012 /* MainView.swift */; };
 		72022AF729FE2F7600DC9012 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72022AE329FD434C00DC9012 /* NetworkExtension.framework */; };
@@ -39,7 +38,10 @@
 		7275E5952A0537270091FA7A /* v2orange.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7275E5942A0537270091FA7A /* v2orange.xcframework */; };
 		7275E5962A0538940091FA7A /* v2orange.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7275E5942A0537270091FA7A /* v2orange.xcframework */; };
 		7275E5982A0623330091FA7A /* EndpointService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5972A0623330091FA7A /* EndpointService.swift */; };
-		7275E59A2A062F850091FA7A /* VPNService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5992A062F850091FA7A /* VPNService.swift */; };
+		7275E59A2A062F850091FA7A /* NETunnelProviderManager+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5992A062F850091FA7A /* NETunnelProviderManager+Helper.swift */; };
+		7275E59E2A0687DC0091FA7A /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E59D2A0687DC0091FA7A /* Account.swift */; };
+		7275E5A02A06B2BD0091FA7A /* RouteMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E59F2A06B2BD0091FA7A /* RouteMode.swift */; };
+		7275E5A62A06B9D30091FA7A /* V2Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5A52A06B9D30091FA7A /* V2Config.swift */; };
 		7276F5DE29EAD77200A937DD /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7276F5DD29EAD77200A937DD /* Onboarding.swift */; };
 		7276F5E129EADAF200A937DD /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7276F5E029EADAF200A937DD /* Utils.swift */; };
 		7276F5E729EC35D200A937DD /* OnboardingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7276F5E629EC35D200A937DD /* OnboardingService.swift */; };
@@ -99,7 +101,6 @@
 		72022ACB29FA081600DC9012 /* UserDefault+Orange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault+Orange.swift"; sourceTree = "<group>"; };
 		72022ACE29FA206200DC9012 /* MainContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContentView.swift; sourceTree = "<group>"; };
 		72022AD029FA2A1E00DC9012 /* ModePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModePickerView.swift; sourceTree = "<group>"; };
-		72022AD429FA2B5700DC9012 /* V2Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V2Service.swift; sourceTree = "<group>"; };
 		72022AD629FA61FF00DC9012 /* SideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
 		72022AD829FA724C00DC9012 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		72022ADB29FCD89300DC9012 /* vDemoCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = vDemoCore.xcframework; sourceTree = "<group>"; };
@@ -124,7 +125,10 @@
 		7273D89D29FE43780006BDA4 /* v2ray.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = v2ray.json; sourceTree = "<group>"; };
 		7275E5942A0537270091FA7A /* v2orange.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = v2orange.xcframework; path = ../../framework/v2orange.xcframework; sourceTree = "<group>"; };
 		7275E5972A0623330091FA7A /* EndpointService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointService.swift; sourceTree = "<group>"; };
-		7275E5992A062F850091FA7A /* VPNService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNService.swift; sourceTree = "<group>"; };
+		7275E5992A062F850091FA7A /* NETunnelProviderManager+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NETunnelProviderManager+Helper.swift"; sourceTree = "<group>"; };
+		7275E59D2A0687DC0091FA7A /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		7275E59F2A06B2BD0091FA7A /* RouteMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMode.swift; sourceTree = "<group>"; };
+		7275E5A52A06B9D30091FA7A /* V2Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V2Config.swift; sourceTree = "<group>"; };
 		7276F5DD29EAD77200A937DD /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		7276F5E029EADAF200A937DD /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		7276F5E629EC35D200A937DD /* OnboardingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingService.swift; sourceTree = "<group>"; };
@@ -279,9 +283,10 @@
 				72022A5D29F4273100DC9012 /* ErrorService.swift */,
 				72022ABF29F7C23C00DC9012 /* Box.swift */,
 				72022AC929FA078900DC9012 /* TokenService.swift */,
-				72022AD429FA2B5700DC9012 /* V2Service.swift */,
 				7275E5972A0623330091FA7A /* EndpointService.swift */,
-				7275E5992A062F850091FA7A /* VPNService.swift */,
+				7275E5992A062F850091FA7A /* NETunnelProviderManager+Helper.swift */,
+				7275E59D2A0687DC0091FA7A /* Account.swift */,
+				7275E59F2A06B2BD0091FA7A /* RouteMode.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -326,6 +331,7 @@
 				72022A5529F409B300DC9012 /* View+erase.swift */,
 				72022AC129F7C68A00DC9012 /* String+Util.swift */,
 				72022ACB29FA081600DC9012 /* UserDefault+Orange.swift */,
+				7275E5A52A06B9D30091FA7A /* V2Config.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -499,21 +505,23 @@
 				72022A5E29F4273100DC9012 /* ErrorService.swift in Sources */,
 				7275E5982A0623330091FA7A /* EndpointService.swift in Sources */,
 				72022AD129FA2A1E00DC9012 /* ModePickerView.swift in Sources */,
-				72022AD529FA2B5700DC9012 /* V2Service.swift in Sources */,
 				72022AC429F8FF8300DC9012 /* LoadingView.swift in Sources */,
-				7275E59A2A062F850091FA7A /* VPNService.swift in Sources */,
+				7275E59A2A062F850091FA7A /* NETunnelProviderManager+Helper.swift in Sources */,
 				7276F5EC29EE215900A937DD /* Withable.swift in Sources */,
+				7275E5A62A06B9D30091FA7A /* V2Config.swift in Sources */,
 				7276F5DE29EAD77200A937DD /* Onboarding.swift in Sources */,
 				7208212E29E951B200D36AF3 /* ContentView.swift in Sources */,
 				7276F5EA29EE20C400A937DD /* Codable+JSON.swift in Sources */,
 				72022ACC29FA081600DC9012 /* UserDefault+Orange.swift in Sources */,
 				72022ACA29FA078900DC9012 /* TokenService.swift in Sources */,
 				72022AC829F9198F00DC9012 /* OnboardingView.swift in Sources */,
+				7275E5A02A06B2BD0091FA7A /* RouteMode.swift in Sources */,
 				72022AC229F7C68A00DC9012 /* String+Util.swift in Sources */,
 				72022ACF29FA206200DC9012 /* MainContentView.swift in Sources */,
 				72022AC029F7C23C00DC9012 /* Box.swift in Sources */,
 				7276F5E729EC35D200A937DD /* OnboardingService.swift in Sources */,
 				72022A5629F409B300DC9012 /* View+erase.swift in Sources */,
+				7275E59E2A0687DC0091FA7A /* Account.swift in Sources */,
 				72022A5229F3DCCF00DC9012 /* Linkman.swift in Sources */,
 				72022A5A29F418A100DC9012 /* ErrorView.swift in Sources */,
 				7208212C29E951B200D36AF3 /* orange_acceleratorApp.swift in Sources */,

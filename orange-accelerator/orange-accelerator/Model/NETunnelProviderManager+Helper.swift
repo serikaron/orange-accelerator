@@ -8,41 +8,41 @@
 import Foundation
 import NetworkExtension
 
-@MainActor
-class VPNService {
-    private var manager: NETunnelProviderManager? {
-        get async throws {
-            if _manager != nil { return _manager }
-            try await loadPreferences()
-            if _manager != nil { return _manager }
-            try await inatallPreferences()
-            return _manager
-        }
-    }
-    
-    private var _manager: NETunnelProviderManager? = nil
-    
-    func loadManager() async {
+extension NETunnelProviderManager {
+    @MainActor
+    static func requestPermission() async {
         do {
-            _ = try await self.manager
+            if try await loadPreferences() != nil {
+                return
+            }
+            _ = try await inatallPreferences()
         } catch {
             Box.sendError(error)
         }
     }
-    
-    private func loadPreferences() async throws {
-        let managers = try await NETunnelProviderManager.loadAllFromPreferences()
-        _manager = managers.isEmpty ? nil : managers[0]
+
+    private static var manager: NETunnelProviderManager {
+        get async throws {
+            if let manager = try await loadPreferences() {
+                return manager
+            }
+            return try await inatallPreferences()
+        }
     }
     
-    private func inatallPreferences() async throws {
+    private static func loadPreferences() async throws -> NETunnelProviderManager? {
+        let managers = try await NETunnelProviderManager.loadAllFromPreferences()
+        return managers.isEmpty ? nil : managers[0]
+    }
+    
+    private static func inatallPreferences() async throws -> NETunnelProviderManager {
         let manager = makeManager()
         manager.isEnabled = true
         try await manager.saveToPreferences()
-        _manager = manager
+        return manager
     }
     
-    private func makeManager() -> NETunnelProviderManager {
+    private static func makeManager() -> NETunnelProviderManager {
         let manager = NETunnelProviderManager()
         manager.localizedDescription = "橙子加速器"
         
@@ -55,22 +55,21 @@ class VPNService {
         return manager
     }
     
-    private func enable() async throws {
-        guard let manager = try await manager else {
-            throw "NETunnelProviderManager is null"
-        }
-        
+    private static func enable() async throws {
+        let manager = try await manager
+        if manager.isEnabled { return }
         manager.isEnabled = true
         try await manager.saveToPreferences()
     }
     
-    private func sayHelloToTunnel() async throws {
+    private static func sayHelloToTunnel() async throws {
         _ = try await send(data: "Hello Provider".data(using: String.Encoding.utf8))
     }
         
-    private func send(data: Data?) async throws -> Data? {
+    private static func send(data: Data?) async throws -> Data? {
+        let tunnel = try await manager
+        
         guard
-            let tunnel = try await manager,
             let session = tunnel.connection as? NETunnelProviderSession,
             let data = data, tunnel.connection.status != .invalid
         else {
@@ -88,14 +87,11 @@ class VPNService {
         }
     }
     
-    func start() async {
+    static func start() async {
         do {
             try await enable()
             try await sayHelloToTunnel()
-            guard let manager = try await manager else {
-                throw "start vpn FAILED !!!"
-            }
-            try manager.connection.startVPNTunnel()
+            try await manager.connection.startVPNTunnel()
         } catch {
             Box.sendError(error)
         }

@@ -7,6 +7,7 @@
 
 import Foundation
 import V2orange
+import NetworkExtension
 
 enum EndpointType {
     case dedicated, free
@@ -70,10 +71,14 @@ extension EndpointList {
 }
 
 extension Endpoint {
+    func connect(routeMode: RouteMode) async throws {
+        await NETunnelProviderManager.start()
+    }
+    
     fileprivate func ping() async -> EndpointLatency {
         await withCheckedContinuation { continuation in
             ping { latency, error in
-                if let err = error {
+                if error != nil {
                     continuation.resume(returning: .timeout)
                     return
                 }
