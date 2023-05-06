@@ -7,13 +7,11 @@
 
 import Foundation
 
-fileprivate let baseURL = ""
-
 private extension URLComponents {
     static func orange() -> URLComponents {
         var out = URLComponents()
         out.scheme = "http"
-        out.host = ""
+        out.host = "chengzitest.daoyi365.com"
         return out
     }
 }
@@ -33,6 +31,7 @@ class Linkman{
     static let shared = Linkman()
     
     var standalone = false
+    var showLog = false
     var token: String? = nil
     
     struct LoginResponse: Codable {
@@ -41,13 +40,12 @@ class Linkman{
     
     func login(phone: String, password: String) async throws -> LoginResponse {
         return try await Request()
-            .with(\.path, setTo: "/login")
+            .with(\.path, setTo: "/v1/api/user/login")
             .with(\.method, setTo: .POST)
-            .with(\.body, setTo: ["phone": phone, "password": password])
+            .with(\.body, setTo: ["username": phone, "password": password])
             .with(\.standaloneResponse, setTo: LoginResponse(access_token: "mockToken"))
             .make()
-            .response()
-            .decodedData() as LoginResponse
+            .response() as LoginResponse
     }
     
     struct RegisterResponse: Codable {
@@ -56,21 +54,81 @@ class Linkman{
     
     func register(phone: String, password: String) async throws -> RegisterResponse {
         return try await Request()
-            .with(\.path, setTo: "/register")
+            .with(\.path, setTo: "/v1/api/user/register")
             .with(\.method, setTo: .POST)
-            .with(\.body, setTo: ["phone": phone, "password": password])
+            .with(\.body, setTo: ["username": phone, "password": password])
             .with(\.standaloneResponse, setTo: RegisterResponse(access_token: "mockToken"))
             .make()
-            .response()
-            .decodedData() as RegisterResponse
+            .response() as RegisterResponse
     }
 }
 
 private extension Linkman {
+    func log(request: URLRequest){
+        let urlString = request.url?.absoluteString ?? ""
+        let components = NSURLComponents(string: urlString)
+
+        let method = request.httpMethod != nil ? "\(request.httpMethod!)": ""
+        let path = "\(components?.path ?? "")"
+        let query = "\(components?.query ?? "")"
+        let host = "\(components?.host ?? "")"
+
+        var requestLog = "\n---------- OUT ---------->\n"
+        requestLog += "\(urlString)"
+        requestLog += "\n\n"
+        requestLog += "\(method) \(path)?\(query) HTTP/1.1\n"
+        requestLog += "Host: \(host)\n"
+        for (key,value) in request.allHTTPHeaderFields ?? [:] {
+            requestLog += "\(key): \(value)\n"
+        }
+        if let body = request.httpBody{
+            let bodyString = NSString(data: body, encoding: String.Encoding.utf8.rawValue) ?? "Can't render body; not utf8 encoded";
+            requestLog += "\n\(bodyString)\n"
+        }
+
+        requestLog += "\n------------------------->\n";
+        print(requestLog)
+    }
+    
+    func log(data: Data?, response: HTTPURLResponse?, error: Error?){
+
+        let urlString = response?.url?.absoluteString
+        let components = NSURLComponents(string: urlString ?? "")
+
+        let path = "\(components?.path ?? "")"
+        let query = "\(components?.query ?? "")"
+
+        var responseLog = "\n<---------- IN ----------\n"
+        if let urlString = urlString {
+            responseLog += "\(urlString)"
+            responseLog += "\n\n"
+        }
+
+        if let statusCode =  response?.statusCode{
+            responseLog += "HTTP \(statusCode) \(path)?\(query)\n"
+        }
+        if let host = components?.host{
+            responseLog += "Host: \(host)\n"
+        }
+        for (key,value) in response?.allHeaderFields ?? [:] {
+            responseLog += "\(key): \(value)\n"
+        }
+        if let body = data{
+            let bodyString = NSString(data: body, encoding: String.Encoding.utf8.rawValue) ?? "Can't render body; not utf8 encoded";
+            responseLog += "\n\(bodyString)\n"
+        }
+        if let error = error{
+            responseLog += "\nError: \(error.localizedDescription)\n"
+        }
+
+        responseLog += "<------------------------\n";
+        print(responseLog)
+    }
+    
     func make(request: Request) async throws {
         do {
             if (standalone || request.forceStandalone) {
-                request._response = Response(err_code: 0, data: try request.standaloneResponse?.encoded())
+                request._response = try Response(code: 0, data: try request.standaloneResponse?.encoded()).encoded()
                 try await Task.sleep(nanoseconds: UInt64.random(in: 10_000_000...200_000_000))
                 return
             }
@@ -98,24 +156,36 @@ private extension Linkman {
             }
             req.setValue("application/json", forHTTPHeaderField: "Content-Type")
             
+            if (showLog) {
+                log(request: req)
+            }
+            
             let (data, response) = try await URLSession.shared.data(for: req)
             
             guard let httpResponse = response as? HTTPURLResponse else {
                 throw "not an http response"
             }
             
+            if (showLog) {
+                log(data: data, response: httpResponse, error: nil)
+            }
+            
             guard 200 <= httpResponse.statusCode && httpResponse.statusCode < 300 else {
                 throw "request failed, status: \(httpResponse.statusCode)"
             }
             
-            let rsp = try data.decoded() as Response
+            struct Rsp: Decodable {
+                let code: Int
+                let msg: String?
+            }
+            let rsp = try data.decoded() as Rsp
             
-            guard rsp.err_code == 0 else {
-                throw NetworkError.domainError(rsp.err_code)
+            guard rsp.code == 0 else {
+                throw NetworkError.domainError(rsp.code)
             }
             
             
-            request._response = rsp
+            request._response = data
         } catch {
             if request.sendError {
                 Box.sendError(error)
@@ -149,7 +219,7 @@ private class Request: Withable {
     }
     
     var standaloneResponse: Encodable?
-    var _response: Response?
+    var _response: Data?
     var sendError = true
     var throwError = true
     var forceStandalone: Bool = false
@@ -159,24 +229,19 @@ private class Request: Withable {
         return self
     }
     
-    func response() throws -> Response {
+    func response<T: Codable>() throws -> T {
         guard let r = _response else {
             throw "response not exists"
         }
-        return r
+        
+        let rsp = try r.decoded() as Response<T>
+        return rsp.data!
     }
 }
 
 // MARK: - Response
-private struct Response: Decodable {
-    let err_code: Int
-    let data: Data?
-    
-    func decodedData<T: Decodable>() throws -> T {
-        guard let data = data else {
-            throw "response data not exists"
-        }
-        return try data.decoded()
-    }
+private struct Response<T: Codable>: Codable {
+    let code: Int
+    let data: T?
 }
 

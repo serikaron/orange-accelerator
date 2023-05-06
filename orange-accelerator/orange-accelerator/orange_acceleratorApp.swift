@@ -10,7 +10,8 @@ import SwiftUI
 @main
 struct orange_acceleratorApp: App {
     init() {
-        Linkman.shared.standalone = true
+//        Linkman.shared.standalone = true
+        Linkman.shared.showLog = true
     }
     
     var body: some Scene {

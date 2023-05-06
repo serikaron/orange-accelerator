@@ -67,6 +67,10 @@ class AccountService: ObservableObject {
         }
         Box.setLoading(false)
     }
+    
+    func logout() {
+        Box.setToken(nil)
+    }
 }
 
 

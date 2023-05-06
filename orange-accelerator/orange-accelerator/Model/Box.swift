@@ -19,7 +19,9 @@ class Box {
 
 extension Box {
     static func sendError(_ error: Error?) {
-        Box.shared.errorSubject.send(error)
+        DispatchQueue.main.async {
+            Box.shared.errorSubject.send(error)
+        }
     }
     
     static func setLoading(_ loading: Bool) {

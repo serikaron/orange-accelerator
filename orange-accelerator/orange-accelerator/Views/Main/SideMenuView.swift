@@ -8,13 +8,17 @@
 import SwiftUI
 
 struct SideMenuView: View {
+    @EnvironmentObject var accountService: AccountService
+    
     var body: some View {
         VStack {
             info
             Spacer().frame(height: 35)
             list
             Spacer()
-            Button("退出登录") {}
+            Button("退出登录") {
+                accountService.logout()
+            }
                 .buttonStyle(OnboardingButton())
                 .padding(.horizontal, 20)
             Spacer().frame(height: 15.5)
@@ -106,5 +110,6 @@ fileprivate enum MenuItem: CaseIterable, Identifiable {
 struct SideMenuView_Previews: PreviewProvider {
     static var previews: some View {
         SideMenuView()
+            .environmentObject(AccountService())
     }
 }
