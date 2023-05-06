@@ -10,6 +10,7 @@ import V2orange
 
 struct MainContentView: View {
     @StateObject private var v2Service = V2Service()
+    @StateObject private var endpointService = EndpointService()
     
     @Binding var showSideMenu: Bool
     
@@ -80,6 +81,7 @@ struct MainContentView: View {
         .onAppear {
             Task {
                 await v2Service.loadConfig()
+                await endpointService.loadEndpoints()
             }
         }
     }

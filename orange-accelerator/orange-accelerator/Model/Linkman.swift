@@ -32,7 +32,6 @@ class Linkman{
     
     var standalone = false
     var showLog = false
-    var token: String? = nil
     
     struct LoginResponse: Codable {
         let access_token: String
@@ -60,6 +59,26 @@ class Linkman{
             .with(\.standaloneResponse, setTo: RegisterResponse(access_token: "mockToken"))
             .make()
             .response() as RegisterResponse
+    }
+    
+    struct ServerResonse: Codable {
+        let id: Int
+        let name: String
+        let group: String
+        let ip: String
+        let port: String
+        let server_type: Int
+        let sort: Int
+    }
+    
+    typealias ServerListResponse = [ServerResonse]
+    
+    func getServerList() async throws -> ServerListResponse {
+        return try await Request()
+            .with(\.path, setTo: "/v1/api/server/list")
+            .with(\.method, setTo: .GET)
+            .make()
+            .response() as ServerListResponse
     }
 }
 
@@ -151,8 +170,8 @@ private extension Linkman {
             if let body = request.body {
                 req.httpBody = try body.encoded()
             }
-            if let token = token {
-                req.addValue(token, forHTTPHeaderField: "Access_Token")
+            if let token = Box.shared.tokenSubject.value {
+                req.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
             }
             req.setValue("application/json", forHTTPHeaderField: "Content-Type")
             

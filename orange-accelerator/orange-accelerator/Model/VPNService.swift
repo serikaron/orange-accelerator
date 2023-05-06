@@ -1,80 +1,53 @@
 //
 //  VPNService.swift
-//  vDemo
+//  orange-accelerator
 //
-//  Created by serika on 2022/5/12.
+//  Created by serika on 2023/5/6.
 //
 
 import Foundation
 import NetworkExtension
-import Combine
 
-enum VPNError: Error {
-    case intervalError
-}
-
-class V2Client {
-    static let shared = V2Client()
-    
-    typealias Response = AnyPublisher<NETunnelProviderManager?, Error>
-    
-    private var manager: NETunnelProviderManager?
-    
-    func loadConfig() -> Response {
-        let response = PassthroughSubject<NETunnelProviderManager?, Error>()
-        
-        NETunnelProviderManager.loadAllFromPreferences { managers, error in
-            guard error == nil else {
-                print("there is an error \(error!)")
-                response.send(completion: .failure(error!))
-                return
-            }
-            
-            if let managers = managers, !managers.isEmpty {
-                self.manager = managers[0]
-            } else {
-                self.manager = nil
-            }
-            
-            response.send(self.manager)
-            response.send(completion: .finished)
+@MainActor
+class VPNService {
+    private var manager: NETunnelProviderManager? {
+        get async throws {
+            if _manager != nil { return _manager }
+            try await loadPreferences()
+            if _manager != nil { return _manager }
+            try await inatallPreferences()
+            return _manager
         }
-        
-        return response.eraseToAnyPublisher()
     }
     
-    func installProfile() -> Response {
-        let response = PassthroughSubject<NETunnelProviderManager?, Error>()
-        
-        let manager = makeManager()
-        manager.saveToPreferences { error in
-            guard error == nil else {
-                print("install vpn profile failed, \(error!)")
-                response.send(completion: .failure(error!))
-                return
-            }
-
-            self.manager = manager
-            response.send(manager)
-            response.send(completion: .finished)
+    private var _manager: NETunnelProviderManager? = nil
+    
+    func loadManager() async {
+        do {
+            _ = try await self.manager
+        } catch {
+            Box.sendError(error)
         }
-        
-        return response.eraseToAnyPublisher()
+    }
+    
+    private func loadPreferences() async throws {
+        let managers = try await NETunnelProviderManager.loadAllFromPreferences()
+        _manager = managers.isEmpty ? nil : managers[0]
+    }
+    
+    private func inatallPreferences() async throws {
+        let manager = makeManager()
+        manager.isEnabled = true
+        try await manager.saveToPreferences()
+        _manager = manager
     }
     
     private func makeManager() -> NETunnelProviderManager {
         let manager = NETunnelProviderManager()
-        manager.localizedDescription = "vDemo"
+        manager.localizedDescription = "橙子加速器"
         
-        // Configure a VPN protocol to use a Packet Tunnel Provider
         let proto = NETunnelProviderProtocol()
-        // This must match an app extension bundle identifier
-//        proto.providerBundleIdentifier = "test.v2ray.demo.vDemo-tunnel"
-        // Replace with an actual VPN server address
-//        proto.serverAddress = "27.124.9.79:10086"
-//        proto.serverAddress = "27.124.9.79"
         proto.serverAddress = "127.0.0.1"
-        // Pass additional information to the tunnel
         proto.providerConfiguration = [:]
         
         manager.protocolConfiguration = proto
@@ -82,71 +55,49 @@ class V2Client {
         return manager
     }
     
-    func start() {
-        guard let manager = self.manager else { return }
+    private func enable() async throws {
+        guard let manager = try await manager else {
+            throw "NETunnelProviderManager is null"
+        }
         
+        manager.isEnabled = true
+        try await manager.saveToPreferences()
+    }
+    
+    private func sayHelloToTunnel() async throws {
+        _ = try await send(data: "Hello Provider".data(using: String.Encoding.utf8))
+    }
+        
+    private func send(data: Data?) async throws -> Data? {
+        guard
+            let tunnel = try await manager,
+            let session = tunnel.connection as? NETunnelProviderSession,
+            let data = data, tunnel.connection.status != .invalid
+        else {
+            throw "send message to tunnel FAILED !!!"
+        }
+        
+        return try await withCheckedThrowingContinuation { continuation in
+            do {
+                try session.sendProviderMessage(data) { data in
+                    continuation.resume(returning: data)
+                }
+            } catch {
+                continuation.resume(throwing: error)
+            }
+        }
+    }
+    
+    func start() async {
         do {
+            try await enable()
+            try await sayHelloToTunnel()
+            guard let manager = try await manager else {
+                throw "start vpn FAILED !!!"
+            }
             try manager.connection.startVPNTunnel()
         } catch {
-            print("sth error")
-            print(error)
-        }
-    }
-    
-    func update(isEnable: Bool) -> Response {
-        let response = PassthroughSubject<NETunnelProviderManager?, Error>()
-        
-        guard let manager = manager else {
-            DispatchQueue.main.async {
-                response.send(completion: .failure(VPNError.intervalError))
-            }
-            return response.eraseToAnyPublisher()
-        }
-
-        manager.isEnabled = isEnable
-        manager.saveToPreferences() { error in
-            guard error == nil else {
-                print("enable vpn profile failed, \(error!)")
-                response.send(completion: .failure(error!))
-                return
-            }
-            
-            manager.loadFromPreferences { error in
-                guard error == nil else {
-                    print("reload vpn profile failed, \(error!)")
-                    response.send(completion: .failure(error!))
-                    return
-                }
-                
-                response.send(manager)
-                response.send(completion: .finished)
-            }
-        }
-
-        return response.eraseToAnyPublisher()
-    }
-    
-    func sayHelloToTunnel() {
-        // Send a simple IPC message to the provider, handle the response.
-        guard
-            let tunnel = manager,
-            let session = tunnel.connection as? NETunnelProviderSession,
-            let message = "Hello Provider".data(using: String.Encoding.utf8), tunnel.connection.status != .invalid
-        else {
-            return
-        }
-
-        do {
-            try session.sendProviderMessage(message) { response in
-                if response != nil {
-                    let responseString = NSString(data: response!, encoding: String.Encoding.utf8.rawValue)
-                    NSLog("Received response from the provider: \(String(describing: responseString))")
-                } else {
-                    NSLog("Got a nil response from the provider")
-                }
-            }
-        } catch {
-            NSLog("Failed to send a message to the provider")
+            Box.sendError(error)
         }
     }
 }
