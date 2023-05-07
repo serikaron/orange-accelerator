@@ -24,6 +24,13 @@ enum EndpointType {
 
 enum EndpointLatency {
     case ms(Int), timeout
+    
+    func toString() -> String {
+        switch self {
+        case .timeout: return "Timeout"
+        case .ms(let ms): return "\(ms)ms"
+        }
+    }
 }
 
 struct Endpoint {
@@ -59,19 +66,24 @@ extension EndpointList {
         var out: EndpointList = []
         for endpoint in self {
             let latency = await endpoint.ping()
+            print("latency of endpoint: \(endpoint.name) - \(latency.toString())")
             out.append(Endpoint(name: endpoint.name, host: endpoint.host, port: endpoint.port, type: endpoint.type, latency: latency))
         }
         return out
     }
     
     func fastest() throws -> Endpoint? {
-        self.sorted { $0.latency! < $1.latency! }
+        print("get fastest endpoint")
+        let out = self.sorted { $0.latency! < $1.latency! }
             .first
+        print("fastest endpoint: \(out?.name ?? "nil")")
+        return out
     }
 }
 
 extension Endpoint {
     func connect(routeMode: RouteMode) async throws {
+        print("connect vpn")
         await NETunnelProviderManager.start()
     }
     

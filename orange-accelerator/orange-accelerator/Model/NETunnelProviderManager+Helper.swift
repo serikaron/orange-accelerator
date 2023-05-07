@@ -87,6 +87,7 @@ extension NETunnelProviderManager {
         }
     }
     
+    @MainActor
     static func start() async {
         do {
             try await enable()

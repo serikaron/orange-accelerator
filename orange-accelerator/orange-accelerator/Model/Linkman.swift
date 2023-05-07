@@ -160,6 +160,7 @@ private extension Linkman {
         print(responseLog)
     }
     
+    @MainActor
     func make(request: Request) async throws {
         do {
             if (standalone || request.forceStandalone) {

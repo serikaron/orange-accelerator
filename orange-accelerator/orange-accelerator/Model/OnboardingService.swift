@@ -8,6 +8,7 @@
 import Foundation
 
 
+@MainActor
 class OnboardingService: ObservableObject {
     enum OnboardingError: Error {
         case emptyPhone
