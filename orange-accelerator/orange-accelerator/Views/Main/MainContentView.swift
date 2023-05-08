@@ -72,7 +72,7 @@ struct MainContentView: View {
         }
         .onAppear {
             Task {
-                routeMode = RouteMode.mode
+//                routeMode = RouteMode.mode
                 await NETunnelProviderManager.requestPermission()
                 do {
                     account = try await Account.current
@@ -80,6 +80,9 @@ struct MainContentView: View {
                     Box.sendError(error)
                 }
             }
+        }
+        .onChange(of: routeMode) { newValue in
+            RouteMode.mode = routeMode
         }
     }
     

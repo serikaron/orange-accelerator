@@ -15,6 +15,7 @@ enum RouteMode {
             return UserDefaults.routeMode
         }
         set(value) {
+            print("update route mode to \(value)")
             UserDefaults.routeMode = value
         }
     }

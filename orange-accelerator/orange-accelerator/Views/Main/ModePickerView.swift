@@ -19,7 +19,7 @@ struct ModePickerView: View {
     
     fileprivate func makeButton(mode: RouteMode, position: ModeButtonStyle.Position) -> some View {
         Button(mode.buttonTittle) {
-            RouteMode.mode = mode
+            routeMode = mode
         }
             .buttonStyle(ModeButtonStyle(position: position, selected: routeMode == mode))
     }

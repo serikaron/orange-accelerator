@@ -42,6 +42,7 @@
 		7275E59E2A0687DC0091FA7A /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E59D2A0687DC0091FA7A /* Account.swift */; };
 		7275E5A02A06B2BD0091FA7A /* RouteMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E59F2A06B2BD0091FA7A /* RouteMode.swift */; };
 		7275E5A62A06B9D30091FA7A /* V2Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5A52A06B9D30091FA7A /* V2Config.swift */; };
+		7275E5A82A08F2D80091FA7A /* geosite.dat in Resources */ = {isa = PBXBuildFile; fileRef = 7275E5A72A08F2D80091FA7A /* geosite.dat */; };
 		7276F5DE29EAD77200A937DD /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7276F5DD29EAD77200A937DD /* Onboarding.swift */; };
 		7276F5E129EADAF200A937DD /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7276F5E029EADAF200A937DD /* Utils.swift */; };
 		7276F5E729EC35D200A937DD /* OnboardingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7276F5E629EC35D200A937DD /* OnboardingService.swift */; };
@@ -129,6 +130,7 @@
 		7275E59D2A0687DC0091FA7A /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		7275E59F2A06B2BD0091FA7A /* RouteMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMode.swift; sourceTree = "<group>"; };
 		7275E5A52A06B9D30091FA7A /* V2Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V2Config.swift; sourceTree = "<group>"; };
+		7275E5A72A08F2D80091FA7A /* geosite.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = geosite.dat; sourceTree = "<group>"; };
 		7276F5DD29EAD77200A937DD /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		7276F5E029EADAF200A937DD /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		7276F5E629EC35D200A937DD /* OnboardingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingService.swift; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 		7273D89229FE40D80006BDA4 /* orange-tunnel */ = {
 			isa = PBXGroup;
 			children = (
+				7275E5A72A08F2D80091FA7A /* geosite.dat */,
 				7273D89D29FE43780006BDA4 /* v2ray.json */,
 				7273D89329FE40D80006BDA4 /* PacketTunnelProvider.swift */,
 				7273D89529FE40D80006BDA4 /* Info.plist */,
@@ -486,6 +489,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7275E5A82A08F2D80091FA7A /* geosite.dat in Resources */,
 				7273D89E29FE43780006BDA4 /* v2ray.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

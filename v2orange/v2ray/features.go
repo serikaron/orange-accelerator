@@ -42,6 +42,7 @@ import (
 	_ "github.com/v2fly/v2ray-core/v5/transport/internet/udp"
 	_ "github.com/v2fly/v2ray-core/v5/transport/internet/websocket"
 
+	_ "github.com/v2fly/v2ray-core/v5/infra/conf/geodata/standard"
 	// Transport headers
 	_ "github.com/v2fly/v2ray-core/v5/transport/internet/headers/http"
 	_ "github.com/v2fly/v2ray-core/v5/transport/internet/headers/noop"
@@ -50,13 +51,7 @@ import (
 	_ "github.com/v2fly/v2ray-core/v5/transport/internet/headers/utp"
 	_ "github.com/v2fly/v2ray-core/v5/transport/internet/headers/wechat"
 	_ "github.com/v2fly/v2ray-core/v5/transport/internet/headers/wireguard"
-	// JSON config support. Choose only one from the two below.
-	// The following line loads JSON from v2ctl
-	// _ "github.com/v2fly/v2ray-core/v5/main/json"
-	// The following line loads JSON internally
-	//_ "github.com/v2fly/v2ray-core/v5/main/jsonem" // v5 disable
-	// Load config from file or http(s)
-	// _ "github.com/v2fly/v2ray-core/v5/main/confloader/external"
+
 	_ "github.com/v2fly/v2ray-core/v5/infra/conf/mergers"
 	_ "github.com/v2fly/v2ray-core/v5/main/formats"
 )
