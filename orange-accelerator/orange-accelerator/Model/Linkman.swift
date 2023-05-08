@@ -79,7 +79,7 @@ class Linkman{
             .with(\.method, setTo: .GET)
             .with(\.standaloneResponse, setTo: standaloneResponse([
                 ServerResonse(id: 1, name: "live", group: "", ip: "us.60cdn.com", port: "10233", server_type: 2, sort: 0),
-                ServerResonse(id: 2, name: "dead", group: "", ip: "124.71.122.218", port: "10233", server_type: 2, sort: 0),
+//                ServerResonse(id: 2, name: "dead", group: "", ip: "124.71.122.218", port: "10233", server_type: 2, sort: 0),
             ]))
             .make()
             .response() as ServerListResponse
@@ -97,7 +97,7 @@ class Linkman{
         return try await Request()
             .with(\.path, setTo: "/v1/api/user/info")
             .with(\.method, setTo: .GET)
-            .with(\.standaloneResponse, setTo: standaloneResponse(UserInfoResponse(id: 1, username: "serika", uuid: "uuid", is_vip: false, expire_time: 0)))
+            .with(\.standaloneResponse, setTo: standaloneResponse(UserInfoResponse(id: 1, username: "serika", uuid: "073c3ae5-4868-3da4-8d8d-ff1e29ed974f", is_vip: false, expire_time: 0)))
             .make()
             .response() as UserInfoResponse
     }

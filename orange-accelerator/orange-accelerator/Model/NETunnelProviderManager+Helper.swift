@@ -88,11 +88,11 @@ extension NETunnelProviderManager {
     }
     
     @MainActor
-    static func start() async {
+    static func start(config: Data) async {
         do {
             try await enable()
             try await sayHelloToTunnel()
-            try await manager.connection.startVPNTunnel()
+            try await manager.connection.startVPNTunnel(options: ["config": config] as [String: NSObject])
         } catch {
             Box.sendError(error)
         }

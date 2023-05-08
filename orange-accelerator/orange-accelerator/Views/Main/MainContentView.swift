@@ -12,6 +12,7 @@ import NetworkExtension
 struct MainContentView: View {
     @Binding var showSideMenu: Bool
     @State private var routeMode = RouteMode.mode
+    @State private var account: Account?
     
     var body: some View {
         VStack(spacing: 0) {
@@ -73,6 +74,11 @@ struct MainContentView: View {
             Task {
                 routeMode = RouteMode.mode
                 await NETunnelProviderManager.requestPermission()
+                do {
+                    account = try await Account.current
+                } catch {
+                    Box.sendError(error)
+                }
             }
         }
     }
@@ -114,11 +120,15 @@ struct MainContentView: View {
     private func connect() {
         Task {
             do {
+                guard let account = account else {
+                    throw "INVALID account !!!"
+                }
+                
                 try await EndpointList.all
-                    .filtered(isVip: try await Account.current.isVip)
+                    .filtered(isVip: account.isVip)
                     .ping()
                     .fastest()?
-                    .connect(routeMode: routeMode)
+                    .connect(uuid: account.uuid, routeMode: routeMode)
             } catch {
                 Box.sendError(error)
             }

@@ -90,9 +90,14 @@ extension EndpointList {
 }
 
 extension Endpoint {
-    func connect(routeMode: RouteMode) async throws {
+    func connect(uuid: String, routeMode: RouteMode) async throws {
         print("connect vpn")
-        await NETunnelProviderManager.start()
+        guard let port = Int(port) else {
+            throw "INVALID v2 port (\(self.port))"
+        }
+        let v2Config = V2.BuildConfig(name: name, address: host, port: port, userId: uuid)
+        let data = try v2Config.encoded()
+        await NETunnelProviderManager.start(config: data)
     }
     
     fileprivate func ping() async -> EndpointLatency {

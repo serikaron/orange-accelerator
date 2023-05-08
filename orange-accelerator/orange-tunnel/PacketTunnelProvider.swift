@@ -25,70 +25,45 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             weakSelf!.tunToUDP()
         }
     }
+    
     override func startTunnel(options: [String : NSObject]?, completionHandler: @escaping (Error?) -> Void) {
+        guard let config = options?["config"] as? Data else {
+            completionHandler("config NOT found !!!")
+            return
+        }
+        
+        var err: NSError?
+        V2orangeStartV2Ray(self, config, &err)
+        if err != nil {
+            completionHandler(err)
+            return
+        }
         
         let networkSettings = NEPacketTunnelNetworkSettings(tunnelRemoteAddress: serverIp)
         networkSettings.mtu = 1480
-        
+
         let ipv4Settings = NEIPv4Settings(addresses: [serverIp], subnetMasks: ["255.255.255.0"])
             ipv4Settings.includedRoutes = [NEIPv4Route.default()]
         let dnsSetting = NEDNSSettings.init(servers: ["8.8.8.8","8.8.4.8"])
-        
+
         networkSettings.ipv4Settings = ipv4Settings
         networkSettings.dnsSettings = dnsSetting
-//        self.setTunnelNetworkSettings(ipv4Settings, completionHandler:  (Error?) ->Void){
-//            completionHandler(nil)
-//        }
-        
+
         setTunnelNetworkSettings(networkSettings) { (error) in
             guard error == nil else {
                 completionHandler(error)
                 NSLog(error?.localizedDescription ?? "")
                 return
             }
-            
-            completionHandler(error)
-
-
-
-        }
-        NSLog("before")
-
-//        Tun2socksStartShadowsocks(self, serverIp, 8488, "AES-256-CFB", "abcd1234")
-        
-        let fileName = "v2ray"
-        if let url = Bundle.main.url(forResource: fileName, withExtension: "json") {
-            do {
-                let data = try Data(contentsOf: url)
-//                NSLog(data.description)
-                NSLog("description :\(data.description)")
-                let out = V2orangeLoadConfig(data)
-                NSLog("out: %s", out)
-                var err: NSError?
-                V2orangeStartV2Ray(self, data, &err)
-                print("err: \(err)")
-            } catch let err {
-                print("error:\(err)")
-            }
-
+            completionHandler(nil)
         }
 
-        NSLog("after")
-        
-//        Tun2socksStartV2ray(self, <#T##configBytes: Data!##Data!#>)
-        
-//        self.tunToUDP()
-        NSLog("========")
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.tunToUDP()
         }
-        // Add code here to start the process of connecting the tunnel.
     }
     
     override func stopTunnel(with reason: NEProviderStopReason, completionHandler: @escaping () -> Void) {
-        // Add code here to start the process of stopping the tunnel.
-        
-//        VpnManager.shared.disconnect()
         completionHandler()
     }
     
@@ -123,4 +98,8 @@ extension PacketTunnelProvider: V2orangePacketFlowProtocol{
     }
     
     
+}
+
+extension String: LocalizedError {
+    public var errorDescription: String? { return self }
 }
