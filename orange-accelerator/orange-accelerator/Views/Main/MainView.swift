@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 private let MENU_WIDTH: CGFloat = 275
 
@@ -13,32 +14,64 @@ struct MainView: View {
     @StateObject private var onboardingService = OnboardingService()
     
     @State private var showSideMenu = false
+    @State private var showNodeList = false
+    @State private var showMemberStore = false
+    @State private var showPopup = false
+    @State private var popupType = PopupViewType.member
     
     @State private var maskAlpha: Double = 0
     @State private var sideMenuOffset: CGFloat = -MENU_WIDTH
     
+    private let hidePopupSubject = HidePopupSubject()
+    private let showPopupSubject = ShowPopupSubject()
+    
     var body: some View {
-        ZStack {
-            MainContentView(showSideMenu: $showSideMenu)
-            Color.black.opacity(maskAlpha)
-                .ignoresSafeArea()
-                .onTapGesture {
-                    showSideMenu = false
+        NavigationView {
+            ZStack {
+                NavigationLink(destination: NodeListView(), isActive: $showNodeList) {
+                    EmptyView()
                 }
-            GeometryReader { geometry in
-                Group {
-                    Color.white
-                        .ignoresSafeArea()
-                    SideMenuView()
+                NavigationLink(destination: MemberStoreView(), isActive: $showMemberStore) {
+                    EmptyView()
                 }
-                .frame(width: MENU_WIDTH)
-                .offset(x: sideMenuOffset, y: 0)
+                MainContentView(showSideMenu: $showSideMenu,
+                                showNodeList: $showNodeList,
+                                showPopup: showPopupSubject)
+                Color.black.opacity(maskAlpha)
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        showSideMenu = false
+                    }
+                PopupView(type: popupType, isShow: $showPopup, buttonClick: hidePopupSubject)
+                    .ignoresSafeArea()
+                GeometryReader { geometry in
+                    Group {
+                        Color.white
+                            .ignoresSafeArea()
+                        SideMenuView()
+                    }
+                    .frame(width: MENU_WIDTH)
+                    .offset(x: sideMenuOffset, y: 0)
+                }
             }
         }
         .onChange(of: showSideMenu) { isShow in
             withAnimation {
                 maskAlpha = isShow ? 0.5 : 0
                 sideMenuOffset = isShow ? 0 : -MENU_WIDTH
+            }
+        }
+        .onReceive(showPopupSubject) { type in
+            showPopup = true
+            popupType = type
+        }
+        .onReceive(hidePopupSubject) { popupType in
+            print("onReceive \(popupType)")
+            switch popupType {
+            case .member:
+                showMemberStore = true
+            case .mode:
+                break
             }
         }
         .environmentObject(onboardingService)

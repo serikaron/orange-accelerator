@@ -11,6 +11,10 @@ import NetworkExtension
 
 struct MainContentView: View {
     @Binding var showSideMenu: Bool
+    @Binding var showNodeList: Bool
+    
+    let showPopup: ShowPopupSubject
+    
     @State private var routeMode = RouteMode.mode
     @State private var account: Account?
     
@@ -82,7 +86,10 @@ struct MainContentView: View {
             }
         }
         .onChange(of: routeMode) { newValue in
-            RouteMode.mode = routeMode
+            RouteMode.mode = newValue
+            if newValue == .intellegent {
+                showPopup.send(.mode)
+            }
         }
     }
     
@@ -114,8 +121,20 @@ struct MainContentView: View {
                     .orangeText(size: 12, color: .hex("#999999"))
             }
             Spacer().frame(width: 15)
-            Text("更换")
-                .orangeText(size: 15, color: .main)
+//            NavigationLink(destination: NodeListView(), isActive: $showNodeList) {
+//                EmptyView()
+//            }
+            Button {
+                print("clicked 更换")
+                if account?.isVip ?? false {
+                    showNodeList = true
+                } else {
+                    showPopup.send(.member)
+                }
+            } label: {
+                Text("更换")
+                    .orangeText(size: 15, color: .main)
+            }
         }
     }
     
@@ -141,6 +160,6 @@ struct MainContentView: View {
 
 struct MainContentView_Previews: PreviewProvider {
     static var previews: some View {
-        MainContentView(showSideMenu: .constant(false))
+        MainContentView(showSideMenu: .constant(false), showNodeList: .constant(false), showPopup: ShowPopupSubject())
     }
 }

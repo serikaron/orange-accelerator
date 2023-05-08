@@ -43,6 +43,9 @@
 		7275E5A02A06B2BD0091FA7A /* RouteMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E59F2A06B2BD0091FA7A /* RouteMode.swift */; };
 		7275E5A62A06B9D30091FA7A /* V2Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5A52A06B9D30091FA7A /* V2Config.swift */; };
 		7275E5A82A08F2D80091FA7A /* geosite.dat in Resources */ = {isa = PBXBuildFile; fileRef = 7275E5A72A08F2D80091FA7A /* geosite.dat */; };
+		7275E5AA2A08F5670091FA7A /* NodeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5A92A08F5670091FA7A /* NodeListView.swift */; };
+		7275E5AE2A0903BF0091FA7A /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5AD2A0903BF0091FA7A /* PopupView.swift */; };
+		7275E5B02A0929D90091FA7A /* MemberStoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5AF2A0929D90091FA7A /* MemberStoreView.swift */; };
 		7276F5DE29EAD77200A937DD /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7276F5DD29EAD77200A937DD /* Onboarding.swift */; };
 		7276F5E129EADAF200A937DD /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7276F5E029EADAF200A937DD /* Utils.swift */; };
 		7276F5E729EC35D200A937DD /* OnboardingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7276F5E629EC35D200A937DD /* OnboardingService.swift */; };
@@ -131,6 +134,9 @@
 		7275E59F2A06B2BD0091FA7A /* RouteMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMode.swift; sourceTree = "<group>"; };
 		7275E5A52A06B9D30091FA7A /* V2Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V2Config.swift; sourceTree = "<group>"; };
 		7275E5A72A08F2D80091FA7A /* geosite.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = geosite.dat; sourceTree = "<group>"; };
+		7275E5A92A08F5670091FA7A /* NodeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeListView.swift; sourceTree = "<group>"; };
+		7275E5AD2A0903BF0091FA7A /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
+		7275E5AF2A0929D90091FA7A /* MemberStoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberStoreView.swift; sourceTree = "<group>"; };
 		7276F5DD29EAD77200A937DD /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		7276F5E029EADAF200A937DD /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		7276F5E629EC35D200A937DD /* OnboardingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingService.swift; sourceTree = "<group>"; };
@@ -177,10 +183,13 @@
 		72022ACD29FA1D3E00DC9012 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				72022AD829FA724C00DC9012 /* MainView.swift */,
 				72022ACE29FA206200DC9012 /* MainContentView.swift */,
 				72022AD029FA2A1E00DC9012 /* ModePickerView.swift */,
 				72022AD629FA61FF00DC9012 /* SideMenuView.swift */,
-				72022AD829FA724C00DC9012 /* MainView.swift */,
+				7275E5A92A08F5670091FA7A /* NodeListView.swift */,
+				7275E5AD2A0903BF0091FA7A /* PopupView.swift */,
+				7275E5AF2A0929D90091FA7A /* MemberStoreView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -504,6 +513,7 @@
 				72022AD729FA61FF00DC9012 /* SideMenuView.swift in Sources */,
 				72022AD929FA724C00DC9012 /* MainView.swift in Sources */,
 				72022A5429F3FF6400DC9012 /* RegisterView.swift in Sources */,
+				7275E5AE2A0903BF0091FA7A /* PopupView.swift in Sources */,
 				7276F5E129EADAF200A937DD /* Utils.swift in Sources */,
 				7208215829EAC5AD00D36AF3 /* LoginView.swift in Sources */,
 				72022A5E29F4273100DC9012 /* ErrorService.swift in Sources */,
@@ -512,6 +522,7 @@
 				72022AC429F8FF8300DC9012 /* LoadingView.swift in Sources */,
 				7275E59A2A062F850091FA7A /* NETunnelProviderManager+Helper.swift in Sources */,
 				7276F5EC29EE215900A937DD /* Withable.swift in Sources */,
+				7275E5AA2A08F5670091FA7A /* NodeListView.swift in Sources */,
 				7275E5A62A06B9D30091FA7A /* V2Config.swift in Sources */,
 				7276F5DE29EAD77200A937DD /* Onboarding.swift in Sources */,
 				7208212E29E951B200D36AF3 /* ContentView.swift in Sources */,
@@ -522,6 +533,7 @@
 				7275E5A02A06B2BD0091FA7A /* RouteMode.swift in Sources */,
 				72022AC229F7C68A00DC9012 /* String+Util.swift in Sources */,
 				72022ACF29FA206200DC9012 /* MainContentView.swift in Sources */,
+				7275E5B02A0929D90091FA7A /* MemberStoreView.swift in Sources */,
 				72022AC029F7C23C00DC9012 /* Box.swift in Sources */,
 				7276F5E729EC35D200A937DD /* OnboardingService.swift in Sources */,
 				72022A5629F409B300DC9012 /* View+erase.swift in Sources */,
