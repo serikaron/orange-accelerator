@@ -8,6 +8,7 @@ import (
 	"log"
 	"net"
 	"os"
+	"time"
 )
 
 func PingRaw(host string) {
@@ -73,6 +74,7 @@ func ProPing(host string) (string, error) {
 		//panic(err)
 	}
 	pinger.Count = 3
+	pinger.Timeout = time.Second
 	err = pinger.Run() // Blocks until finished.
 	if err != nil {
 		//panic(err)

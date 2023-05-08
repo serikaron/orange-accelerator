@@ -110,15 +110,17 @@ struct MainContentView: View {
         }
     }
     
+    @MainActor
     private func connect() {
         Task {
             do {
                 try await EndpointList.all
                     .filtered(isVip: try await Account.current.isVip)
+                    .ping()
                     .fastest()?
                     .connect(routeMode: routeMode)
             } catch {
-                
+                Box.sendError(error)
             }
         }
     }

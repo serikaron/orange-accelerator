@@ -42,7 +42,7 @@ class Linkman{
             .with(\.path, setTo: "/v1/api/user/login")
             .with(\.method, setTo: .POST)
             .with(\.body, setTo: ["username": phone, "password": password])
-            .with(\.standaloneResponse, setTo: LoginResponse(access_token: "mockToken"))
+            .with(\.standaloneResponse, setTo: standaloneResponse(LoginResponse(access_token: "mockToken")))
             .make()
             .response() as LoginResponse
     }
@@ -56,7 +56,7 @@ class Linkman{
             .with(\.path, setTo: "/v1/api/user/register")
             .with(\.method, setTo: .POST)
             .with(\.body, setTo: ["username": phone, "password": password])
-            .with(\.standaloneResponse, setTo: RegisterResponse(access_token: "mockToken"))
+            .with(\.standaloneResponse, setTo: standaloneResponse(RegisterResponse(access_token: "mockToken")))
             .make()
             .response() as RegisterResponse
     }
@@ -77,6 +77,10 @@ class Linkman{
         return try await Request()
             .with(\.path, setTo: "/v1/api/server/list")
             .with(\.method, setTo: .GET)
+            .with(\.standaloneResponse, setTo: standaloneResponse([
+                ServerResonse(id: 1, name: "live", group: "", ip: "us.60cdn.com", port: "10233", server_type: 2, sort: 0),
+                ServerResonse(id: 2, name: "dead", group: "", ip: "124.71.122.218", port: "10233", server_type: 2, sort: 0),
+            ]))
             .make()
             .response() as ServerListResponse
     }
@@ -93,6 +97,7 @@ class Linkman{
         return try await Request()
             .with(\.path, setTo: "/v1/api/user/info")
             .with(\.method, setTo: .GET)
+            .with(\.standaloneResponse, setTo: standaloneResponse(UserInfoResponse(id: 1, username: "serika", uuid: "uuid", is_vip: false, expire_time: 0)))
             .make()
             .response() as UserInfoResponse
     }
@@ -164,7 +169,7 @@ private extension Linkman {
     func make(request: Request) async throws {
         do {
             if (standalone || request.forceStandalone) {
-                request._response = try Response(code: 0, data: try request.standaloneResponse?.encoded()).encoded()
+                request._response = request.standaloneResponse
                 try await Task.sleep(nanoseconds: UInt64.random(in: 10_000_000...200_000_000))
                 return
             }
@@ -254,7 +259,7 @@ private class Request: Withable {
         }
     }
     
-    var standaloneResponse: Encodable?
+    var standaloneResponse: Data?
     var _response: Data?
     var sendError = true
     var throwError = true
@@ -279,5 +284,9 @@ private class Request: Withable {
 private struct Response<T: Codable>: Codable {
     let code: Int
     let data: T?
+}
+
+fileprivate func standaloneResponse<T: Codable>(_ data: T) -> Data {
+    try! Response<T>(code: 0, data: data).encoded()
 }
 

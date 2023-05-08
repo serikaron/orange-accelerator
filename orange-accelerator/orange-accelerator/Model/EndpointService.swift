@@ -23,7 +23,7 @@ enum EndpointType {
 }
 
 enum EndpointLatency {
-    case ms(Int), timeout
+    case ms(Double), timeout
     
     func toString() -> String {
         switch self {
@@ -64,11 +64,19 @@ extension EndpointList {
     
     func ping() async -> EndpointList {
         var out: EndpointList = []
-        for endpoint in self {
-            let latency = await endpoint.ping()
-            print("latency of endpoint: \(endpoint.name) - \(latency.toString())")
-            out.append(Endpoint(name: endpoint.name, host: endpoint.host, port: endpoint.port, type: endpoint.type, latency: latency))
+        
+        await withTaskGroup(of: Endpoint.self) { group in
+            for endpoint in self {
+                group.addTask {
+                    endpoint.withLatency(endpoint.blocksPing())
+                }
+            }
+            // 等待所有ping操作完成
+            for await result in group {
+                out.append(result)
+            }
         }
+        
         return out
     }
     
@@ -95,20 +103,13 @@ extension Endpoint {
                     return
                 }
                 
-                let match = latency.range(of: #"([1-9]|[1-9][0-9]{1,2})ms"#, options: .regularExpression) != nil
-                guard match else {
-                    continuation.resume(returning: .timeout)
-                    return
-                }
+                let num = latency.latencyNum
                 
-                let idx = latency.index(latency.endIndex, offsetBy: -2)
-                let numStr = latency[..<idx]
-                guard let num = Int(numStr) else {
+                if num == nil || num == 0 {
                     continuation.resume(returning: .timeout)
-                    return
+                } else {
+                    continuation.resume(returning: .ms(num!))
                 }
-                
-                continuation.resume(returning: .ms(num))
             }
         }
     }
@@ -119,6 +120,19 @@ extension Endpoint {
             let latency = V2orangeProPing(host, &error)
             completion(latency, error)
         }
+    }
+    
+    func blocksPing() -> EndpointLatency {
+        print("ping \(host) ...")
+        var error: NSError?
+        let latencyStr = V2orangeProPing(host, &error)
+        let latencyNum = latencyStr.latencyNum
+        print("ping \(host) end, latency: \(latencyNum)")
+        return latencyNum == nil || latencyNum == 0 ? .timeout : .ms(latencyNum!)
+    }
+    
+    func withLatency(_ latency: EndpointLatency) -> Endpoint {
+        Endpoint(name: name, host: host, port: port, type: type, latency: latency)
     }
 }
 
@@ -136,5 +150,16 @@ fileprivate extension EndpointLatency {
         case (.ms, .timeout): return true
         case let (.ms(l), .ms(r)): return l < r
         }
+    }
+}
+
+fileprivate extension String {
+    var latencyNum: Double? {
+        let suffix = "ms"
+        guard hasSuffix(suffix) else { return nil }
+        let startIndex = index(startIndex, offsetBy: 0)
+        let endIndex = index(endIndex, offsetBy: -suffix.count)
+        let numericPart = self[startIndex..<endIndex]
+        return Double(numericPart)
     }
 }
