@@ -42,8 +42,8 @@ struct MainView: View {
                     .onTapGesture {
                         showSideMenu = false
                     }
-//                PopupView(type: popupType, isShow: $showPopup, buttonClick: hidePopupSubject)
-//                    .ignoresSafeArea()
+                PopupView(type: popupType, isShow: $showPopup, buttonClick: hidePopupSubject)
+                    .ignoresSafeArea()
                 GeometryReader { geometry in
                     Group {
                         Color.white

@@ -15,9 +15,12 @@ enum PopupViewType {
 typealias HidePopupSubject = PassthroughSubject<PopupViewType, Never>
 typealias ShowPopupSubject = PassthroughSubject<PopupViewType, Never>
 
+let ANIMATION_DURATION = 0.15
+
 struct PopupView: View {
     let type: PopupViewType
     @Binding var isShow: Bool
+    @State private var hideAll = true
     
     @State private var backgroundAlpha: Double = 0
     @State private var scaleX: CGFloat = 0
@@ -26,55 +29,69 @@ struct PopupView: View {
     let buttonClick: HidePopupSubject
     
     var body: some View {
-        ZStack {
-            Color.black
-//                .opacity(0.5)
-                .opacity(backgroundAlpha)
-            VStack(spacing: 0) {
-                Text(type.title)
-                    .orangeText(size: 17, color: .c000000)
-                    .frame(height: 40)
-                Color.hex("#EDEDED")
-                    .frame(height: 1)
-                Spacer().frame(height: 16.5)
-                VStack(spacing: 13) {
-                    ForEach(type.content, id: \.self) { content in
-                        Text(content)
-                            .orangeText(size: 15, color: .c000000)
-                    }
-                }
-                Spacer()
-                Button {
-                    isShow = false
-                    buttonClick.send(type)
-                } label: {
-                    Text(type.buttonTitle)
-                        .orangeText(size: 15, color: .white)
-                        .frame(width: 100, height: 38)
-                        .background(Color.main)
-                        .cornerRadius(19)
-                }
-                Spacer().frame(height: 20)
-            }
-            .padding(.horizontal, 7.5)
-            .frame(width: 278, height: 218)
-            .background(.white)
-            .cornerRadius(10)
-            .scaleEffect(x: scaleX, y: scaleY)
-        }
+        content
         .onChange(of: isShow) { isShow in
-            withAnimation {
-                backgroundAlpha = isShow ? 0.5 : 0
-            }
             if isShow {
+                hideAll = false
+                withAnimation(.linear(duration: ANIMATION_DURATION)) {
+                    backgroundAlpha = 0.5
+                }
                 withAnimation(.interpolatingSpring(stiffness: 200, damping: 15)) {
                     scaleX = 1
                     scaleY = 1
                 }
             } else {
-                withAnimation {
-                    scaleX = 0
-                    scaleY = 0
+                Task {
+                    await animation(duration: ANIMATION_DURATION) {
+                        scaleX = 0
+                        scaleY = 0
+                        backgroundAlpha = 0
+                    }
+                    hideAll = true
+                }
+            }
+        }
+    }
+    
+    private var content: some View {
+        Group {
+            if hideAll {
+                EmptyView()
+            } else {
+                ZStack {
+                    Color.black
+                        .opacity(backgroundAlpha)
+                    VStack(spacing: 0) {
+                        Text(type.title)
+                            .orangeText(size: 17, color: .c000000)
+                            .frame(height: 40)
+                        Color.hex("#EDEDED")
+                            .frame(height: 1)
+                        Spacer().frame(height: 16.5)
+                        VStack(spacing: 13) {
+                            ForEach(type.content, id: \.self) { content in
+                                Text(content)
+                                    .orangeText(size: 15, color: .c000000)
+                            }
+                        }
+                        Spacer()
+                        Button {
+                            isShow = false
+                            buttonClick.send(type)
+                        } label: {
+                            Text(type.buttonTitle)
+                                .orangeText(size: 15, color: .white)
+                                .frame(width: 100, height: 38)
+                                .background(Color.main)
+                                .cornerRadius(19)
+                        }
+                        Spacer().frame(height: 20)
+                    }
+                    .padding(.horizontal, 7.5)
+                    .frame(width: 278, height: 218)
+                    .background(.white)
+                    .cornerRadius(10)
+                    .scaleEffect(x: scaleX, y: scaleY)
                 }
             }
         }
