@@ -35,8 +35,6 @@
 		7273D89429FE40D80006BDA4 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7273D89329FE40D80006BDA4 /* PacketTunnelProvider.swift */; };
 		7273D89929FE40D80006BDA4 /* orange-tunnel.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 7273D89029FE40D80006BDA4 /* orange-tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7273D89E29FE43780006BDA4 /* v2ray.json in Resources */ = {isa = PBXBuildFile; fileRef = 7273D89D29FE43780006BDA4 /* v2ray.json */; };
-		7275E5952A0537270091FA7A /* v2orange.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7275E5942A0537270091FA7A /* v2orange.xcframework */; };
-		7275E5962A0538940091FA7A /* v2orange.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7275E5942A0537270091FA7A /* v2orange.xcframework */; };
 		7275E5982A0623330091FA7A /* EndpointService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5972A0623330091FA7A /* EndpointService.swift */; };
 		7275E59A2A062F850091FA7A /* NETunnelProviderManager+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5992A062F850091FA7A /* NETunnelProviderManager+Helper.swift */; };
 		7275E59E2A0687DC0091FA7A /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E59D2A0687DC0091FA7A /* Account.swift */; };
@@ -108,7 +106,6 @@
 		72022AD029FA2A1E00DC9012 /* ModePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModePickerView.swift; sourceTree = "<group>"; };
 		72022AD629FA61FF00DC9012 /* SideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
 		72022AD829FA724C00DC9012 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		72022ADB29FCD89300DC9012 /* vDemoCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = vDemoCore.xcframework; sourceTree = "<group>"; };
 		72022AE329FD434C00DC9012 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		72022AF129FD437000DC9012 /* orange-accelerator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "orange-accelerator.entitlements"; sourceTree = "<group>"; };
 		72022AF829FE300000DC9012 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -128,7 +125,6 @@
 		7273D89529FE40D80006BDA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7273D89629FE40D80006BDA4 /* orange_tunnel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = orange_tunnel.entitlements; sourceTree = "<group>"; };
 		7273D89D29FE43780006BDA4 /* v2ray.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = v2ray.json; sourceTree = "<group>"; };
-		7275E5942A0537270091FA7A /* v2orange.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = v2orange.xcframework; path = ../../framework/v2orange.xcframework; sourceTree = "<group>"; };
 		7275E5972A0623330091FA7A /* EndpointService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointService.swift; sourceTree = "<group>"; };
 		7275E5992A062F850091FA7A /* NETunnelProviderManager+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NETunnelProviderManager+Helper.swift"; sourceTree = "<group>"; };
 		7275E59D2A0687DC0091FA7A /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
@@ -152,7 +148,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				72022AF729FE2F7600DC9012 /* NetworkExtension.framework in Frameworks */,
-				7275E5962A0538940091FA7A /* v2orange.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,7 +170,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7273D89129FE40D80006BDA4 /* NetworkExtension.framework in Frameworks */,
-				7275E5952A0537270091FA7A /* v2orange.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,8 +194,6 @@
 		72022ADA29FCD87700DC9012 /* frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7275E5942A0537270091FA7A /* v2orange.xcframework */,
-				72022ADB29FCD89300DC9012 /* vDemoCore.xcframework */,
 			);
 			path = frameworks;
 			sourceTree = "<group>";

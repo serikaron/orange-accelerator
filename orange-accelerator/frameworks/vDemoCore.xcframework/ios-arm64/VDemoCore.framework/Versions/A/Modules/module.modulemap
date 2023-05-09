@@ -1,8 +1,0 @@
-framework module "VDemoCore" {
-	header "ref.h"
-    header "VDemoCore.objc.h"
-    header "Universe.objc.h"
-    header "VDemoCore.h"
-
-    export *
-}

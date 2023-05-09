@@ -24,13 +24,19 @@ func InputPacket(data []byte) {
 	lwipStack.Write(data)
 }
 
+var vInst *vcore.Instance
+
 func StartV2Ray(packetFlow PacketFlow, configBytes []byte) error {
+	if vInst != nil {
+		return nil
+	}
+
 	if packetFlow != nil {
 		lwipStack = core.NewLWIPStack()
 
 		core.SetBufferPool(vbytespool.GetPool(core.BufSize))
 
-		v, err := vcore.StartInstance(vcore.FormatJSON, configBytes)
+		vInst, err := vcore.StartInstance(vcore.FormatJSON, configBytes)
 		if err != nil {
 			//log.Fatalf("start V instance failed: %v", err)
 			return err
@@ -41,8 +47,8 @@ func StartV2Ray(packetFlow PacketFlow, configBytes []byte) error {
 			DestinationOverride: strings.Split("tls,http", ","),
 		}
 		ctx := contextWithSniffingConfig(context.Background(), sniffingConfig)
-		core.RegisterTCPConnHandler(v2ray.NewTCPHandler(ctx, v))
-		core.RegisterUDPConnHandler(v2ray.NewUDPHandler(ctx, v, 30*time.Second))
+		core.RegisterTCPConnHandler(v2ray.NewTCPHandler(ctx, vInst))
+		core.RegisterUDPConnHandler(v2ray.NewUDPHandler(ctx, vInst, 30*time.Second))
 
 		core.RegisterOutputFn(func(data []byte) (int, error) {
 			packetFlow.WritePacket(data)
@@ -51,6 +57,22 @@ func StartV2Ray(packetFlow PacketFlow, configBytes []byte) error {
 		return nil
 	}
 	return errors.New("packetFlow should not be nil")
+}
+
+func StopV2Ray() error {
+	if vInst != nil {
+		err := lwipStack.Close()
+		if err != nil {
+			return err
+		}
+
+		err = vInst.Close()
+		if err != nil {
+			return err
+		}
+
+		vInst = nil
+	}
 }
 
 func LoadConfig(configBytes []byte) string {
