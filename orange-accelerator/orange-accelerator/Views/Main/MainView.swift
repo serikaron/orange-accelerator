@@ -19,6 +19,8 @@ struct MainView: View {
     @State private var showResetPassword = false
     @State private var showPopup = false
     @State private var popupType = PopupViewType.member
+    @State private var showWebView = false
+    @State private var webLink: String?
     
     @State private var maskAlpha: Double = 0
     @State private var sideMenuOffset: CGFloat = -MENU_WIDTH
@@ -38,6 +40,9 @@ struct MainView: View {
                 NavigationLink(destination: ResetPasswordView(), isActive: $showResetPassword) {
                     EmptyView()
                 }
+                NavigationLink(destination: WebView(request: webLink), isActive: $showWebView) {
+                    EmptyView()
+                }
                 MainContentView(showSideMenu: $showSideMenu,
                                 showNodeList: $showNodeList,
                                 showMemberStore: $showMemberStore,
@@ -55,7 +60,9 @@ struct MainView: View {
                             .ignoresSafeArea()
                         SideMenuView(
                             showMemberStore: $showMemberStore,
-                            showResetPassword: $showResetPassword
+                            showResetPassword: $showResetPassword,
+                            showWebView: $showWebView,
+                            webLink: $webLink
                         )
                     }
                     .frame(width: MENU_WIDTH)

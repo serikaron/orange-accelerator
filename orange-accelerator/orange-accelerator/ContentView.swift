@@ -16,6 +16,11 @@ struct ContentView: View {
             LoadingView()
             ErrorView()
         }
+//        NavigationView {
+//            NavigationLink(destination: WebView(request: "https://www.baidu.com")) {
+//                Text("baidu")
+//            }
+//        }
     }
     
     private var content: some View {

@@ -14,6 +14,8 @@ struct SideMenuView: View {
     @EnvironmentObject var onboardingService: OnboardingService
     @Binding var showMemberStore: Bool
     @Binding var showResetPassword: Bool
+    @Binding var showWebView: Bool
+    @Binding var webLink: String?
     
     @State private var account: Account?
     
@@ -48,6 +50,9 @@ struct SideMenuView: View {
             case .password:
                 showResetPassword = true
                 break
+            case .customService:
+                webLink = "https://www.baidu.com"
+                showWebView = true
             default:
                 break
             }
@@ -163,7 +168,9 @@ struct SideMenuView_Previews: PreviewProvider {
     static var previews: some View {
         SideMenuView(
             showMemberStore: .constant(false),
-            showResetPassword: .constant(false)
+            showResetPassword: .constant(false),
+            showWebView: .constant(false),
+            webLink: .constant("")
         )
             .environmentObject(OnboardingService())
     }
