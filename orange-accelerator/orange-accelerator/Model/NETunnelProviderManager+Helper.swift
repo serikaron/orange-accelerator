@@ -98,6 +98,15 @@ extension NETunnelProviderManager {
         }
     }
     
+    @MainActor
+    static func stop() async {
+        do {
+            try await manager.connection.stopVPNTunnel()
+        } catch {
+            Box.sendError(error)
+        }
+    }
+    
     static var connectedDuration: String {
         get async {
             do {

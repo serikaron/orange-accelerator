@@ -59,18 +59,13 @@ func StartV2Ray(packetFlow PacketFlow, configBytes []byte) error {
 	return errors.New("packetFlow should not be nil")
 }
 
-func StopV2Ray() error {
+func StopV2Ray() {
+	if lwipStack != nil {
+		_ = lwipStack.Close()
+		lwipStack = nil
+	}
 	if vInst != nil {
-		err := lwipStack.Close()
-		if err != nil {
-			return err
-		}
-
-		err = vInst.Close()
-		if err != nil {
-			return err
-		}
-
+		_ = vInst.Close()
 		vInst = nil
 	}
 }

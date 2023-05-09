@@ -18,7 +18,7 @@ struct MainContentView: View {
     @State private var routeMode = RouteMode.mode
     @State private var account: Account?
     
-    @State private var connectionStatus: NEVPNStatus = .invalid
+    @State private var connectionStatus: NEVPNStatus = .disconnected
     
     var body: some View {
         VStack(spacing: 0) {
@@ -34,10 +34,20 @@ struct MainContentView: View {
                     .padding(.horizontal)
                 Spacer().frame(height: 45)
                 Button {
-                    connect()
+                    if connectionStatus == .disconnected {
+                        connect()
+                    } else if connectionStatus == .connected ||
+                                connectionStatus == .connecting {
+                        disconnect()
+                    }
                 } label: {
-                    Image("button.main.connected")
-                        .padding(.top, 20)
+                    if connectionStatus == .disconnected {
+                        Image("button.main.connected")
+                            .padding(.top, 20)
+                    } else {
+                        Image("button.main.connected")
+                            .padding(.top, 20)
+                    }
                 }
                 Spacer().frame(height: 45)
                 ConnectionStatusView(status: $connectionStatus)
@@ -150,6 +160,13 @@ struct MainContentView: View {
             } catch {
                 Box.sendError(error)
             }
+        }
+    }
+    
+    @MainActor
+    private func disconnect() {
+        Task {
+            await NETunnelProviderManager.stop()
         }
     }
 }

@@ -64,6 +64,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     }
     
     override func stopTunnel(with reason: NEProviderStopReason, completionHandler: @escaping () -> Void) {
+        V2orangeStopV2Ray()
         completionHandler()
     }
     
