@@ -18,6 +18,8 @@ struct MainContentView: View {
     @State private var routeMode = RouteMode.mode
     @State private var account: Account?
     
+    @State private var connectionStatus: NEVPNStatus = .invalid
+    
     var body: some View {
         VStack(spacing: 0) {
             title
@@ -38,16 +40,7 @@ struct MainContentView: View {
                         .padding(.top, 20)
                 }
                 Spacer().frame(height: 45)
-                HStack {
-                    Text("链接状态：")
-                        .orangeText(size: 15, color: .c000000)
-                    Text("已连接")
-                        .orangeText(size: 15, color: .hex("#02C91E"))
-                }
-                Spacer().frame(height: 45)
-                Text("02：26：17")
-                    .orangeText(size: 15, color: .c000000)
-                    .padding(.top, -20)
+                ConnectionStatusView(status: $connectionStatus)
             }
             Spacer()
             Button {
@@ -76,7 +69,6 @@ struct MainContentView: View {
         }
         .onAppear {
             Task {
-//                routeMode = RouteMode.mode
                 await NETunnelProviderManager.requestPermission()
                 do {
                     account = try await Account.current
@@ -89,6 +81,12 @@ struct MainContentView: View {
             RouteMode.mode = newValue
             if newValue == .intellegent {
                 showPopup.send(.mode)
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.NEVPNStatusDidChange)) {
+            guard let connection = $0.object as? NETunnelProviderSession else { return }
+            if (connectionStatus != connection.status) {
+                connectionStatus = connection.status
             }
         }
     }
@@ -121,9 +119,6 @@ struct MainContentView: View {
                     .orangeText(size: 12, color: .hex("#999999"))
             }
             Spacer().frame(width: 15)
-//            NavigationLink(destination: NodeListView(), isActive: $showNodeList) {
-//                EmptyView()
-//            }
             Button {
                 print("clicked 更换")
                 if account?.isVip ?? false {
@@ -142,6 +137,7 @@ struct MainContentView: View {
     private func connect() {
         Task {
             do {
+                print("connect vpn")
                 guard let account = account else {
                     throw "INVALID account !!!"
                 }

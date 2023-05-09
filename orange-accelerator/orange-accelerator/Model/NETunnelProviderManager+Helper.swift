@@ -97,4 +97,26 @@ extension NETunnelProviderManager {
             Box.sendError(error)
         }
     }
+    
+    static var connectedDuration: String {
+        get async {
+            do {
+                guard let connectedDate = try await manager.connection.connectedDate else {
+                    return "00:00:00"
+                }
+                return duration(from: connectedDate)
+            } catch {
+                return "00:00:00"
+            }
+        }
+    }
+}
+
+private func duration(from startTime: Date) -> String {
+    let calendar = Calendar.current
+    let components = calendar.dateComponents([.hour, .minute, .second], from: startTime, to: Date())
+    let hours = components.hour ?? 0
+    let minutes = components.minute ?? 0
+    let seconds = components.second ?? 0
+    return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
 }
