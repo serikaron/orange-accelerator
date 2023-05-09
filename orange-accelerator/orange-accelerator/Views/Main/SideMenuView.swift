@@ -16,6 +16,7 @@ struct SideMenuView: View {
     @Binding var showResetPassword: Bool
     @Binding var showWebView: Bool
     @Binding var webViewInfo: WebViewInfo
+    @Binding var showVersionPopup: Bool
     
     @State private var account: Account?
     
@@ -55,12 +56,17 @@ struct SideMenuView: View {
                     webViewInfo = (title: "在线客服", url: await WebViewService.onlineServiceURL)
                     showWebView = true
                 }
+                break
             case .privacy:
                 Task {
                     webViewInfo = (title: "隐私政策", url: await WebViewService.policyURL)
                     showWebView = true
                 }
-            default:
+                break
+            case .version:
+                Task {
+                    showVersionPopup = true
+                }
                 break
             }
         }
@@ -177,7 +183,8 @@ struct SideMenuView_Previews: PreviewProvider {
             showMemberStore: .constant(false),
             showResetPassword: .constant(false),
             showWebView: .constant(false),
-            webViewInfo: .constant(("", ""))
+            webViewInfo: .constant(("", "")),
+            showVersionPopup: .constant(false)
         )
             .environmentObject(OnboardingService())
     }

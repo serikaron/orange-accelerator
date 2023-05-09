@@ -163,6 +163,19 @@ class Linkman{
             .make()
             .response() as OnlineServiceResponse
     }
+    
+    struct VersionResponse: Codable {
+        let version_str: String
+    }
+    
+    func getUpdate() async throws -> VersionResponse {
+        return try await Request()
+            .with(\.path, setTo: "/v1/api/update")
+            .with(\.method, setTo: .GET)
+            .with(\.standaloneResponse, setTo: standaloneResponse(VersionResponse(version_str: "1.0.0")))
+            .make()
+            .response() as VersionResponse
+    }
 }
 
 private extension Linkman {

@@ -21,6 +21,7 @@ struct MainView: View {
     @State private var popupType = PopupViewType.member
     @State private var showWebView = false
     @State private var webViewInfo: WebViewInfo = ("", "")
+    @State private var showVersionPopp = false
     
     @State private var maskAlpha: Double = 0
     @State private var sideMenuOffset: CGFloat = -MENU_WIDTH
@@ -63,12 +64,15 @@ struct MainView: View {
                             showMemberStore: $showMemberStore,
                             showResetPassword: $showResetPassword,
                             showWebView: $showWebView,
-                            webViewInfo: $webViewInfo
+                            webViewInfo: $webViewInfo,
+                            showVersionPopup: $showVersionPopp
                         )
                     }
                     .frame(width: MENU_WIDTH)
                     .offset(x: sideMenuOffset, y: 0)
                 }
+                VersionPopupView(isShow: $showVersionPopp)
+                    .ignoresSafeArea()
             }
         }
         .onChange(of: showSideMenu) { isShow in

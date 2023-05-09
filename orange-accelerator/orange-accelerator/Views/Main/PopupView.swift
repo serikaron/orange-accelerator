@@ -15,7 +15,8 @@ enum PopupViewType {
 typealias HidePopupSubject = PassthroughSubject<PopupViewType, Never>
 typealias ShowPopupSubject = PassthroughSubject<PopupViewType, Never>
 
-let ANIMATION_DURATION = 0.15
+fileprivate let ANIMATION_DURATION = 0.2
+fileprivate let OFFSET_Y: Double = -25
 
 struct PopupView: View {
     let type: PopupViewType
@@ -23,8 +24,8 @@ struct PopupView: View {
     @State private var hideAll = true
     
     @State private var backgroundAlpha: Double = 0
-    @State private var scaleX: CGFloat = 0
-    @State private var scaleY: CGFloat = 0
+    @State private var popupAlpha: Double = 0
+    @State private var offsetY: Double = 0
     
     let buttonClick: HidePopupSubject
     
@@ -33,19 +34,18 @@ struct PopupView: View {
         .onChange(of: isShow) { isShow in
             if isShow {
                 hideAll = false
+                offsetY = OFFSET_Y
                 withAnimation(.linear(duration: ANIMATION_DURATION)) {
                     backgroundAlpha = 0.5
-                }
-                withAnimation(.interpolatingSpring(stiffness: 200, damping: 15)) {
-                    scaleX = 1
-                    scaleY = 1
+                    popupAlpha = 1
+                    offsetY = 0
                 }
             } else {
                 Task {
                     await animation(duration: ANIMATION_DURATION) {
-                        scaleX = 0
-                        scaleY = 0
                         backgroundAlpha = 0
+                        popupAlpha = 0
+                        offsetY = OFFSET_Y
                     }
                     hideAll = true
                 }
@@ -91,7 +91,8 @@ struct PopupView: View {
                     .frame(width: 278, height: 218)
                     .background(.white)
                     .cornerRadius(10)
-                    .scaleEffect(x: scaleX, y: scaleY)
+                    .offset(y: offsetY)
+                    .opacity(popupAlpha)
                 }
             }
         }
