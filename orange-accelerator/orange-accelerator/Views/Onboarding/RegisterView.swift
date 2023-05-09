@@ -33,7 +33,7 @@ struct RegisterView: View {
                         await service.register(phone: phone, password: password, password1: password2)
                     }
             }
-            .buttonStyle(OnboardingButton())
+            .buttonStyle(OrangeButton())
             Spacer().frame(height: 22.5)
             HStack(spacing: 2) {
                 Toggle(isOn: $checked, label: {})

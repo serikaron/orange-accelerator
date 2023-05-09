@@ -39,6 +39,7 @@ struct Endpoint {
     let port: String
     let type: EndpointType
     var latency: EndpointLatency?
+    let group: String
 }
 typealias EndpointList = [Endpoint]
 
@@ -51,7 +52,7 @@ extension EndpointList {
             
             let l = try await Linkman.shared.getServerList()
                 .map { server in
-                    Endpoint(name: server.name, host: server.ip, port: server.port, type: try EndpointType(serverType: server.server_type))
+                    Endpoint(name: server.name, host: server.ip, port: server.port, type: try EndpointType(serverType: server.server_type), group: server.group)
                 }
             _all = l
             return _all!
@@ -132,12 +133,12 @@ extension Endpoint {
         var error: NSError?
         let latencyStr = V2orangeProPing(host, &error)
         let latencyNum = latencyStr.latencyNum
-        print("ping \(host) end, latency: \(latencyNum)")
+        print("ping \(host) end, latency: \(latencyNum ?? 0)")
         return latencyNum == nil || latencyNum == 0 ? .timeout : .ms(latencyNum!)
     }
     
     func withLatency(_ latency: EndpointLatency) -> Endpoint {
-        Endpoint(name: name, host: host, port: port, type: type, latency: latency)
+        Endpoint(name: name, host: host, port: port, type: type, latency: latency, group: group)
     }
 }
 

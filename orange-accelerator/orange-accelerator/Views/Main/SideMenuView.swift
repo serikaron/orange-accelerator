@@ -19,7 +19,7 @@ struct SideMenuView: View {
             Button("退出登录") {
                 onboardingService.logout()
             }
-                .buttonStyle(OnboardingButton())
+                .buttonStyle(OrangeButton())
                 .padding(.horizontal, 20)
             Spacer().frame(height: 15.5)
             HStack(spacing: 0) {

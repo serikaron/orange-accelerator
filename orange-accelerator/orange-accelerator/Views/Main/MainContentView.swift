@@ -12,13 +12,14 @@ import NetworkExtension
 struct MainContentView: View {
     @Binding var showSideMenu: Bool
     @Binding var showNodeList: Bool
+    @Binding var showMemberStore: Bool
     
     let showPopup: ShowPopupSubject
     
     @State private var routeMode = RouteMode.mode
     @State private var account: Account?
     
-    @State private var connectionStatus: NEVPNStatus = .disconnected
+    @State private var connectionStatus: NEVPNStatus = .invalid
     
     var body: some View {
         VStack(spacing: 0) {
@@ -34,7 +35,8 @@ struct MainContentView: View {
                     .padding(.horizontal)
                 Spacer().frame(height: 45)
                 Button {
-                    if connectionStatus == .disconnected {
+                    if connectionStatus == .disconnected ||
+                        connectionStatus == .invalid {
                         connect()
                     } else if connectionStatus == .connected ||
                                 connectionStatus == .connecting {
@@ -54,6 +56,7 @@ struct MainContentView: View {
             }
             Spacer()
             Button {
+                showMemberStore = true
             } label: {
                 HStack {
                     Image("button.member")
@@ -173,6 +176,6 @@ struct MainContentView: View {
 
 struct MainContentView_Previews: PreviewProvider {
     static var previews: some View {
-        MainContentView(showSideMenu: .constant(false), showNodeList: .constant(false), showPopup: ShowPopupSubject())
+        MainContentView(showSideMenu: .constant(false), showNodeList: .constant(false), showMemberStore: .constant(false), showPopup: ShowPopupSubject())
     }
 }

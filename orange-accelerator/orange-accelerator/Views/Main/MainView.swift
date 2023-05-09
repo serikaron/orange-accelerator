@@ -36,6 +36,7 @@ struct MainView: View {
                 }
                 MainContentView(showSideMenu: $showSideMenu,
                                 showNodeList: $showNodeList,
+                                showMemberStore: $showMemberStore,
                                 showPopup: showPopupSubject)
                 Color.black.opacity(maskAlpha)
                     .ignoresSafeArea()

@@ -101,6 +101,38 @@ class Linkman{
             .make()
             .response() as UserInfoResponse
     }
+    
+    struct PackageItem: Codable {
+        let id: Int
+        let name: String
+        let price: Double
+        let mark: String
+        let sort: Int
+    }
+    
+    typealias PackageItemResponse = [PackageItem]
+    
+    func getPackageList() async throws -> PackageItemResponse {
+        return try await Request()
+            .with(\.path, setTo: "/v1/api/package/list")
+            .with(\.method, setTo: .GET)
+            .with(\.headers, setTo: ["oem": "iOS"])
+            .with(\.standaloneResponse, setTo: standaloneResponse([
+                PackageItem(id: 1, name: "年卡", price: 360, mark: "折合￥0.49/天", sort: 1),
+                PackageItem(id: 2, name: "年卡", price: 360, mark: "折合￥0.49/天", sort: 2),
+                PackageItem(id: 3, name: "年卡", price: 360, mark: "折合￥0.49/天", sort: 3),
+            ]))
+            .make()
+            .response() as PackageItemResponse
+    }
+    
+    func buyPackage(with id: Int) async throws {
+        try await Request()
+            .with(\.path, setTo: "/v1/api/buy/payurl")
+            .with(\.method, setTo: .GET)
+            .with(\.body, setTo: ["pak_id": id])
+            .make()
+    }
 }
 
 private extension Linkman {
@@ -265,6 +297,7 @@ private class Request: Withable {
     var throwError = true
     var forceStandalone: Bool = false
     
+    @discardableResult
     func make() async throws -> Self {
         try await Linkman.shared.make(request: self)
         return self

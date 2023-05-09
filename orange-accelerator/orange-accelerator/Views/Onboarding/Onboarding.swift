@@ -81,16 +81,6 @@ struct OnboardingSecureInput: View {
         }    }
 }
 
-struct OnboardingButton: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .frame(maxWidth: .infinity)
-            .frame(height: 50)
-            .orangeText(size: 16, color: .white)
-            .background(Color.main)
-            .cornerRadius(25)
-    }
-}
 
 struct OnboardingHeader_Previews: PreviewProvider {
     static var previews: some View {
@@ -101,9 +91,6 @@ struct OnboardingHeader_Previews: PreviewProvider {
                 .previewDisplayName("input")
             OnboardingSecureInput(title: "登录帐号", inputText: .constant("abc"))
                 .previewDisplayName("secure")
-            Button("登录") {}
-                .previewDisplayName("Button")
-                .buttonStyle(OnboardingButton())
         }
     }
 }

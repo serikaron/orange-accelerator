@@ -30,7 +30,7 @@ struct LoginView: View {
                         await service.login(phone: phone, password: password)
                     }
             }
-            .buttonStyle(OnboardingButton())
+            .buttonStyle(OrangeButton())
             Spacer().frame(height: 27)
             HStack {
                 Text("还没有帐号？")
