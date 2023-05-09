@@ -52,6 +52,7 @@
 		7275E5BF2A0A276C0091FA7A /* NavigationTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5BE2A0A276C0091FA7A /* NavigationTitleView.swift */; };
 		7275E5C22A0A34960091FA7A /* NavigationSwipHack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5C12A0A34960091FA7A /* NavigationSwipHack.swift */; };
 		7275E5C32A0A34960091FA7A /* NavigationSwipHack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5C12A0A34960091FA7A /* NavigationSwipHack.swift */; };
+		7275E5C52A0A37AA0091FA7A /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5C42A0A37AA0091FA7A /* ResetPasswordView.swift */; };
 		7276F5DE29EAD77200A937DD /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7276F5DD29EAD77200A937DD /* Onboarding.swift */; };
 		7276F5E129EADAF200A937DD /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7276F5E029EADAF200A937DD /* Utils.swift */; };
 		7276F5E729EC35D200A937DD /* OnboardingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7276F5E629EC35D200A937DD /* OnboardingService.swift */; };
@@ -147,6 +148,7 @@
 		7275E5BB2A0A15760091FA7A /* OrangeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrangeButton.swift; sourceTree = "<group>"; };
 		7275E5BE2A0A276C0091FA7A /* NavigationTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTitleView.swift; sourceTree = "<group>"; };
 		7275E5C12A0A34960091FA7A /* NavigationSwipHack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationSwipHack.swift; sourceTree = "<group>"; };
+		7275E5C42A0A37AA0091FA7A /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		7276F5DD29EAD77200A937DD /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		7276F5E029EADAF200A937DD /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		7276F5E629EC35D200A937DD /* OnboardingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingService.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				7275E5A92A08F5670091FA7A /* NodeListView.swift */,
 				7275E5AD2A0903BF0091FA7A /* PopupView.swift */,
 				7275E5AF2A0929D90091FA7A /* MemberStoreView.swift */,
+				7275E5C42A0A37AA0091FA7A /* ResetPasswordView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -527,6 +530,7 @@
 				72022AD729FA61FF00DC9012 /* SideMenuView.swift in Sources */,
 				72022AD929FA724C00DC9012 /* MainView.swift in Sources */,
 				72022A5429F3FF6400DC9012 /* RegisterView.swift in Sources */,
+				7275E5C52A0A37AA0091FA7A /* ResetPasswordView.swift in Sources */,
 				7275E5AE2A0903BF0091FA7A /* PopupView.swift in Sources */,
 				7275E5B42A09D5F20091FA7A /* ConnectionStatusView.swift in Sources */,
 				7276F5E129EADAF200A937DD /* Utils.swift in Sources */,

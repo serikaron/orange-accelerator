@@ -6,9 +6,18 @@
 //
 
 import SwiftUI
+import Combine
+
+fileprivate typealias ItemTapped = PassthroughSubject<MenuItem, Never>
 
 struct SideMenuView: View {
     @EnvironmentObject var onboardingService: OnboardingService
+    @Binding var showMemberStore: Bool
+    @Binding var showResetPassword: Bool
+    
+    @State private var account: Account?
+    
+    private let itemTapped = ItemTapped()
     
     var body: some View {
         VStack {
@@ -30,9 +39,28 @@ struct SideMenuView: View {
             }
         }
         .background(Color.white)
-//        .padding(.top, 20.5)
         .padding(.bottom, 37.5)
-//        .ignoresSafeArea()
+        .onReceive(itemTapped) { item in
+            switch item {
+            case .member:
+                showMemberStore = true
+                break
+            case .password:
+                showResetPassword = true
+                break
+            default:
+                break
+            }
+        }
+        .onAppear {
+            Task {
+                do {
+                    account = try await Account.current
+                } catch {
+                    Box.sendError(error)
+                }
+            }
+        }
     }
     
     private var info: some View {
@@ -42,14 +70,14 @@ struct SideMenuView: View {
             HStack(spacing: 0) {
                 Text("用户名：")
                     .orangeText(size: 16, color: .c999999)
-                Text("Whitney001")
+                Text(account?.username ?? "")
                     .orangeText(size: 16, color: .c999999)
             }
             Spacer().frame(height: 12)
             HStack(spacing: 0) {
                 Text("到期时间：")
                     .orangeText(size: 12, color: .c999999)
-                Text("2023-05-30")
+                Text(expiration)
                     .orangeText(size: 12, color: .c999999)
             }
         }
@@ -59,24 +87,48 @@ struct SideMenuView: View {
         VStack {
             Color(hex: "#EDEDED").frame(height: 1)
             ForEach(MenuItem.allCases) { item in
-                MenuItemView(item: item)
+                MenuItemView(item: item, itemTapped: itemTapped)
                 Color(hex: "#EDEDED").frame(height: 1)
             }
         }
+    }
+    
+    private var expiration: String {
+        guard let expiration = account?.vipExpiration else {
+            return ""
+        }
+        guard account?.isVip ?? false else {
+            return ""
+        }
+        
+        let date = Date(timeIntervalSince1970: TimeInterval(expiration))
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(abbreviation: "HKT")
+        dateFormatter.locale = NSLocale.current
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        return dateFormatter.string(from: date)
     }
 }
 
 fileprivate struct MenuItemView: View {
     let item: MenuItem
     
+    let itemTapped: ItemTapped
+    
     var body: some View {
-        HStack(spacing: 15) {
-            Image(item.icon)
-            Text(item.title)
-            Spacer()
+        Button {
+            itemTapped.send(item)
+        } label: {
+            HStack(spacing: 15) {
+                Image(item.icon)
+                Text(item.title)
+                    .orangeText(size: 15, color: .c000000)
+                Spacer()
+            }
+            .frame(height: 44)
+            .padding(.horizontal, 20)
         }
-        .frame(height: 44)
-        .padding(.horizontal, 20)
+//        .onTapGesture { itemTapped.send(item) }
     }
 }
 
@@ -109,7 +161,10 @@ fileprivate enum MenuItem: CaseIterable, Identifiable {
 
 struct SideMenuView_Previews: PreviewProvider {
     static var previews: some View {
-        SideMenuView()
+        SideMenuView(
+            showMemberStore: .constant(false),
+            showResetPassword: .constant(false)
+        )
             .environmentObject(OnboardingService())
     }
 }

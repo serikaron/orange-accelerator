@@ -25,6 +25,15 @@ struct Account {
             return _account!
         }
     }
+    
+    @MainActor
+    static func resetPassword(oldPassword: String, newPassword: String) async {
+        do {
+            try await Linkman.shared.userRecover(oldPassword: oldPassword, newPassword: newPassword)
+        } catch {
+            Box.sendError(error)
+        }
+    }
 }
 
 

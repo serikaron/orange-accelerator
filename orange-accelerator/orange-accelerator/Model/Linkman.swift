@@ -61,6 +61,14 @@ class Linkman{
             .response() as RegisterResponse
     }
     
+    func userRecover(oldPassword: String, newPassword: String) async throws {
+        try await Request()
+            .with(\.path, setTo: "/v1/api/user/recover")
+            .with(\.method, setTo: .POST)
+            .with(\.body, setTo: ["old_password": oldPassword, "new_password": newPassword])
+            .make()
+    }
+    
     struct ServerResonse: Codable {
         let id: Int
         let name: String
@@ -129,7 +137,7 @@ class Linkman{
     func buyPackage(with id: Int) async throws {
         try await Request()
             .with(\.path, setTo: "/v1/api/buy/payurl")
-            .with(\.method, setTo: .GET)
+            .with(\.method, setTo: .POST)
             .with(\.body, setTo: ["pak_id": id])
             .make()
     }

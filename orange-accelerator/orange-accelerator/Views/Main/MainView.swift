@@ -16,6 +16,7 @@ struct MainView: View {
     @State private var showSideMenu = false
     @State private var showNodeList = false
     @State private var showMemberStore = false
+    @State private var showResetPassword = false
     @State private var showPopup = false
     @State private var popupType = PopupViewType.member
     
@@ -34,6 +35,9 @@ struct MainView: View {
                 NavigationLink(destination: MemberStoreView(), isActive: $showMemberStore) {
                     EmptyView()
                 }
+                NavigationLink(destination: ResetPasswordView(), isActive: $showResetPassword) {
+                    EmptyView()
+                }
                 MainContentView(showSideMenu: $showSideMenu,
                                 showNodeList: $showNodeList,
                                 showMemberStore: $showMemberStore,
@@ -49,7 +53,10 @@ struct MainView: View {
                     Group {
                         Color.white
                             .ignoresSafeArea()
-                        SideMenuView()
+                        SideMenuView(
+                            showMemberStore: $showMemberStore,
+                            showResetPassword: $showResetPassword
+                        )
                     }
                     .frame(width: MENU_WIDTH)
                     .offset(x: sideMenuOffset, y: 0)
