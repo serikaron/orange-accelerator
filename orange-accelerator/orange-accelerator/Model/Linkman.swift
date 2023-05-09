@@ -141,6 +141,28 @@ class Linkman{
             .with(\.body, setTo: ["pak_id": id])
             .make()
     }
+    
+    typealias PolicyResponse = String
+    
+    func getPolicy() async throws -> PolicyResponse {
+        return try await Request()
+            .with(\.path, setTo: "/v1/api/private/policy")
+            .with(\.method, setTo: .GET)
+            .with(\.standaloneResponse, setTo: standaloneResponse("https://www.baidu.com"))
+            .make()
+            .response() as PolicyResponse
+    }
+    
+    typealias OnlineServiceResponse = String
+    
+    func getOnlineService() async throws -> OnlineServiceResponse {
+        return try await Request()
+            .with(\.path, setTo: "/v1/api/online/service")
+            .with(\.method, setTo: .GET)
+            .with(\.standaloneResponse, setTo: standaloneResponse("https://www.baidu.com"))
+            .make()
+            .response() as OnlineServiceResponse
+    }
 }
 
 private extension Linkman {

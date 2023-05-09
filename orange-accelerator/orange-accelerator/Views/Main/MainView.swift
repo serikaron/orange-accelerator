@@ -20,13 +20,14 @@ struct MainView: View {
     @State private var showPopup = false
     @State private var popupType = PopupViewType.member
     @State private var showWebView = false
-    @State private var webLink: String?
+    @State private var webViewInfo: WebViewInfo = ("", "")
     
     @State private var maskAlpha: Double = 0
     @State private var sideMenuOffset: CGFloat = -MENU_WIDTH
     
     private let hidePopupSubject = HidePopupSubject()
     private let showPopupSubject = ShowPopupSubject()
+    
     
     var body: some View {
         NavigationView {
@@ -40,7 +41,7 @@ struct MainView: View {
                 NavigationLink(destination: ResetPasswordView(), isActive: $showResetPassword) {
                     EmptyView()
                 }
-                NavigationLink(destination: WebView(request: webLink), isActive: $showWebView) {
+                NavigationLink(destination: WebView(title: webViewInfo.title, url: webViewInfo.url), isActive: $showWebView) {
                     EmptyView()
                 }
                 MainContentView(showSideMenu: $showSideMenu,
@@ -62,7 +63,7 @@ struct MainView: View {
                             showMemberStore: $showMemberStore,
                             showResetPassword: $showResetPassword,
                             showWebView: $showWebView,
-                            webLink: $webLink
+                            webViewInfo: $webViewInfo
                         )
                     }
                     .frame(width: MENU_WIDTH)

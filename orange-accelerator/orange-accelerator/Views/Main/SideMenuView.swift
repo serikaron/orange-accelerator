@@ -15,7 +15,7 @@ struct SideMenuView: View {
     @Binding var showMemberStore: Bool
     @Binding var showResetPassword: Bool
     @Binding var showWebView: Bool
-    @Binding var webLink: String?
+    @Binding var webViewInfo: WebViewInfo
     
     @State private var account: Account?
     
@@ -51,8 +51,15 @@ struct SideMenuView: View {
                 showResetPassword = true
                 break
             case .customService:
-                webLink = "https://www.baidu.com"
-                showWebView = true
+                Task {
+                    webViewInfo = (title: "在线客服", url: await WebViewService.onlineServiceURL)
+                    showWebView = true
+                }
+            case .privacy:
+                Task {
+                    webViewInfo = (title: "隐私政策", url: await WebViewService.policyURL)
+                    showWebView = true
+                }
             default:
                 break
             }
@@ -170,7 +177,7 @@ struct SideMenuView_Previews: PreviewProvider {
             showMemberStore: .constant(false),
             showResetPassword: .constant(false),
             showWebView: .constant(false),
-            webLink: .constant("")
+            webViewInfo: .constant(("", ""))
         )
             .environmentObject(OnboardingService())
     }
