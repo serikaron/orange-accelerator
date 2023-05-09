@@ -19,6 +19,7 @@ struct WebView: View {
             NavigationTitleView(title: title)
             _WebView(request: url)
         }
+        .navigationBarHidden(true)
     }
 }
 
