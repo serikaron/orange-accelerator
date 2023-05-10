@@ -43,7 +43,7 @@ class OnboardingService: ObservableObject {
         Box.setLoading(false)
     }
     
-    func register(phone: String, password: String, password1: String) async {
+    func register(phone: String, password: String) async {
         if (phone.isEmpty) {
             Box.sendError(OnboardingError.emptyPhone)
             return
@@ -53,12 +53,7 @@ class OnboardingService: ObservableObject {
             Box.sendError(OnboardingError.emptyPassword)
             return
         }
-        
-        if (password != password1) {
-            Box.sendError("两次密码输入不一样")
-            return
-        }
-        
+
         Box.setLoading(true)
         do {
             let registerRsp = try await Linkman.shared.register(phone: phone, password: password)

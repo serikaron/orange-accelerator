@@ -13,7 +13,7 @@ struct RegisterView: View {
     
     @State var phone: String = ""
     @State var password: String = ""
-    @State var password2: String = ""
+    @State var password1: String = ""
     
     @State var checked = false
     
@@ -26,13 +26,11 @@ struct RegisterView: View {
             VStack(spacing: 21.5){
                 OnboardingInput(title: "设置登录帐号", inputText: $phone)
                 OnboardingSecureInput(title: "设置登录密码", inputText: $password)
-                OnboardingSecureInput(title: "登录密码", inputText: $password2)
+                OnboardingSecureInput(title: "登录密码", inputText: $password1)
             }
             Spacer().frame(height: 41.5)
             Button("立即注册"){
-                    Task {
-                        await service.register(phone: phone, password: password, password1: password2)
-                    }
+                register()
             }
             .buttonStyle(OrangeButton())
             Spacer().frame(height: 22.5)
@@ -64,14 +62,30 @@ struct RegisterView: View {
                 Button {
                     page = .login
                 } label: {
-                    Text("立即注册")
+                    Text("立即登录")
                         .orangeText(size: 15, color: .main)
                 }
-
+                
             }
             Spacer()
         }
         .padding(.horizontal, 35)
+    }
+    
+    private func register() {
+        Task {
+            if (password != password1) {
+                Box.sendError("两次密码输入不一样")
+                return
+            }
+            
+            if !checked {
+                Box.sendError("请阅读并同意《用户协议》和《隐私政策》")
+                return
+            }
+            
+            await service.register(phone: phone, password: password)
+        }
     }
 }
 
