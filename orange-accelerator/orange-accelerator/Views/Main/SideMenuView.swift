@@ -17,6 +17,7 @@ struct SideMenuView: View {
     @Binding var showVersionPopup: Bool
     
     @State private var account: Account?
+    @State private var clientVersion: String = "0.0.0"
     
     private let itemTapped = ItemTapped()
     
@@ -35,7 +36,7 @@ struct SideMenuView: View {
             HStack(spacing: 0) {
                 Text("当前版本：")
                     .orangeText(size: 12, color: .c999999)
-                Text("V2.1.13")
+                Text("V\(clientVersion)")
                     .orangeText(size: 12, color: .c999999)
             }
         }
@@ -55,7 +56,7 @@ struct SideMenuView: View {
                 nav.webPage = .privacy
             case .version:
                 Task {
-                    showVersionPopup = true
+                    showVersionPopup = await Version.hasUpdate
                 }
                 break
             }
@@ -64,6 +65,7 @@ struct SideMenuView: View {
             Task {
                 do {
                     account = try await Account.current
+                    clientVersion = Version.clientVersion
                 } catch {
                     Box.sendError(error)
                 }

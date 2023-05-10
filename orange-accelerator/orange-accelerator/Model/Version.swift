@@ -27,4 +27,11 @@ struct Version {
             }
         }
     }
+    
+    static var clientVersion: String {
+        guard let clienVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
+            return "0.0.0"
+        }
+        return clienVersion
+    }
 }

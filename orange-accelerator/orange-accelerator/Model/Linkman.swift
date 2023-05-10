@@ -172,7 +172,7 @@ class Linkman{
         return try await Request()
             .with(\.path, setTo: "/v1/api/update")
             .with(\.method, setTo: .GET)
-            .with(\.standaloneResponse, setTo: standaloneResponse(VersionResponse(version_str: "1.0.0")))
+            .with(\.standaloneResponse, setTo: standaloneResponse(VersionResponse(version_str: "1.1.0")))
             .make()
             .response() as VersionResponse
     }
