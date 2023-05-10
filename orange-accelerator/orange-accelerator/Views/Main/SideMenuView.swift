@@ -14,8 +14,6 @@ struct SideMenuView: View {
     @EnvironmentObject var onboardingService: OnboardingService
     @EnvironmentObject var nav: NavigationService
     
-    @Binding var showMemberStore: Bool
-    @Binding var showResetPassword: Bool
     @Binding var showVersionPopup: Bool
     
     @State private var account: Account?
@@ -46,10 +44,10 @@ struct SideMenuView: View {
         .onReceive(itemTapped) { item in
             switch item {
             case .member:
-                showMemberStore = true
+                nav.showMemberStore = true
                 break
             case .password:
-                showResetPassword = true
+                nav.showResetPassword = true
                 break
             case .customService:
                 nav.webPage = .customService
@@ -172,10 +170,9 @@ fileprivate enum MenuItem: CaseIterable, Identifiable {
 struct SideMenuView_Previews: PreviewProvider {
     static var previews: some View {
         SideMenuView(
-            showMemberStore: .constant(false),
-            showResetPassword: .constant(false),
             showVersionPopup: .constant(false)
         )
             .environmentObject(OnboardingService())
+            .environmentObject(NavigationService())
     }
 }

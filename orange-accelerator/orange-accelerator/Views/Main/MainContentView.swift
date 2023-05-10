@@ -10,9 +10,8 @@ import V2orange
 import NetworkExtension
 
 struct MainContentView: View {
+    @EnvironmentObject var nav: NavigationService
     @Binding var showSideMenu: Bool
-    @Binding var showNodeList: Bool
-    @Binding var showMemberStore: Bool
     
     let showPopup: ShowPopupSubject
     
@@ -56,7 +55,7 @@ struct MainContentView: View {
             }
             Spacer()
             Button {
-                showMemberStore = true
+                nav.showMemberStore = true
             } label: {
                 HStack {
                     Image("button.member")
@@ -135,7 +134,7 @@ struct MainContentView: View {
             Button {
                 print("clicked 更换")
                 if account?.isVip ?? false {
-                    showNodeList = true
+                    nav.showNodeList = true
                 } else {
                     showPopup.send(.member)
                 }
@@ -176,6 +175,8 @@ struct MainContentView: View {
 
 struct MainContentView_Previews: PreviewProvider {
     static var previews: some View {
-        MainContentView(showSideMenu: .constant(false), showNodeList: .constant(false), showMemberStore: .constant(false), showPopup: ShowPopupSubject())
+        MainContentView(showSideMenu: .constant(false),
+                        showPopup: ShowPopupSubject())
+        .environmentObject(NavigationService())
     }
 }

@@ -12,11 +12,9 @@ private let MENU_WIDTH: CGFloat = 275
 
 struct MainView: View {
     @StateObject private var onboardingService = OnboardingService()
+    @EnvironmentObject var nav: NavigationService
     
     @State private var showSideMenu = false
-    @State private var showNodeList = false
-    @State private var showMemberStore = false
-    @State private var showResetPassword = false
     @State private var showPopup = false
     @State private var popupType = PopupViewType.member
     @State private var showWebView = false
@@ -32,21 +30,19 @@ struct MainView: View {
     
     var body: some View {
         ZStack {
-            NavigationLink(destination: NodeListView(), isActive: $showNodeList) {
+            NavigationLink(destination: NodeListView(), isActive: $nav.showNodeList) {
                 EmptyView()
             }
-            NavigationLink(destination: MemberStoreView(), isActive: $showMemberStore) {
+            NavigationLink(destination: MemberStoreView(), isActive: $nav.showMemberStore) {
                 EmptyView()
             }
-            NavigationLink(destination: ResetPasswordView(), isActive: $showResetPassword) {
+            NavigationLink(destination: ResetPasswordView(), isActive: $nav.showResetPassword) {
                 EmptyView()
             }
 //            NavigationLink(destination: WebView(title: webViewInfo.title, url: webViewInfo.url), isActive: $showWebView) {
 //                EmptyView()
 //            }
             MainContentView(showSideMenu: $showSideMenu,
-                            showNodeList: $showNodeList,
-                            showMemberStore: $showMemberStore,
                             showPopup: showPopupSubject)
             Color.black.opacity(maskAlpha)
                 .ignoresSafeArea()
@@ -60,8 +56,6 @@ struct MainView: View {
                     Color.white
                         .ignoresSafeArea()
                     SideMenuView(
-                        showMemberStore: $showMemberStore,
-                        showResetPassword: $showResetPassword,
                         showVersionPopup: $showVersionPopp
                     )
                 }
@@ -85,7 +79,7 @@ struct MainView: View {
             print("onReceive \(popupType)")
             switch popupType {
             case .member:
-                showMemberStore = true
+                nav.showMemberStore = true
             case .mode:
                 break
             }
