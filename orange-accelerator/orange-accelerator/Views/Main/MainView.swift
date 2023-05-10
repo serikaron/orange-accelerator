@@ -31,49 +31,45 @@ struct MainView: View {
     
     
     var body: some View {
-        NavigationView {
-            ZStack {
-                NavigationLink(destination: NodeListView(), isActive: $showNodeList) {
-                    EmptyView()
-                }
-                NavigationLink(destination: MemberStoreView(), isActive: $showMemberStore) {
-                    EmptyView()
-                }
-                NavigationLink(destination: ResetPasswordView(), isActive: $showResetPassword) {
-                    EmptyView()
-                }
-                NavigationLink(destination: WebView(title: webViewInfo.title, url: webViewInfo.url), isActive: $showWebView) {
-                    EmptyView()
-                }
-                MainContentView(showSideMenu: $showSideMenu,
-                                showNodeList: $showNodeList,
-                                showMemberStore: $showMemberStore,
-                                showPopup: showPopupSubject)
-                Color.black.opacity(maskAlpha)
-                    .ignoresSafeArea()
-                    .onTapGesture {
-                        showSideMenu = false
-                    }
-                PopupView(type: popupType, isShow: $showPopup, buttonClick: hidePopupSubject)
-                    .ignoresSafeArea()
-                GeometryReader { geometry in
-                    Group {
-                        Color.white
-                            .ignoresSafeArea()
-                        SideMenuView(
-                            showMemberStore: $showMemberStore,
-                            showResetPassword: $showResetPassword,
-                            showWebView: $showWebView,
-                            webViewInfo: $webViewInfo,
-                            showVersionPopup: $showVersionPopp
-                        )
-                    }
-                    .frame(width: MENU_WIDTH)
-                    .offset(x: sideMenuOffset, y: 0)
-                }
-                VersionPopupView(isShow: $showVersionPopp)
-                    .ignoresSafeArea()
+        ZStack {
+            NavigationLink(destination: NodeListView(), isActive: $showNodeList) {
+                EmptyView()
             }
+            NavigationLink(destination: MemberStoreView(), isActive: $showMemberStore) {
+                EmptyView()
+            }
+            NavigationLink(destination: ResetPasswordView(), isActive: $showResetPassword) {
+                EmptyView()
+            }
+//            NavigationLink(destination: WebView(title: webViewInfo.title, url: webViewInfo.url), isActive: $showWebView) {
+//                EmptyView()
+//            }
+            MainContentView(showSideMenu: $showSideMenu,
+                            showNodeList: $showNodeList,
+                            showMemberStore: $showMemberStore,
+                            showPopup: showPopupSubject)
+            Color.black.opacity(maskAlpha)
+                .ignoresSafeArea()
+                .onTapGesture {
+                    showSideMenu = false
+                }
+            PopupView(type: popupType, isShow: $showPopup, buttonClick: hidePopupSubject)
+                .ignoresSafeArea()
+            GeometryReader { geometry in
+                Group {
+                    Color.white
+                        .ignoresSafeArea()
+                    SideMenuView(
+                        showMemberStore: $showMemberStore,
+                        showResetPassword: $showResetPassword,
+                        showVersionPopup: $showVersionPopp
+                    )
+                }
+                .frame(width: MENU_WIDTH)
+                .offset(x: sideMenuOffset, y: 0)
+            }
+            VersionPopupView(isShow: $showVersionPopp)
+                .ignoresSafeArea()
         }
         .onChange(of: showSideMenu) { isShow in
             withAnimation {

@@ -148,7 +148,7 @@ class Linkman{
         return try await Request()
             .with(\.path, setTo: "/v1/api/private/policy")
             .with(\.method, setTo: .GET)
-            .with(\.standaloneResponse, setTo: standaloneResponse("https://www.baidu.com"))
+            .with(\.standaloneResponse, setTo: standaloneResponse("<html><body><h1>我是标题</h1>我是内容</body></html>"))
             .make()
             .response() as PolicyResponse
     }
@@ -271,6 +271,11 @@ private extension Linkman {
                 req.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
             }
             req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            if let extraHeader = request.headers {
+                extraHeader.forEach { header in
+                    req.addValue(header.value, forHTTPHeaderField: header.key)
+                }
+            }
             
             if (showLog) {
                 log(request: req)

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var tokenService = TokenService()
+    @StateObject private var nav = NavigationService()
     
     var body: some View {
         ZStack {
@@ -16,19 +17,44 @@ struct ContentView: View {
             LoadingView()
             ErrorView()
         }
-//        NavigationView {
-//            NavigationLink(destination: WebView(request: "https://www.baidu.com")) {
-//                Text("baidu")
-//            }
-//        }
     }
     
     private var content: some View {
-        Group {
-            if tokenService.isLoggedIn {
-                MainView()
-            } else {
-                OnboardingView()
+        NavigationView {
+            ZStack {
+                NavigationLink(destination: WebView(page: nav.webPage ?? .privacy),
+                               isActive: showWebView) {
+                    EmptyView()
+                }
+                if tokenService.isLoggedIn {
+                    MainView()
+                } else {
+                    OnboardingView()
+                }
+            }
+        }
+        .environmentObject(nav)
+    }
+    
+    private var showWebView: Binding<Bool> {
+        Binding {
+            nav.webPage != nil
+        } set: { show in
+            if !show {
+                nav.webPage = nil
+            }
+        }
+
+    }
+}
+
+fileprivate struct SomeView: View {
+    @StateObject var s: OnboardingService = OnboardingService()
+    var body: some View {
+        ZStack {
+            Color.green
+            Button("logout") {
+                s.logout()
             }
         }
     }

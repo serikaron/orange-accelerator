@@ -12,10 +12,10 @@ fileprivate typealias ItemTapped = PassthroughSubject<MenuItem, Never>
 
 struct SideMenuView: View {
     @EnvironmentObject var onboardingService: OnboardingService
+    @EnvironmentObject var nav: NavigationService
+    
     @Binding var showMemberStore: Bool
     @Binding var showResetPassword: Bool
-    @Binding var showWebView: Bool
-    @Binding var webViewInfo: WebViewInfo
     @Binding var showVersionPopup: Bool
     
     @State private var account: Account?
@@ -52,17 +52,9 @@ struct SideMenuView: View {
                 showResetPassword = true
                 break
             case .customService:
-                Task {
-                    webViewInfo = (title: "在线客服", url: await WebViewService.onlineServiceURL)
-                    showWebView = true
-                }
-                break
+                nav.webPage = .customService
             case .privacy:
-                Task {
-                    webViewInfo = (title: "隐私政策", url: await WebViewService.policyURL)
-                    showWebView = true
-                }
-                break
+                nav.webPage = .privacy
             case .version:
                 Task {
                     showVersionPopup = true
@@ -182,8 +174,6 @@ struct SideMenuView_Previews: PreviewProvider {
         SideMenuView(
             showMemberStore: .constant(false),
             showResetPassword: .constant(false),
-            showWebView: .constant(false),
-            webViewInfo: .constant(("", "")),
             showVersionPopup: .constant(false)
         )
             .environmentObject(OnboardingService())

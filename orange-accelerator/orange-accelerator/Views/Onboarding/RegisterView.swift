@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RegisterView: View {
     @EnvironmentObject var service: OnboardingService
+    @EnvironmentObject var nav: NavigationService
     
     @State var phone: String = ""
     @State var password: String = ""
@@ -50,6 +51,7 @@ struct RegisterView: View {
                 Text("及")
                     .orangeText(size: 13, color: .c000000)
                 Button{
+                    nav.webPage = .privacy
                 } label: {
                     Text("《隐私政策》")
                         .orangeText(size: 13, color: .main)

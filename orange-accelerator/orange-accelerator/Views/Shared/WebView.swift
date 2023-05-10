@@ -11,15 +11,30 @@ import WebKit
 typealias WebViewInfo = (title: String, url: String)
 
 struct WebView: View {
-    let title: String
-    let url: String
+    let page: WebViewPage
+    
+    @State private var url: String?
+    @State private var htmlContent: String?
     
     var body: some View {
         VStack {
-            NavigationTitleView(title: title)
-            _WebView(request: url)
+            NavigationTitleView(title: page.title)
+            if url != nil || htmlContent != nil {
+                _WebView(request: url, htmlContent: htmlContent)
+            }
+            Spacer()
         }
         .navigationBarHidden(true)
+        .onAppear {
+            Task {
+                do {
+                    url = try await page.url
+                    htmlContent = try await page.htmlContent
+                } catch {
+                    Box.sendError(error)
+                }
+            }
+        }
     }
 }
 
@@ -27,19 +42,23 @@ struct WebView: View {
 struct _WebView : UIViewRepresentable {
     
     let request: String?
+    let htmlContent: String?
     
     func makeUIView(context: Context) -> WKWebView  {
         let view = WKWebView()
-        view.navigationDelegate = context.coordinator
         
-        guard let str = request,
-              let url = URL(string: str)
-        else {
-            Box.sendError("INVALID url: \(request ?? "")")
-            return view
+        if let request = request {
+            view.navigationDelegate = context.coordinator
+            
+            guard let url = URL(string: request) else {
+                Box.sendError("INVALID url: \(request)")
+                return view
+            }
+            
+            view.load(URLRequest(url: url))
+        } else if let htmlContent = htmlContent {
+            view.loadHTMLString(htmlContent, baseURL: nil)
         }
-        
-        view.load(URLRequest(url: url))
         return view
     }
     
@@ -67,6 +86,7 @@ struct _WebView : UIViewRepresentable {
 
 struct WebView_Previews: PreviewProvider {
     static var previews: some View {
-        WebView(title: "测试", url: "https://www.baidu.com")
+        WebView(page: .customService)
+        WebView(page: .privacy)
     }
 }

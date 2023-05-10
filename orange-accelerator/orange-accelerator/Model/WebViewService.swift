@@ -8,26 +8,33 @@
 import Foundation
 
 @MainActor
-enum WebViewService {
-    static var policyURL: String {
-        get async {
-            do {
-                return try await Linkman.shared.getPolicy()
-            } catch {
-                Box.sendError(error)
-                return ""
+enum WebViewPage {
+    case privacy, customService
+    
+    var title: String {
+        switch self {
+        case .privacy: return "隐私政策"
+        case .customService: return "在线客服"
+        }
+    }
+    
+    var url: String? {
+        get async throws {
+            switch self {
+            case .privacy: return nil
+            case .customService: return try await Linkman.shared.getOnlineService()
             }
         }
     }
     
-    static var onlineServiceURL: String {
-        get async {
-            do {
-                return try await Linkman.shared.getOnlineService()
-            } catch {
-                Box.sendError(error)
-                return ""
+    var htmlContent: String? {
+        get async throws {
+            switch self {
+            case .privacy: return try await Linkman.shared.getPolicy()
+            case .customService: return nil
             }
         }
     }
 }
+
+

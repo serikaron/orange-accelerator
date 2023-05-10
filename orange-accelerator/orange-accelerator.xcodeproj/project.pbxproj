@@ -57,6 +57,7 @@
 		7275E5CB2A0A4EDC0091FA7A /* WebViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5CA2A0A4EDC0091FA7A /* WebViewService.swift */; };
 		7275E5CE2A0AA3A00091FA7A /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5CD2A0AA3A00091FA7A /* Version.swift */; };
 		7275E5D12A0AA6340091FA7A /* VersionPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5D02A0AA6340091FA7A /* VersionPopupView.swift */; };
+		7275E5D42A0B2A560091FA7A /* NavigationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5D32A0B2A560091FA7A /* NavigationService.swift */; };
 		7276F5DE29EAD77200A937DD /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7276F5DD29EAD77200A937DD /* Onboarding.swift */; };
 		7276F5E129EADAF200A937DD /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7276F5E029EADAF200A937DD /* Utils.swift */; };
 		7276F5E729EC35D200A937DD /* OnboardingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7276F5E629EC35D200A937DD /* OnboardingService.swift */; };
@@ -157,6 +158,7 @@
 		7275E5CA2A0A4EDC0091FA7A /* WebViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewService.swift; sourceTree = "<group>"; };
 		7275E5CD2A0AA3A00091FA7A /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		7275E5D02A0AA6340091FA7A /* VersionPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionPopupView.swift; sourceTree = "<group>"; };
+		7275E5D32A0B2A560091FA7A /* NavigationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationService.swift; sourceTree = "<group>"; };
 		7276F5DD29EAD77200A937DD /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		7276F5E029EADAF200A937DD /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		7276F5E629EC35D200A937DD /* OnboardingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingService.swift; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 				7275E5B82A09FB010091FA7A /* MemberStore.swift */,
 				7275E5CA2A0A4EDC0091FA7A /* WebViewService.swift */,
 				7275E5CD2A0AA3A00091FA7A /* Version.swift */,
+				7275E5D32A0B2A560091FA7A /* NavigationService.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -552,6 +555,7 @@
 				72022A5E29F4273100DC9012 /* ErrorService.swift in Sources */,
 				7275E5982A0623330091FA7A /* EndpointService.swift in Sources */,
 				72022AD129FA2A1E00DC9012 /* ModePickerView.swift in Sources */,
+				7275E5D42A0B2A560091FA7A /* NavigationService.swift in Sources */,
 				72022AC429F8FF8300DC9012 /* LoadingView.swift in Sources */,
 				7275E59A2A062F850091FA7A /* NETunnelProviderManager+Helper.swift in Sources */,
 				7275E5C82A0A41760091FA7A /* WebView.swift in Sources */,
