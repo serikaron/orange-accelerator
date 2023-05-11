@@ -65,6 +65,7 @@ class OnboardingService: ObservableObject {
     }
     
     func logout() {
+        Account.clean()
         Box.setToken(nil)
     }
 }

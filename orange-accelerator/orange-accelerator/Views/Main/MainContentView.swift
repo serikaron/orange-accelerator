@@ -68,7 +68,6 @@ struct MainContentView: View {
                 await NETunnelProviderManager.requestPermission()
                 do {
                     account = try await Account.current
-                    print(account)
                 } catch {
                     Box.sendError(error)
                 }

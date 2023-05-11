@@ -41,6 +41,10 @@ struct ResetPasswordView: View {
             }
             Spacer()
         }
+        .background(Color.white)
+        .onTapGesture {
+            hideKeyboard()
+        }
         .padding(.horizontal, 35)
         .onAppear {
             Task {

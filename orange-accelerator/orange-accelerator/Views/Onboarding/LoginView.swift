@@ -18,6 +18,9 @@ struct LoginView: View {
     var body: some View {
         VStack {
             OnboardingHeader()
+                .onTapGesture {
+                    hideKeyboard()
+                }
             Spacer().frame(height: 75)
             Group {
                 OnboardingInput(title: "登录帐号", inputText: $phone)
@@ -45,7 +48,9 @@ struct LoginView: View {
             }
             Spacer()
         }
-//        .background(Color.blue)
+        .onTapGesture {
+            hideKeyboard()
+        }
         .padding(.horizontal, 35)
     }
 }

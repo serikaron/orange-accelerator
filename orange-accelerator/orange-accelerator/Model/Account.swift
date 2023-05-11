@@ -34,6 +34,10 @@ struct Account {
             Box.sendError(error)
         }
     }
+    
+    static func clean() {
+        _account = nil
+    }
 }
 
 

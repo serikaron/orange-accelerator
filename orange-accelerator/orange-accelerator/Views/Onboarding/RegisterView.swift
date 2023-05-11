@@ -70,6 +70,10 @@ struct RegisterView: View {
             Spacer()
         }
         .padding(.horizontal, 35)
+        .background(Color.white)
+        .onTapGesture {
+            hideKeyboard()
+        }
     }
     
     private func register() {
