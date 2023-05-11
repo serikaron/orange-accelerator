@@ -31,10 +31,11 @@
 		7208214729E951B300D36AF3 /* orange_acceleratorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7208214629E951B300D36AF3 /* orange_acceleratorUITests.swift */; };
 		7208214929E951B300D36AF3 /* orange_acceleratorUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7208214829E951B300D36AF3 /* orange_acceleratorUITestsLaunchTests.swift */; };
 		7208215829EAC5AD00D36AF3 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7208215729EAC5AD00D36AF3 /* LoginView.swift */; };
+		722700792A0B5EDA0098D988 /* V2Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5A52A06B9D30091FA7A /* V2Config.swift */; };
+		722700822A0C6D990098D988 /* FirstTimeRestart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722700812A0C6D990098D988 /* FirstTimeRestart.swift */; };
 		7273D89129FE40D80006BDA4 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72022AE329FD434C00DC9012 /* NetworkExtension.framework */; };
 		7273D89429FE40D80006BDA4 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7273D89329FE40D80006BDA4 /* PacketTunnelProvider.swift */; };
 		7273D89929FE40D80006BDA4 /* orange-tunnel.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 7273D89029FE40D80006BDA4 /* orange-tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		7273D89E29FE43780006BDA4 /* v2ray.json in Resources */ = {isa = PBXBuildFile; fileRef = 7273D89D29FE43780006BDA4 /* v2ray.json */; };
 		7275E5982A0623330091FA7A /* EndpointService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5972A0623330091FA7A /* EndpointService.swift */; };
 		7275E59A2A062F850091FA7A /* NETunnelProviderManager+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5992A062F850091FA7A /* NETunnelProviderManager+Helper.swift */; };
 		7275E59E2A0687DC0091FA7A /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E59D2A0687DC0091FA7A /* Account.swift */; };
@@ -42,7 +43,7 @@
 		7275E5A62A06B9D30091FA7A /* V2Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5A52A06B9D30091FA7A /* V2Config.swift */; };
 		7275E5A82A08F2D80091FA7A /* geosite.dat in Resources */ = {isa = PBXBuildFile; fileRef = 7275E5A72A08F2D80091FA7A /* geosite.dat */; };
 		7275E5AA2A08F5670091FA7A /* NodeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5A92A08F5670091FA7A /* NodeListView.swift */; };
-		7275E5AE2A0903BF0091FA7A /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5AD2A0903BF0091FA7A /* PopupView.swift */; };
+		7275E5AE2A0903BF0091FA7A /* RemindPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5AD2A0903BF0091FA7A /* RemindPopupView.swift */; };
 		7275E5B02A0929D90091FA7A /* MemberStoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5AF2A0929D90091FA7A /* MemberStoreView.swift */; };
 		7275E5B42A09D5F20091FA7A /* ConnectionStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5B32A09D5F20091FA7A /* ConnectionStatusView.swift */; };
 		7275E5B62A09F3430091FA7A /* v2orange.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7275E5B52A09F3430091FA7A /* v2orange.xcframework */; };
@@ -56,7 +57,6 @@
 		7275E5C82A0A41760091FA7A /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5C72A0A41760091FA7A /* WebView.swift */; };
 		7275E5CB2A0A4EDC0091FA7A /* WebViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5CA2A0A4EDC0091FA7A /* WebViewService.swift */; };
 		7275E5CE2A0AA3A00091FA7A /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5CD2A0AA3A00091FA7A /* Version.swift */; };
-		7275E5D12A0AA6340091FA7A /* VersionPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5D02A0AA6340091FA7A /* VersionPopupView.swift */; };
 		7275E5D42A0B2A560091FA7A /* NavigationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5D32A0B2A560091FA7A /* NavigationService.swift */; };
 		7276F5DE29EAD77200A937DD /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7276F5DD29EAD77200A937DD /* Onboarding.swift */; };
 		7276F5E129EADAF200A937DD /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7276F5E029EADAF200A937DD /* Utils.swift */; };
@@ -133,6 +133,8 @@
 		7208214629E951B300D36AF3 /* orange_acceleratorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = orange_acceleratorUITests.swift; sourceTree = "<group>"; };
 		7208214829E951B300D36AF3 /* orange_acceleratorUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = orange_acceleratorUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		7208215729EAC5AD00D36AF3 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		7227007B2A0B63360098D988 /* v2ray.routing.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = v2ray.routing.json; sourceTree = "<group>"; };
+		722700812A0C6D990098D988 /* FirstTimeRestart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTimeRestart.swift; sourceTree = "<group>"; };
 		7273D89029FE40D80006BDA4 /* orange-tunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "orange-tunnel.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7273D89329FE40D80006BDA4 /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
 		7273D89529FE40D80006BDA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -145,7 +147,7 @@
 		7275E5A52A06B9D30091FA7A /* V2Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V2Config.swift; sourceTree = "<group>"; };
 		7275E5A72A08F2D80091FA7A /* geosite.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = geosite.dat; sourceTree = "<group>"; };
 		7275E5A92A08F5670091FA7A /* NodeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeListView.swift; sourceTree = "<group>"; };
-		7275E5AD2A0903BF0091FA7A /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
+		7275E5AD2A0903BF0091FA7A /* RemindPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindPopupView.swift; sourceTree = "<group>"; };
 		7275E5AF2A0929D90091FA7A /* MemberStoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberStoreView.swift; sourceTree = "<group>"; };
 		7275E5B32A09D5F20091FA7A /* ConnectionStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionStatusView.swift; sourceTree = "<group>"; };
 		7275E5B52A09F3430091FA7A /* v2orange.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = v2orange.xcframework; sourceTree = "<group>"; };
@@ -157,7 +159,6 @@
 		7275E5C72A0A41760091FA7A /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		7275E5CA2A0A4EDC0091FA7A /* WebViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewService.swift; sourceTree = "<group>"; };
 		7275E5CD2A0AA3A00091FA7A /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
-		7275E5D02A0AA6340091FA7A /* VersionPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionPopupView.swift; sourceTree = "<group>"; };
 		7275E5D32A0B2A560091FA7A /* NavigationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationService.swift; sourceTree = "<group>"; };
 		7276F5DD29EAD77200A937DD /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		7276F5E029EADAF200A937DD /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -211,7 +212,6 @@
 				72022AD029FA2A1E00DC9012 /* ModePickerView.swift */,
 				72022AD629FA61FF00DC9012 /* SideMenuView.swift */,
 				7275E5A92A08F5670091FA7A /* NodeListView.swift */,
-				7275E5AD2A0903BF0091FA7A /* PopupView.swift */,
 				7275E5AF2A0929D90091FA7A /* MemberStoreView.swift */,
 				7275E5C42A0A37AA0091FA7A /* ResetPasswordView.swift */,
 			);
@@ -325,6 +325,7 @@
 				7275E5CA2A0A4EDC0091FA7A /* WebViewService.swift */,
 				7275E5CD2A0AA3A00091FA7A /* Version.swift */,
 				7275E5D32A0B2A560091FA7A /* NavigationService.swift */,
+				722700812A0C6D990098D988 /* FirstTimeRestart.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -334,6 +335,7 @@
 			children = (
 				7275E5A72A08F2D80091FA7A /* geosite.dat */,
 				7273D89D29FE43780006BDA4 /* v2ray.json */,
+				7227007B2A0B63360098D988 /* v2ray.routing.json */,
 				7273D89329FE40D80006BDA4 /* PacketTunnelProvider.swift */,
 				7273D89529FE40D80006BDA4 /* Info.plist */,
 				7273D89629FE40D80006BDA4 /* orange_tunnel.entitlements */,
@@ -355,13 +357,13 @@
 		7276F5DF29EADAC700A937DD /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				7275E5AD2A0903BF0091FA7A /* RemindPopupView.swift */,
 				7276F5E029EADAF200A937DD /* Utils.swift */,
 				72022A5929F418A100DC9012 /* ErrorView.swift */,
 				72022AC329F8FF8300DC9012 /* LoadingView.swift */,
 				7275E5BB2A0A15760091FA7A /* OrangeButton.swift */,
 				7275E5BE2A0A276C0091FA7A /* NavigationTitleView.swift */,
 				7275E5C72A0A41760091FA7A /* WebView.swift */,
-				7275E5D02A0AA6340091FA7A /* VersionPopupView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -531,7 +533,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7275E5A82A08F2D80091FA7A /* geosite.dat in Resources */,
-				7273D89E29FE43780006BDA4 /* v2ray.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,7 +547,7 @@
 				72022AD929FA724C00DC9012 /* MainView.swift in Sources */,
 				72022A5429F3FF6400DC9012 /* RegisterView.swift in Sources */,
 				7275E5C52A0A37AA0091FA7A /* ResetPasswordView.swift in Sources */,
-				7275E5AE2A0903BF0091FA7A /* PopupView.swift in Sources */,
+				7275E5AE2A0903BF0091FA7A /* RemindPopupView.swift in Sources */,
 				7275E5CB2A0A4EDC0091FA7A /* WebViewService.swift in Sources */,
 				7275E5CE2A0AA3A00091FA7A /* Version.swift in Sources */,
 				7275E5B42A09D5F20091FA7A /* ConnectionStatusView.swift in Sources */,
@@ -563,11 +564,11 @@
 				7276F5EC29EE215900A937DD /* Withable.swift in Sources */,
 				7275E5AA2A08F5670091FA7A /* NodeListView.swift in Sources */,
 				7275E5A62A06B9D30091FA7A /* V2Config.swift in Sources */,
+				722700822A0C6D990098D988 /* FirstTimeRestart.swift in Sources */,
 				7276F5DE29EAD77200A937DD /* Onboarding.swift in Sources */,
 				7208212E29E951B200D36AF3 /* ContentView.swift in Sources */,
 				7276F5EA29EE20C400A937DD /* Codable+JSON.swift in Sources */,
 				72022ACC29FA081600DC9012 /* UserDefault+Orange.swift in Sources */,
-				7275E5D12A0AA6340091FA7A /* VersionPopupView.swift in Sources */,
 				72022ACA29FA078900DC9012 /* TokenService.swift in Sources */,
 				72022AC829F9198F00DC9012 /* OnboardingView.swift in Sources */,
 				7275E5B92A09FB010091FA7A /* MemberStore.swift in Sources */,
@@ -610,6 +611,7 @@
 			files = (
 				7273D89429FE40D80006BDA4 /* PacketTunnelProvider.swift in Sources */,
 				7275E5C32A0A34960091FA7A /* NavigationSwipHack.swift in Sources */,
+				722700792A0B5EDA0098D988 /* V2Config.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -767,12 +769,12 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = orange.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -800,12 +802,12 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = orange.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -901,13 +903,13 @@
 				INFOPLIST_FILE = "orange-tunnel/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "orange-tunnel";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "orange.dev.orange-tunnel";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -928,13 +930,13 @@
 				INFOPLIST_FILE = "orange-tunnel/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "orange-tunnel";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "orange.dev.orange-tunnel";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

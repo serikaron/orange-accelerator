@@ -27,7 +27,7 @@ func InputPacket(data []byte) {
 var vInst *vcore.Instance
 
 func StartV2Ray(packetFlow PacketFlow, configBytes []byte) error {
-	if vInst != nil {
+	if vInst != nil && lwipStack != nil {
 		return nil
 	}
 

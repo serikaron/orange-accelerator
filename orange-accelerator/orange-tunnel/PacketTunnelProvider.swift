@@ -16,9 +16,9 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         
         weak var weakSelf = self
         self.packetFlow.readPackets { (packets: [Data], protocols: [NSNumber]) in
+            NSLog("received packets, %d", packets.count)
             for packet in packets {
                 V2orangeInputPacket(packet)
-                
             }
             
             // Recursive to keep reading
@@ -38,6 +38,26 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             completionHandler(err)
             return
         }
+        
+        
+//        let fileName = "v2ray"
+//        if let url = Bundle.main.url(forResource: fileName, withExtension: "json") {
+//            do {
+//                let data = try Data(contentsOf: url)
+//                let fileJson = try JSONDecoder().decode(V2.Config.self, from: data)
+//                let inputJson = try JSONDecoder().decode(V2.Config.self, from: config)
+//                NSLog("\(fileJson)")
+//                NSLog("\(inputJson)")
+////                var err: NSError?
+////                V2orangeStartV2Ray(self, data, &err)
+////                if err != nil {
+////                    completionHandler(err)
+////                    return
+////                }
+//            } catch let err {
+//                NSLog("error:\(err)")
+//            }
+//        }
         
         let networkSettings = NEPacketTunnelNetworkSettings(tunnelRemoteAddress: serverIp)
         networkSettings.mtu = 1480
@@ -91,11 +111,8 @@ extension PacketTunnelProvider: V2orangePacketFlowProtocol{
             return
         }
 
-//        self.packetFlow.writePackets([packet],withProtocols: [NSNumber](repeating: AF_INET as NSNumber, count: 1))
-        
+        NSLog("write packet, %d", packet.count)
         self.packetFlow.writePackets([packet], withProtocols: [AF_INET as NSNumber])
-//        self.packetFlow.writePacketObjects([packet])
-        
     }
     
     

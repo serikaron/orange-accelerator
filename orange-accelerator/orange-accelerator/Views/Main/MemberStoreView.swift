@@ -10,6 +10,7 @@ import SwiftUI
 let ITEM_COUNT_PER_ROW = 2
 
 struct MemberStoreView: View {
+    @EnvironmentObject var nav: NavigationService
     @State private var items: [[MemberStoreItem]] = []
     
     @State private var selectedItemId = 0
@@ -66,8 +67,12 @@ struct MemberStoreView: View {
                 HStack(spacing: 0) {
                     Text("支付过程中如果遇到问题，请联系")
                         .orangeText(size: 13, color: .c000000)
-                    Text("在线客服")
-                        .orangeText(size: 13, color: .main)
+                    Button {
+                        nav.webPage = .customService
+                    } label: {
+                        Text("在线客服")
+                            .orangeText(size: 13, color: .main)
+                    }
                 }
                 Spacer()
             }

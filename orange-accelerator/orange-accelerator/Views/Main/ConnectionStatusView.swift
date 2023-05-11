@@ -12,7 +12,6 @@ struct ConnectionStatusView: View {
     @Binding var status: NEVPNStatus
     
     @State private var duration: String = "00:00:00"
-    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         if status.show {
@@ -34,7 +33,7 @@ struct ConnectionStatusView: View {
             .onChange(of: status) { _ in
                 updateDuration()
             }
-            .onReceive(timer) { timer in
+            .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { timer in
                 guard status == .connected else { return }
                 updateDuration()
             }

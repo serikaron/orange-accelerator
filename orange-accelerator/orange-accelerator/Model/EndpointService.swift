@@ -96,7 +96,9 @@ extension Endpoint {
         guard let port = Int(port) else {
             throw "INVALID v2 port (\(self.port))"
         }
-        let v2Config = V2.BuildConfig(name: name, address: host, port: port, userId: uuid, usingRoute: routeMode == .intellegent)
+        #warning("fakeUUID just for test")
+        let fakeUUID = "073c3ae5-4868-3da4-8d8d-ff1e29ed974f"
+        let v2Config = V2.BuildConfig(name: name, address: host, port: port, userId: fakeUUID, usingRoute: routeMode == .intellegent)
         let data = try v2Config.encoded()
         await NETunnelProviderManager.start(config: data)
     }

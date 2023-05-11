@@ -13,7 +13,7 @@ struct MainContentView: View {
     @EnvironmentObject var nav: NavigationService
     @Binding var showSideMenu: Bool
     
-    let showPopup: ShowPopupSubject
+    let showPopup: ShowRemindSubject
     
     @State private var routeMode = RouteMode.mode
     @State private var account: Account?
@@ -176,7 +176,7 @@ struct MainContentView: View {
 struct MainContentView_Previews: PreviewProvider {
     static var previews: some View {
         MainContentView(showSideMenu: .constant(false),
-                        showPopup: ShowPopupSubject())
+                        showPopup: ShowRemindSubject())
         .environmentObject(NavigationService())
     }
 }

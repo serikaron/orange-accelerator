@@ -17,12 +17,12 @@ private extension URLComponents {
 }
 
 enum NetworkError: Error, LocalizedError {
-    case domainError(Int)
+    case domainError(Int, String?)
     
     var errorDescription: String? {
         switch self {
-        case let .domainError(code):
-            return "DomainError:{code:\(code)}"
+        case let .domainError(code, msg):
+            return "\(code) - \(msg ?? "")"
         }
     }
 }
@@ -86,9 +86,10 @@ class Linkman{
             .with(\.path, setTo: "/v1/api/server/list")
             .with(\.method, setTo: .GET)
             .with(\.standaloneResponse, setTo: standaloneResponse([
-                ServerResonse(id: 1, name: "live", group: "", ip: "us.60cdn.com", port: "10233", server_type: 2, sort: 0),
+                ServerResonse(id: 1, name: "live", group: "", ip: "us.60cdn.com", port: "10233", server_type: 1, sort: 0),
 //                ServerResonse(id: 2, name: "dead", group: "", ip: "124.71.122.218", port: "10233", server_type: 2, sort: 0),
             ]))
+            .with(\.forceStandalone, setTo: true)
             .make()
             .response() as ServerListResponse
     }
@@ -302,7 +303,7 @@ private extension Linkman {
             let rsp = try data.decoded() as Rsp
             
             guard rsp.code == 0 else {
-                throw NetworkError.domainError(rsp.code)
+                throw NetworkError.domainError(rsp.code, rsp.msg)
             }
             
             

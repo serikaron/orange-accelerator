@@ -16,13 +16,29 @@ struct WebView: View {
     @State private var url: String?
     @State private var htmlContent: String?
     
+    @State private var loading = false
+    
     var body: some View {
-        VStack {
-            NavigationTitleView(title: page.title)
-            if url != nil || htmlContent != nil {
-                _WebView(request: url, htmlContent: htmlContent)
+        ZStack {
+            VStack {
+                NavigationTitleView(title: page.title)
+                if url != nil || htmlContent != nil {
+                    _WebView(request: url, htmlContent: htmlContent, loading: $loading)
+                }
+                Spacer()
             }
-            Spacer()
+            if loading {
+                ProgressView()
+                    .scaleEffect(1.5)
+                    .progressViewStyle(CircularProgressViewStyle(tint: .main))
+                    .background(
+                        Color.black
+                            .opacity(0.15)
+                            .frame(width: 100, height: 100)
+                            .cornerRadius(15)
+                    )
+            }
+
         }
         .navigationBarHidden(true)
         .onAppear {
@@ -43,6 +59,8 @@ struct _WebView : UIViewRepresentable {
     
     let request: String?
     let htmlContent: String?
+    
+    @Binding var loading: Bool
     
     func makeUIView(context: Context) -> WKWebView  {
         let view = WKWebView()
@@ -66,20 +84,26 @@ struct _WebView : UIViewRepresentable {
     }
 
     func makeCoordinator() -> _WebView.Coordinator {
-        Coordinator()
+        Coordinator(loading: $loading)
     }
     
     class Coordinator: NSObject, WKNavigationDelegate {
-        func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-            DispatchQueue.main.async {
-                Box.setLoading(false)
-            }
+        @Binding var loading: Bool
+        
+        init(loading: Binding<Bool>) {
+            self._loading = loading
         }
-
+        
         func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-            DispatchQueue.main.async {
-                Box.setLoading(true)
-            }
+            loading = true
+        }
+        
+        func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+            loading = false
+        }
+        
+        func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+            loading = false
         }
     }
 }

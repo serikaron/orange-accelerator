@@ -11,6 +11,8 @@ struct ContentView: View {
     @StateObject private var tokenService = TokenService()
     @StateObject private var nav = NavigationService()
     
+    @State private var showFirstTimePopup = false
+    
     var body: some View {
         ZStack {
             content
@@ -26,12 +28,20 @@ struct ContentView: View {
                                isActive: showWebView) {
                     EmptyView()
                 }
+                
                 if tokenService.isLoggedIn {
                     MainView()
                 } else {
                     OnboardingView()
                 }
+                
+                if showFirstTimePopup {
+                    FirstTimeRestartView()
+                }
             }
+        }
+        .onAppear {
+            showFirstTimePopup = !FirstTimeRestart.done
         }
         .environmentObject(nav)
     }

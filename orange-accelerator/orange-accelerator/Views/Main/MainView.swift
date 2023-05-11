@@ -16,7 +16,7 @@ struct MainView: View {
     
     @State private var showSideMenu = false
     @State private var showPopup = false
-    @State private var popupType = PopupViewType.member
+    @State private var popupType = RemindType.member
     @State private var showWebView = false
     @State private var webViewInfo: WebViewInfo = ("", "")
     @State private var showVersionPopp = false
@@ -24,8 +24,8 @@ struct MainView: View {
     @State private var maskAlpha: Double = 0
     @State private var sideMenuOffset: CGFloat = -MENU_WIDTH
     
-    private let hidePopupSubject = HidePopupSubject()
-    private let showPopupSubject = ShowPopupSubject()
+    private let hidePopupSubject = HideRemindSubject()
+    private let showPopupSubject = ShowRemindSubject()
     
     
     var body: some View {
@@ -49,7 +49,7 @@ struct MainView: View {
                 .onTapGesture {
                     showSideMenu = false
                 }
-            PopupView(type: popupType, isShow: $showPopup, buttonClick: hidePopupSubject)
+            RemindPopupView(type: popupType, isShow: $showPopup, buttonClick: hidePopupSubject)
                 .ignoresSafeArea()
             GeometryReader { geometry in
                 Group {
@@ -91,5 +91,6 @@ struct MainView: View {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
+            .environmentObject(NavigationService())
     }
 }

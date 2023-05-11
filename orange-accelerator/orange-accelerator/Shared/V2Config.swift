@@ -22,7 +22,7 @@ enum V2 {
     }
     
     struct Mux: Codable {
-        let enable: Bool
+        let enabled: Bool
     }
     
     struct StreamSettings: Codable {
@@ -34,7 +34,7 @@ enum V2 {
     }
     
     struct Vnext: Codable {
-        let name: String
+        let name: String?
         let address: String
         let port: Int
         let users: [User]
@@ -82,7 +82,7 @@ enum V2 {
                 ])
             ]),
             streamSettings: StreamSettings(network: "tcp"),
-            mux: Mux(enable: true),
+            mux: Mux(enabled: true),
             tag: nil
         )
     }
