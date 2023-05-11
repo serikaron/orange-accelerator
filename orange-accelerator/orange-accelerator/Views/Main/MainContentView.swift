@@ -11,14 +11,14 @@ import NetworkExtension
 
 struct MainContentView: View {
     @EnvironmentObject var nav: NavigationService
+    @StateObject var conn = ConnectionService()
+    
     @Binding var showSideMenu: Bool
     
     let showPopup: ShowRemindSubject
     
     @State private var routeMode = RouteMode.mode
     @State private var account: Account?
-    
-    @State private var connectionStatus: NEVPNStatus = .invalid
     
     var body: some View {
         VStack(spacing: 0) {
@@ -33,25 +33,9 @@ struct MainContentView: View {
                 ModePickerView(routeMode: $routeMode)
                     .padding(.horizontal)
                 Spacer().frame(height: 45)
-                Button {
-                    if connectionStatus == .disconnected ||
-                        connectionStatus == .invalid {
-                        connect()
-                    } else if connectionStatus == .connected ||
-                                connectionStatus == .connecting {
-                        disconnect()
-                    }
-                } label: {
-                    if connectionStatus == .disconnected {
-                        Image("button.main.connected")
-                            .padding(.top, 20)
-                    } else {
-                        Image("button.main.connected")
-                            .padding(.top, 20)
-                    }
-                }
+                ConnectButton()
                 Spacer().frame(height: 45)
-                ConnectionStatusView(status: $connectionStatus)
+                ConnectionStatusView()
             }
             Spacer()
             Button {
@@ -84,6 +68,7 @@ struct MainContentView: View {
                 await NETunnelProviderManager.requestPermission()
                 do {
                     account = try await Account.current
+                    print(account)
                 } catch {
                     Box.sendError(error)
                 }
@@ -95,12 +80,16 @@ struct MainContentView: View {
                 showPopup.send(.mode)
             }
         }
-        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.NEVPNStatusDidChange)) {
-            guard let connection = $0.object as? NETunnelProviderSession else { return }
-            if (connectionStatus != connection.status) {
-                connectionStatus = connection.status
+        .onReceive(conn.$status, perform: { newStatus in
+            switch (conn.status, newStatus) {
+            case (.connected, .disconnected):
+                UINotificationFeedbackGenerator().notificationOccurred(.error)
+            case (.connecting, .connected):
+                UINotificationFeedbackGenerator().notificationOccurred(.success)
+            default: break
             }
-        }
+        })
+        .environmentObject(conn)
     }
     
     var title: some View {
@@ -142,33 +131,6 @@ struct MainContentView: View {
                 Text("更换")
                     .orangeText(size: 15, color: .main)
             }
-        }
-    }
-    
-    @MainActor
-    private func connect() {
-        Task {
-            do {
-                print("connect vpn")
-                guard let account = account else {
-                    throw "INVALID account !!!"
-                }
-                
-                try await EndpointList.all
-                    .filtered(isVip: account.isVip)
-                    .ping()
-                    .fastest()?
-                    .connect(uuid: account.uuid, routeMode: routeMode)
-            } catch {
-                Box.sendError(error)
-            }
-        }
-    }
-    
-    @MainActor
-    private func disconnect() {
-        Task {
-            await NETunnelProviderManager.stop()
         }
     }
 }

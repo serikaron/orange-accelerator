@@ -24,7 +24,8 @@ struct MemberStoreItem {
     @MainActor
     static func buy(with id: Int) async {
         do {
-            try await Linkman.shared.buyPackage(with: id)
+            throw "暂无可用支付方式，请联系在线客服"
+//            try await Linkman.shared.buyPackage(with: id)
         } catch {
             Box.sendError(error)
         }
