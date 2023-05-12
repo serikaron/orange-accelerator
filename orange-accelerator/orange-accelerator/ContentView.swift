@@ -35,9 +35,9 @@ struct ContentView: View {
                     OnboardingView()
                 }
                 
-                if showFirstTimePopup {
-                    FirstTimeRestartView()
-                }
+//                if showFirstTimePopup {
+//                    FirstTimeRestartView()
+//                }
             }
         }
         .onAppear {
