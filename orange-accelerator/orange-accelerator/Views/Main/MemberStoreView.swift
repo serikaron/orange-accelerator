@@ -44,17 +44,22 @@ struct MemberStoreView: View {
     private var content: some View {
             VStack(spacing: 0) {
                 NavigationTitleView(title: "开通会员")
-                Spacer().frame(height: 55)
-                VStack(alignment: .leading, spacing: 30) {
-                    ForEach(Array(zip(items.indices, items)), id: \.0) { _, row in
-                        HStack(spacing: 30) {
-                            ForEach(row, id: \.id) {item in
-                                MemberStoreItemView(item: item, selectedItemId: $selectedItemId)
+//                ScrollView {
+//                    Group {
+                        Spacer().frame(height: 55)
+                        VStack(alignment: .leading, spacing: 30) {
+                            ForEach(Array(zip(items.indices, items)), id: \.0) { _, row in
+                                HStack(spacing: 30) {
+                                    ForEach(row, id: \.id) {item in
+                                        MemberStoreItemView(item: item, selectedItemId: $selectedItemId)
+                                    }
+                                }
                             }
                         }
-                    }
-                }
-                Spacer().frame(height: 64)
+                        Spacer().frame(height: 64)
+//                    }
+//                    .frame(maxWidth: .infinity)
+//                }
                 Button("立即支付") {
                     Task {
                         await MemberStoreItem.buy(with: selectedItemId)

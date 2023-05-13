@@ -39,6 +39,7 @@ struct ContentView: View {
 //                    FirstTimeRestartView()
 //                }
             }
+            .navigationBarHidden(true)
         }
         .onAppear {
             showFirstTimePopup = !FirstTimeRestart.done

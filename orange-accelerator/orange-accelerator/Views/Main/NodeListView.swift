@@ -144,7 +144,7 @@ fileprivate struct NodeItemView: View {
     }
     
     private var latency: String {
-        "\(String(format: "%d", item.latency ?? 0))ms"
+        "\(String(format: "%0.2f", item.latency ?? 0))ms"
     }
     
     var body: some View {
