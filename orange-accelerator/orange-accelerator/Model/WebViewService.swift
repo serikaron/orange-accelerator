@@ -9,12 +9,13 @@ import Foundation
 
 @MainActor
 enum WebViewPage {
-    case privacy, customService
+    case privacy, customService, inviteRule
     
     var title: String {
         switch self {
         case .privacy: return "隐私政策"
         case .customService: return "在线客服"
+        case .inviteRule: return "活动细则"
         }
     }
     
@@ -23,6 +24,7 @@ enum WebViewPage {
             switch self {
             case .privacy: return nil
             case .customService: return try await Linkman.shared.getOnlineService()
+            case .inviteRule: return nil
             }
         }
     }
@@ -32,6 +34,7 @@ enum WebViewPage {
             switch self {
             case .privacy: return try await Linkman.shared.getPolicy()
             case .customService: return nil
+            case .inviteRule: return try await Linkman.shared.getInviteRule()
             }
         }
     }

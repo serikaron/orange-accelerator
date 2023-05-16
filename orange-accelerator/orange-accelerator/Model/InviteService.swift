@@ -30,6 +30,38 @@ class InviteService: ObservableObject {
     func shareTo(destination: ShareDestination) {}
     
     func loadSharedList(page: Int, perPage: Int) async {
-        sharedList = (0..<10).map { SharedItem(name: "name\($0)", prize: "7天", time: "2022-02-02")}
+        do {
+            let l = try await Linkman.shared.getUserInviteList(page: page, pageSize: perPage)
+            sharedList += try l.map {
+                SharedItem(name: $0.username, prize: $0.reward, time: try $0.created_at.toDateString())
+            }
+        } catch {
+            Box.sendError(error)
+        }
+    }
+    
+    func loadPrizeDays() async {
+        do {
+            let prize = try await Linkman.shared.getInviteReward()
+            guard let days = Int(prize) else {
+                throw "会员天数不正确"
+            }
+            self.days = days
+        } catch {
+            Box.sendError(error)
+        }
+    }
+}
+
+fileprivate extension String {
+    func toDateString() throws -> String {
+        guard let out = self
+            .toDate(format: "yyyy-MM-dd'T'HH:mm:ssZ")?
+            .toString(format: "yyyy-MM-dd")
+        else {
+            throw "format date FAILED !!! \(self)"
+        }
+        
+        return out
     }
 }

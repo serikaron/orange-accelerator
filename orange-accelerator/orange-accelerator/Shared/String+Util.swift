@@ -16,3 +16,19 @@ extension String: LocalizedError {
 //        self.range(of: String.phoneRegex, options: .regularExpression) != nil
 //    }
 }
+
+extension String {
+    func toDate(format: String) -> Date? {
+        let f = DateFormatter()
+        f.dateFormat = format
+        return f.date(from: self)
+    }
+}
+
+extension Date {
+    func toString(format: String) -> String {
+        let f = DateFormatter()
+        f.dateFormat = format
+        return f.string(from: self)
+    }
+}

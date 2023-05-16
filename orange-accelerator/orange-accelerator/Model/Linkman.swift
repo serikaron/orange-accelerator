@@ -194,7 +194,7 @@ class Linkman{
                 (0..<10).map { InvitePrize(username: "name\($0)", reward: "7天", created_at: "2022-02-02")}
             ))
             .make()
-            .response() as UserInviteListResponse
+            .response(default: []) as UserInviteListResponse
     }
     
     typealias InviteRuleResponse = String
@@ -393,13 +393,21 @@ private class Request: Withable {
         return self
     }
     
-    func response<T: Codable>() throws -> T {
+    func response<T: Codable>(default: T? = nil) throws -> T {
         guard let r = _response else {
             throw "response not exists"
         }
         
         let rsp = try r.decoded() as Response<T>
-        return rsp.data!
+        
+        switch (rsp.data, `default`) {
+        case (.some(let rspData), _):
+            return rspData
+        case (.none, .some(let def)):
+            return def
+        case (.none, .none):
+            throw "response data not exists"
+        }
     }
 }
 

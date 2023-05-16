@@ -30,13 +30,13 @@ struct InviteView: View {
         .onAppear {
             Task {
                 await service.loadSharedList(page: 1, perPage: 100)
+                await service.loadPrizeDays()
             }
         }
     }
     
     var detailButton: some View {
-        Button {
-        } label: {
+        NavigationLink(destination: WebView(page: .inviteRule)) {
             Text("活动细则")
                 .orangeText(size: 14, color: .c000000)
                 .padding(.trailing, 15)
@@ -56,7 +56,7 @@ struct InviteView: View {
     
     var section1: some View {
         VStack {
-            Text("邀请还有得7天会员时长")
+            Text("邀请还有得\(service.days)天会员时长")
                 .orangeText(size: 25, color: .c000000)
             Spacer().frame(height: 11)
             Text("每邀请1位好友下单，即可获得")
