@@ -11,6 +11,7 @@ import NetworkExtension
 
 struct MainContentView: View {
     @EnvironmentObject var nav: NavigationService
+    @EnvironmentObject var accountService: AccountService
     @StateObject var conn = ConnectionService()
     
     @Binding var showSideMenu: Bool
@@ -18,7 +19,6 @@ struct MainContentView: View {
     let showPopup: ShowRemindSubject
     
     @State private var routeMode = RouteMode.mode
-    @State private var account: Account?
     
     var body: some View {
         VStack(spacing: 0) {
@@ -66,11 +66,7 @@ struct MainContentView: View {
         .onAppear {
             Task {
                 await NETunnelProviderManager.requestPermission()
-                do {
-                    account = try await Account.current
-                } catch {
-                    Box.sendError(error)
-                }
+                await accountService.loadAccount()
             }
         }
         .onChange(of: routeMode) { newValue in
@@ -89,6 +85,7 @@ struct MainContentView: View {
             }
         })
         .environmentObject(conn)
+        .environmentObject(accountService)
     }
     
     var title: some View {
@@ -121,7 +118,7 @@ struct MainContentView: View {
             Spacer().frame(width: 15)
             Button {
                 print("clicked 更换")
-                if account?.isVip ?? false {
+                if accountService.account?.isVip ?? false {
                     nav.showNodeList = true
                 } else {
                     showPopup.send(.member)
@@ -139,5 +136,6 @@ struct MainContentView_Previews: PreviewProvider {
         MainContentView(showSideMenu: .constant(false),
                         showPopup: ShowRemindSubject())
         .environmentObject(NavigationService())
+        .environmentObject(AccountService())
     }
 }

@@ -13,6 +13,7 @@ fileprivate typealias ItemTapped = PassthroughSubject<MenuItem, Never>
 struct SideMenuView: View {
     @EnvironmentObject var onboardingService: OnboardingService
     @EnvironmentObject var nav: NavigationService
+    @EnvironmentObject var accountService: AccountService
     
     @Binding var showVersionPopup: Bool
     
@@ -60,16 +61,6 @@ struct SideMenuView: View {
                 }
             }
         }
-        .onAppear {
-            Task {
-                do {
-                    account = try await Account.current
-                    clientVersion = Version.clientVersion
-                } catch {
-                    Box.sendError(error)
-                }
-            }
-        }
     }
     
     private var info: some View {
@@ -79,7 +70,7 @@ struct SideMenuView: View {
             HStack(spacing: 0) {
                 Text("用户名：")
                     .orangeText(size: 16, color: .c999999)
-                Text(account?.username ?? "")
+                Text(accountService.account?.username ?? "")
                     .orangeText(size: 16, color: .c999999)
             }
             Spacer().frame(height: 12)
@@ -177,5 +168,6 @@ struct SideMenuView_Previews: PreviewProvider {
         )
             .environmentObject(OnboardingService())
             .environmentObject(NavigationService())
+            .environmentObject(AccountService())
     }
 }

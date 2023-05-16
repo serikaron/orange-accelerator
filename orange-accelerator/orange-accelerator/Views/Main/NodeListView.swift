@@ -19,6 +19,7 @@ fileprivate struct Section {
 
 struct NodeListView: View {
     @State private var sections: [Section] = []
+    @EnvironmentObject var accountService: AccountService
     
     var body: some View {
         content
@@ -26,7 +27,7 @@ struct NodeListView: View {
                 Task {
                     do {
                         let endpoints = try await EndpointList.all
-                            .filtered(isVip: Account.current.isVip)
+                            .filtered(isVip: accountService.account?.isVip ?? false)
                             .ping()
                         var dict = [String: [NodeItem]]()
                         endpoints.forEach { endpoint in
@@ -188,6 +189,7 @@ fileprivate struct SignalIcon: View {
 struct NodeListView_Previews: PreviewProvider {
     static var previews: some View {
         NodeListView()
+            .environmentObject(AccountService())
         SectionView(section: Section(name: "测试节点", items: [
             NodeItem(name: "测试节点", latency: 0),
             NodeItem(name: "测试节点", latency: 300),

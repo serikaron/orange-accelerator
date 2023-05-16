@@ -12,6 +12,7 @@ private let MENU_WIDTH: CGFloat = 275
 
 struct MainView: View {
     @StateObject private var onboardingService = OnboardingService()
+    @StateObject var accountService = AccountService()
     @EnvironmentObject var nav: NavigationService
     
     @State private var showSideMenu = false
@@ -30,7 +31,9 @@ struct MainView: View {
     
     var body: some View {
         ZStack {
-            NavigationLink(destination: NodeListView(), isActive: $nav.showNodeList) {
+            NavigationLink(destination:
+                            NodeListView().environmentObject(accountService),
+                           isActive: $nav.showNodeList) {
                 EmptyView()
             }
             NavigationLink(destination: MemberStoreView(), isActive: $nav.showMemberStore) {
@@ -85,6 +88,7 @@ struct MainView: View {
             }
         }
         .environmentObject(onboardingService)
+        .environmentObject(accountService)
     }
 }
 

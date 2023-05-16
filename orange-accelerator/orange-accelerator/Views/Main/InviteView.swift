@@ -44,12 +44,14 @@ struct InviteView: View {
     }
     
     var content: some View {
-        VStack {
+        VStack(spacing: 0) {
             section1
             Separator()
             section2
             Separator()
             section3
+            Separator()
+            section4
         }
         .padding(.horizontal, 15)
     }
@@ -69,6 +71,10 @@ struct InviteView: View {
     }
     
     var section2: some View {
+        VStack {}
+    }
+    
+    var section3: some View {
         VStack {
             Text("邀请攻略").orangeText(size: 15, color: .c000000)
             Spacer().frame(height: 15)
@@ -97,7 +103,7 @@ struct InviteView: View {
         .padding(.bottom, 24.5)
     }
     
-    var section3: some View {
+    var section4: some View {
         VStack {
             Text("我的奖励记录")
                 .orangeText(size: 15, color: .c000000)

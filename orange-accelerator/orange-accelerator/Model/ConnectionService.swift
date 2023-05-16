@@ -43,10 +43,12 @@ class ConnectionService: ObservableObject {
 //            .assign(to: &$status)
     }
     
-    func connect() async {
+    func connect(account: Account?) async {
         do {
+            guard let account = account else {
+                throw "帐号出错"
+            }
             status = .connecting
-            let account = try await Account.current
             try await EndpointList.all
                 .filtered(isVip: account.isVip)
                 .ping()

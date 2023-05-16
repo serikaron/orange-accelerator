@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ResetPasswordView: View {
-    @State private var account: Account?
+    @EnvironmentObject var accountService: AccountService
     
     @State private var oldPassword = ""
     @State private var newPassword = ""
@@ -46,21 +46,12 @@ struct ResetPasswordView: View {
             hideKeyboard()
         }
         .padding(.horizontal, 35)
-        .onAppear {
-            Task {
-                do {
-                    account = try await Account.current
-                } catch {
-                    Box.sendError(error)
-                }
-            }
-        }
     }
     
     private var header: some View {
         VStack(spacing: 14) {
             Image("logo")
-            Text("用户名：  \(account?.username ?? "")")
+            Text("用户名：  \(accountService.account?.username ?? "")")
         }
     }
     
@@ -80,7 +71,7 @@ struct ResetPasswordView: View {
                     throw "两次密码输入不一样"
                 }
                 
-                await Account.resetPassword(oldPassword: oldPassword, newPassword: newPassword)
+                await accountService.resetPassword(oldPassword: oldPassword, newPassword: newPassword)
             } catch {
                 Box.sendError(error)
             }
@@ -91,5 +82,6 @@ struct ResetPasswordView: View {
 struct ResetPasswordView_Previews: PreviewProvider {
     static var previews: some View {
         ResetPasswordView()
+            .environmentObject(AccountService())
     }
 }

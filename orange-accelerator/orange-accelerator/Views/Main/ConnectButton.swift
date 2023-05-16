@@ -10,6 +10,7 @@ import SwiftUI
 @MainActor
 struct ConnectButton: View {
     @EnvironmentObject var service: ConnectionService
+    @EnvironmentObject var accountService: AccountService
     
     private let timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
     
@@ -26,7 +27,7 @@ struct ConnectButton: View {
             Task {
                 switch service.status {
                 case .connected: await service.disconnect()
-                case .disconnected: await service.connect()
+                case .disconnected: await service.connect(account: accountService.account)
                 case .connecting: await service.disconnect()
                 }
             }
@@ -83,12 +84,15 @@ struct ConnectButton_Previews: PreviewProvider {
     static var previews: some View {
         ConnectButton()
             .environmentObject(ConnectionService().with(state: .disconnected))
+            .environmentObject(AccountService())
             .previewDisplayName("disconnected")
         ConnectButton()
             .environmentObject(ConnectionService().with(state: .connected(Date())))
+            .environmentObject(AccountService())
             .previewDisplayName("connected")
         ConnectButton()
             .environmentObject(ConnectionService().with(state: .connecting))
+            .environmentObject(AccountService())
             .previewDisplayName("connecting")
     }
 }
