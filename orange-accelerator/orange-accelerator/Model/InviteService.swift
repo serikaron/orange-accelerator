@@ -23,11 +23,14 @@ class InviteService: ObservableObject {
     @Published var days = 7
     @Published var sharedList = SharedList()
     
-    func copyCode() {}
-    
-    func copyURL() {}
-    
-    func shareTo(destination: ShareDestination) {}
+//    func shareTo(destination: ShareDestination) {
+//        guard let url = URL(string: destination.link) else {
+//            return
+//        }
+//        guard UIApplication.canOpenURL(url) else {
+//            return
+//        }
+//    }
     
     func loadSharedList(page: Int, perPage: Int) async {
         do {
@@ -63,5 +66,15 @@ fileprivate extension String {
         }
         
         return out
+    }
+}
+
+fileprivate extension ShareDestination {
+    var link: String {
+        switch self {
+        case .wechat: return "weixin://"
+        case .qq: return "qq://"
+        case .weibo: return "weibo://"
+        }
     }
 }

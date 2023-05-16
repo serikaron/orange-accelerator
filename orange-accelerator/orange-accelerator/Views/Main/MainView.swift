@@ -31,8 +31,7 @@ struct MainView: View {
     
     var body: some View {
         ZStack {
-            NavigationLink(destination:
-                            NodeListView().environmentObject(accountService),
+            NavigationLink(destination: NodeListView().environmentObject(accountService),
                            isActive: $nav.showNodeList) {
                 EmptyView()
             }
@@ -42,7 +41,8 @@ struct MainView: View {
             NavigationLink(destination: ResetPasswordView(), isActive: $nav.showResetPassword) {
                 EmptyView()
             }
-            NavigationLink(destination: InviteView(), isActive: $nav.showInviteView) {
+            NavigationLink(destination: InviteView().environmentObject(accountService),
+                           isActive: $nav.showInviteView) {
                 EmptyView()
             }
             MainContentView(showSideMenu: $showSideMenu,

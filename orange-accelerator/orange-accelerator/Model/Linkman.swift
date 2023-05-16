@@ -7,14 +7,7 @@
 
 import Foundation
 
-private extension URLComponents {
-    static func orange() -> URLComponents {
-        var out = URLComponents()
-        out.scheme = "http"
-        out.host = "chengzitest.daoyi365.com"
-        return out
-    }
-}
+
 
 enum NetworkError: Error, LocalizedError {
     case domainError(Int, String?)
@@ -100,13 +93,23 @@ class Linkman{
         let uuid: String
         let is_vip: Bool
         let expire_time: Int
+        let invitation_code: String
     }
     
     func getUserInfo() async throws -> UserInfoResponse {
         return try await Request()
             .with(\.path, setTo: "/v1/api/user/info")
             .with(\.method, setTo: .GET)
-            .with(\.standaloneResponse, setTo: standaloneResponse(UserInfoResponse(id: 1, username: "serika", uuid: "073c3ae5-4868-3da4-8d8d-ff1e29ed974f", is_vip: false, expire_time: 0)))
+            .with(\.standaloneResponse, setTo: standaloneResponse(
+                UserInfoResponse(
+                    id: 1,
+                    username: "serika",
+                    uuid: "073c3ae5-4868-3da4-8d8d-ff1e29ed974f",
+                    is_vip: false,
+                    expire_time: 0,
+                    invitation_code: "00552082"
+                )
+            ))
             .make()
             .response() as UserInfoResponse
     }

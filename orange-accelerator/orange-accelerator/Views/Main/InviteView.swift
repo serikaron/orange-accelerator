@@ -9,6 +9,9 @@ import SwiftUI
 
 struct InviteView: View {
     @StateObject private var service = InviteService()
+    @EnvironmentObject var accountService: AccountService
+    
+    @Environment(\.openURL) var openURL
     
     @State private var isShowMore = false
     private var itemList: SharedList {
@@ -71,7 +74,31 @@ struct InviteView: View {
     }
     
     var section2: some View {
-        VStack {}
+        func row(text1: String, text2: String, action: @escaping () -> Void) -> some View {
+            HStack {
+                Text(text1).orangeText(size: 15, color: .c000000)
+                Text(text2).orangeText(size: 15, color: .main)
+                    .lineLimit(1)
+                //                    .frame(maxWidth: 163)
+                    .truncationMode(.tail)
+                Button {
+                    action()
+                } label: {
+                    Image("icon.copy")
+                }
+            }
+            .padding(.horizontal)
+        }
+        
+        return VStack(spacing: 13.5) {
+            row(text1: "邀请码：", text2: accountService.account?.invitationCode ?? "") {
+                accountService.copyCode()
+            }
+            row(text1: "邀请链接：", text2: accountService.account?.invitationLink ?? "") {
+                accountService.copyLink()
+            }
+        }
+        .padding(.vertical, 20)
     }
     
     var section3: some View {
@@ -92,11 +119,11 @@ struct InviteView: View {
             Text("分享给好友").orangeText(size: 15, color: .c000000)
             Spacer().frame(height: 16)
             HStack {
-                Image("icon.wechat")
+                sharedButton(with: .wechat)
                 Spacer()
-                Image("icon.qq")
+                sharedButton(with: .qq)
                 Spacer()
-                Image("icon.weibo")
+                sharedButton(with: .weibo)
             }.padding(.horizontal, 50)
         }
         .padding(.top, 23)
@@ -147,8 +174,17 @@ struct InviteView: View {
         .frame(height: 25)
         .padding(.horizontal, 20)
     }
+    
+    func sharedButton(with destination: ShareDestination) -> some View {
+        Button {
+            accountService.copyLink()
+            openURL(URL(string: destination.link)!)
+        } label: {
+            Image(destination.imageName)
+        }
+    }
 }
-
+    
 extension Array {
     func zipWithIndices() -> [(Int, Self.Element)]{
         Array<(Int, Self.Element)>(zip(self.indices, self))
@@ -186,8 +222,34 @@ fileprivate extension View {
     }
 }
 
+fileprivate extension ShareDestination {
+    var link: String {
+        switch self {
+        case .wechat: return "weixin://"
+        case .qq: return "mqq://"
+        case .weibo: return "weibolite://"
+        }
+    }
+    
+    var imageName: String {
+        switch self {
+        case .wechat: return "icon.wechat"
+        case .qq: return "icon.qq"
+        case .weibo: return "icon.weibo"
+        }
+    }
+}
+
 struct InviteView_Previews: PreviewProvider {
     static var previews: some View {
         InviteView()
+            .environmentObject(AccountService().withAccount())
+    }
+}
+
+fileprivate extension AccountService {
+    func withAccount() -> AccountService {
+        self.account = .standalone
+        return self
     }
 }

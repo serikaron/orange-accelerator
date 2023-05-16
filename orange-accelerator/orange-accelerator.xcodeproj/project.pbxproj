@@ -34,6 +34,7 @@
 		722513522A12319C00E3ED85 /* InviteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722513512A12319C00E3ED85 /* InviteService.swift */; };
 		722513542A12515800E3ED85 /* InviteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722513532A12515800E3ED85 /* InviteView.swift */; };
 		722513562A12525900E3ED85 /* Separator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722513552A12525900E3ED85 /* Separator.swift */; };
+		722513582A1375FB00E3ED85 /* URLComponents+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722513572A1375FB00E3ED85 /* URLComponents+Util.swift */; };
 		722700792A0B5EDA0098D988 /* V2Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5A52A06B9D30091FA7A /* V2Config.swift */; };
 		722700822A0C6D990098D988 /* FirstTimeRestart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722700812A0C6D990098D988 /* FirstTimeRestart.swift */; };
 		7273D89129FE40D80006BDA4 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72022AE329FD434C00DC9012 /* NetworkExtension.framework */; };
@@ -141,6 +142,7 @@
 		722513512A12319C00E3ED85 /* InviteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteService.swift; sourceTree = "<group>"; };
 		722513532A12515800E3ED85 /* InviteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteView.swift; sourceTree = "<group>"; };
 		722513552A12525900E3ED85 /* Separator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Separator.swift; sourceTree = "<group>"; };
+		722513572A1375FB00E3ED85 /* URLComponents+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLComponents+Util.swift"; sourceTree = "<group>"; };
 		7227007B2A0B63360098D988 /* v2ray.routing.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = v2ray.routing.json; sourceTree = "<group>"; };
 		722700812A0C6D990098D988 /* FirstTimeRestart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTimeRestart.swift; sourceTree = "<group>"; };
 		7273D89029FE40D80006BDA4 /* orange-tunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "orange-tunnel.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -393,6 +395,7 @@
 				72022ACB29FA081600DC9012 /* UserDefault+Orange.swift */,
 				7275E5A52A06B9D30091FA7A /* V2Config.swift */,
 				7275E5C12A0A34960091FA7A /* NavigationSwipHack.swift */,
+				722513572A1375FB00E3ED85 /* URLComponents+Util.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -579,6 +582,7 @@
 				7275E59A2A062F850091FA7A /* NETunnelProviderManager+Helper.swift in Sources */,
 				7275E5C82A0A41760091FA7A /* WebView.swift in Sources */,
 				7275E5BF2A0A276C0091FA7A /* NavigationTitleView.swift in Sources */,
+				722513582A1375FB00E3ED85 /* URLComponents+Util.swift in Sources */,
 				7276F5EC29EE215900A937DD /* Withable.swift in Sources */,
 				7275E5AA2A08F5670091FA7A /* NodeListView.swift in Sources */,
 				7275E5A62A06B9D30091FA7A /* V2Config.swift in Sources */,
