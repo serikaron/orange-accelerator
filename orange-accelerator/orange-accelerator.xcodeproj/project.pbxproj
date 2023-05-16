@@ -31,6 +31,9 @@
 		7208214729E951B300D36AF3 /* orange_acceleratorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7208214629E951B300D36AF3 /* orange_acceleratorUITests.swift */; };
 		7208214929E951B300D36AF3 /* orange_acceleratorUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7208214829E951B300D36AF3 /* orange_acceleratorUITestsLaunchTests.swift */; };
 		7208215829EAC5AD00D36AF3 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7208215729EAC5AD00D36AF3 /* LoginView.swift */; };
+		722513522A12319C00E3ED85 /* InviteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722513512A12319C00E3ED85 /* InviteService.swift */; };
+		722513542A12515800E3ED85 /* InviteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722513532A12515800E3ED85 /* InviteView.swift */; };
+		722513562A12525900E3ED85 /* Separator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722513552A12525900E3ED85 /* Separator.swift */; };
 		722700792A0B5EDA0098D988 /* V2Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5A52A06B9D30091FA7A /* V2Config.swift */; };
 		722700822A0C6D990098D988 /* FirstTimeRestart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722700812A0C6D990098D988 /* FirstTimeRestart.swift */; };
 		7273D89129FE40D80006BDA4 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72022AE329FD434C00DC9012 /* NetworkExtension.framework */; };
@@ -43,7 +46,7 @@
 		7275E5A62A06B9D30091FA7A /* V2Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5A52A06B9D30091FA7A /* V2Config.swift */; };
 		7275E5A82A08F2D80091FA7A /* geosite.dat in Resources */ = {isa = PBXBuildFile; fileRef = 7275E5A72A08F2D80091FA7A /* geosite.dat */; };
 		7275E5AA2A08F5670091FA7A /* NodeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5A92A08F5670091FA7A /* NodeListView.swift */; };
-		7275E5AE2A0903BF0091FA7A /* RemindPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5AD2A0903BF0091FA7A /* RemindPopupView.swift */; };
+		7275E5AE2A0903BF0091FA7A /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5AD2A0903BF0091FA7A /* PopupView.swift */; };
 		7275E5B02A0929D90091FA7A /* MemberStoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5AF2A0929D90091FA7A /* MemberStoreView.swift */; };
 		7275E5B42A09D5F20091FA7A /* ConnectionStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7275E5B32A09D5F20091FA7A /* ConnectionStatusView.swift */; };
 		7275E5B62A09F3430091FA7A /* v2orange.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7275E5B52A09F3430091FA7A /* v2orange.xcframework */; };
@@ -135,6 +138,9 @@
 		7208214629E951B300D36AF3 /* orange_acceleratorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = orange_acceleratorUITests.swift; sourceTree = "<group>"; };
 		7208214829E951B300D36AF3 /* orange_acceleratorUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = orange_acceleratorUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		7208215729EAC5AD00D36AF3 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		722513512A12319C00E3ED85 /* InviteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteService.swift; sourceTree = "<group>"; };
+		722513532A12515800E3ED85 /* InviteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteView.swift; sourceTree = "<group>"; };
+		722513552A12525900E3ED85 /* Separator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Separator.swift; sourceTree = "<group>"; };
 		7227007B2A0B63360098D988 /* v2ray.routing.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = v2ray.routing.json; sourceTree = "<group>"; };
 		722700812A0C6D990098D988 /* FirstTimeRestart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTimeRestart.swift; sourceTree = "<group>"; };
 		7273D89029FE40D80006BDA4 /* orange-tunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "orange-tunnel.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,7 +155,7 @@
 		7275E5A52A06B9D30091FA7A /* V2Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V2Config.swift; sourceTree = "<group>"; };
 		7275E5A72A08F2D80091FA7A /* geosite.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = geosite.dat; sourceTree = "<group>"; };
 		7275E5A92A08F5670091FA7A /* NodeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeListView.swift; sourceTree = "<group>"; };
-		7275E5AD2A0903BF0091FA7A /* RemindPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindPopupView.swift; sourceTree = "<group>"; };
+		7275E5AD2A0903BF0091FA7A /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		7275E5AF2A0929D90091FA7A /* MemberStoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberStoreView.swift; sourceTree = "<group>"; };
 		7275E5B32A09D5F20091FA7A /* ConnectionStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionStatusView.swift; sourceTree = "<group>"; };
 		7275E5B52A09F3430091FA7A /* v2orange.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = v2orange.xcframework; sourceTree = "<group>"; };
@@ -219,6 +225,7 @@
 				7275E5AF2A0929D90091FA7A /* MemberStoreView.swift */,
 				7275E5C42A0A37AA0091FA7A /* ResetPasswordView.swift */,
 				72EB6BB02A0C85F900D317B3 /* ConnectButton.swift */,
+				722513532A12515800E3ED85 /* InviteView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -332,6 +339,7 @@
 				7275E5D32A0B2A560091FA7A /* NavigationService.swift */,
 				722700812A0C6D990098D988 /* FirstTimeRestart.swift */,
 				72EB6BB22A0CBA2800D317B3 /* ConnectionService.swift */,
+				722513512A12319C00E3ED85 /* InviteService.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -363,13 +371,14 @@
 		7276F5DF29EADAC700A937DD /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				7275E5AD2A0903BF0091FA7A /* RemindPopupView.swift */,
+				7275E5AD2A0903BF0091FA7A /* PopupView.swift */,
 				7276F5E029EADAF200A937DD /* Utils.swift */,
 				72022A5929F418A100DC9012 /* ErrorView.swift */,
 				72022AC329F8FF8300DC9012 /* LoadingView.swift */,
 				7275E5BB2A0A15760091FA7A /* OrangeButton.swift */,
 				7275E5BE2A0A276C0091FA7A /* NavigationTitleView.swift */,
 				7275E5C72A0A41760091FA7A /* WebView.swift */,
+				722513552A12525900E3ED85 /* Separator.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -550,10 +559,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				72022AD729FA61FF00DC9012 /* SideMenuView.swift in Sources */,
+				722513542A12515800E3ED85 /* InviteView.swift in Sources */,
 				72022AD929FA724C00DC9012 /* MainView.swift in Sources */,
 				72022A5429F3FF6400DC9012 /* RegisterView.swift in Sources */,
 				7275E5C52A0A37AA0091FA7A /* ResetPasswordView.swift in Sources */,
-				7275E5AE2A0903BF0091FA7A /* RemindPopupView.swift in Sources */,
+				7275E5AE2A0903BF0091FA7A /* PopupView.swift in Sources */,
 				72EB6BB12A0C85F900D317B3 /* ConnectButton.swift in Sources */,
 				7275E5CB2A0A4EDC0091FA7A /* WebViewService.swift in Sources */,
 				7275E5CE2A0AA3A00091FA7A /* Version.swift in Sources */,
@@ -562,6 +572,7 @@
 				7208215829EAC5AD00D36AF3 /* LoginView.swift in Sources */,
 				72022A5E29F4273100DC9012 /* ErrorService.swift in Sources */,
 				7275E5982A0623330091FA7A /* EndpointService.swift in Sources */,
+				722513562A12525900E3ED85 /* Separator.swift in Sources */,
 				72022AD129FA2A1E00DC9012 /* ModePickerView.swift in Sources */,
 				7275E5D42A0B2A560091FA7A /* NavigationService.swift in Sources */,
 				72022AC429F8FF8300DC9012 /* LoadingView.swift in Sources */,
@@ -588,6 +599,7 @@
 				72022AC029F7C23C00DC9012 /* Box.swift in Sources */,
 				7276F5E729EC35D200A937DD /* OnboardingService.swift in Sources */,
 				72022A5629F409B300DC9012 /* View+helper.swift in Sources */,
+				722513522A12319C00E3ED85 /* InviteService.swift in Sources */,
 				7275E5BC2A0A15760091FA7A /* OrangeButton.swift in Sources */,
 				7275E59E2A0687DC0091FA7A /* Account.swift in Sources */,
 				72022A5229F3DCCF00DC9012 /* Linkman.swift in Sources */,
@@ -783,7 +795,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.3;
+				MARKETING_VERSION = 0.1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = orange.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -820,7 +832,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.3;
+				MARKETING_VERSION = 0.1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = orange.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

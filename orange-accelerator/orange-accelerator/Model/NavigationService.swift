@@ -13,4 +13,5 @@ class NavigationService: ObservableObject {
     @Published var showNodeList: Bool = false
     @Published var showMemberStore: Bool = false
     @Published var showResetPassword: Bool = false
+    @Published var showInviteView: Bool = false
 }

@@ -44,12 +44,12 @@ struct SideMenuView: View {
         .padding(.bottom, 37.5)
         .onReceive(itemTapped) { item in
             switch item {
+            case .invite:
+                nav.showInviteView = true
             case .member:
                 nav.showMemberStore = true
-                break
             case .password:
                 nav.showResetPassword = true
-                break
             case .customService:
                 nav.webPage = .customService
             case .privacy:
@@ -58,7 +58,6 @@ struct SideMenuView: View {
                 Task {
                     showVersionPopup = await Version.hasUpdate
                 }
-                break
             }
         }
         .onAppear {
@@ -143,12 +142,13 @@ fileprivate struct MenuItemView: View {
 }
 
 fileprivate enum MenuItem: CaseIterable, Identifiable {
-    case member,password,customService,privacy,version
+    case invite,member,password,customService,privacy,version
     
     var id: String { icon }
     
     var icon: String {
         switch self {
+        case .invite: return "menu.invite"
         case .member: return "menu.member"
         case .password: return "menu.password"
         case .customService: return "menu.custom.service"
@@ -159,6 +159,7 @@ fileprivate enum MenuItem: CaseIterable, Identifiable {
     
     var title: String {
         switch self {
+        case .invite: return "邀请好友"
         case .member: return "续费会员"
         case .password: return "修改密码"
         case .customService: return "在线客服"

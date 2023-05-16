@@ -177,6 +177,47 @@ class Linkman{
             .make()
             .response() as VersionResponse
     }
+    
+    struct InvitePrize: Codable {
+        let username: String
+        let reward: String
+        let created_at: String
+    }
+    typealias UserInviteListResponse = [InvitePrize]
+    
+    func getUserInviteList(page: Int, pageSize: Int) async throws -> UserInviteListResponse {
+        return try await Request()
+            .with(\.path, setTo: "/v1/api/user/invite/list")
+            .with(\.method, setTo: .GET)
+            .with(\.query, setTo: ["page": "\(page)", "page_size": "\(pageSize)"])
+            .with(\.standaloneResponse, setTo: standaloneResponse(
+                (0..<10).map { InvitePrize(username: "name\($0)", reward: "7天", created_at: "2022-02-02")}
+            ))
+            .make()
+            .response() as UserInviteListResponse
+    }
+    
+    typealias InviteRuleResponse = String
+    
+    func getInviteRule() async throws -> InviteRuleResponse {
+        return try await Request()
+            .with(\.path, setTo: "/v1/api/invite/rule")
+            .with(\.method, setTo: .GET)
+            .with(\.standaloneResponse, setTo: standaloneResponse("邀请奖励规则，邀请奖励规则"))
+            .make()
+            .response() as InviteRuleResponse
+    }
+    
+    typealias InviteRewardResponse = String
+    
+    func getInviteReward() async throws -> InviteRewardResponse {
+        return try await Request()
+            .with(\.path, setTo: "/v1/api/invite/reward")
+            .with(\.method, setTo: .GET)
+            .with(\.standaloneResponse, setTo: standaloneResponse("7"))
+            .make()
+            .response() as InviteRewardResponse
+    }
 }
 
 private extension Linkman {

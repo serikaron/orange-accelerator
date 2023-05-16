@@ -39,9 +39,9 @@ struct MainView: View {
             NavigationLink(destination: ResetPasswordView(), isActive: $nav.showResetPassword) {
                 EmptyView()
             }
-//            NavigationLink(destination: WebView(title: webViewInfo.title, url: webViewInfo.url), isActive: $showWebView) {
-//                EmptyView()
-//            }
+            NavigationLink(destination: InviteView(), isActive: $nav.showInviteView) {
+                EmptyView()
+            }
             MainContentView(showSideMenu: $showSideMenu,
                             showPopup: showPopupSubject)
             Color.black.opacity(maskAlpha)

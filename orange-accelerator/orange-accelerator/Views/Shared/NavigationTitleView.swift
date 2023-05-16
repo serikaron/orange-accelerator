@@ -14,11 +14,6 @@ struct NavigationTitleView: View {
     
     var body: some View {
         ZStack {
-            VStack {
-                Spacer()
-                Color(hex: "#EDEDED")
-                    .frame(height: 1)
-            }
             HStack {
                 Spacer().frame(width: 16)
                 Button {
@@ -34,6 +29,7 @@ struct NavigationTitleView: View {
             }
         }
         .frame(height: 44)
+        .overlay(Separator(), alignment: .bottom)
     }
 }
 
