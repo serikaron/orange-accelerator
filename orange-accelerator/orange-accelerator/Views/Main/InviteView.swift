@@ -178,7 +178,11 @@ struct InviteView: View {
     func sharedButton(with destination: ShareDestination) -> some View {
         Button {
             accountService.copyLink()
-            openURL(URL(string: destination.link)!)
+            openURL(URL(string: destination.link)!) { success in
+                if !success {
+                    Box.sendError("跳转到\(destination.appName)失败")
+                }
+            }
         } label: {
             Image(destination.imageName)
         }
@@ -227,7 +231,7 @@ fileprivate extension ShareDestination {
         switch self {
         case .wechat: return "weixin://"
         case .qq: return "mqq://"
-        case .weibo: return "weibolite://"
+        case .weibo: return "sinaweibo://"
         }
     }
     
@@ -236,6 +240,14 @@ fileprivate extension ShareDestination {
         case .wechat: return "icon.wechat"
         case .qq: return "icon.qq"
         case .weibo: return "icon.weibo"
+        }
+    }
+    
+    var appName: String {
+        switch self {
+        case .wechat: return "微信"
+        case .qq: return "QQ"
+        case .weibo: return "微博"
         }
     }
 }
