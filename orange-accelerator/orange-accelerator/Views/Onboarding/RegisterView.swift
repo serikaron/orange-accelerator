@@ -14,6 +14,7 @@ struct RegisterView: View {
     @State var phone: String = ""
     @State var password: String = ""
     @State var password1: String = ""
+    @State var inviteCode: String = ""
     
     @State var checked = false
     
@@ -27,6 +28,7 @@ struct RegisterView: View {
                 OnboardingInput(title: "设置登录帐号", inputText: $phone)
                 OnboardingSecureInput(title: "设置登录密码", inputText: $password)
                 OnboardingSecureInput(title: "登录密码", inputText: $password1)
+                OnboardingInput(title: "邀请码", inputText: $inviteCode)
             }
             Spacer().frame(height: 41.5)
             Button("立即注册"){
@@ -88,7 +90,7 @@ struct RegisterView: View {
                 return
             }
             
-            await service.register(phone: phone, password: password)
+            await service.register(phone: phone, password: password, inviteCode: inviteCode.isEmpty ? nil : inviteCode)
         }
     }
 }

@@ -17,7 +17,6 @@ struct SideMenuView: View {
     
     @Binding var showVersionPopup: Bool
     
-    @State private var account: Account?
     @State private var clientVersion: String = "0.0.0"
     
     private let itemTapped = ItemTapped()
@@ -94,11 +93,10 @@ struct SideMenuView: View {
     }
     
     private var expiration: String {
-        guard let expiration = account?.vipExpiration else {
-            return ""
-        }
-        guard account?.isVip ?? false else {
-            return ""
+        guard accountService.account?.isVip ?? false,
+              let expiration = accountService.account?.vipExpiration
+        else {
+            return "未开通会员"
         }
         
         let date = Date(timeIntervalSince1970: TimeInterval(expiration))

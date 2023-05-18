@@ -44,11 +44,11 @@ class Linkman{
         let access_token: String
     }
     
-    func register(phone: String, password: String) async throws -> RegisterResponse {
+    func register(phone: String, password: String, inviteCode: String?) async throws -> RegisterResponse {
         return try await Request()
             .with(\.path, setTo: "/v1/api/user/register")
             .with(\.method, setTo: .POST)
-            .with(\.body, setTo: ["username": phone, "password": password])
+            .with(\.body, setTo: ["username": phone, "password": password, "invitation_code": inviteCode as Any])
             .with(\.standaloneResponse, setTo: standaloneResponse(RegisterResponse(access_token: "mockToken")))
             .make()
             .response() as RegisterResponse
@@ -372,7 +372,7 @@ private enum HTTPMethod: String {
 private class Request: Withable {
     var path: String = ""
     var method: HTTPMethod = .GET
-    var query: [String: String]?
+    var query: [String: String?]?
     var body: JSONDict?
     var headers: [String: String]?
 

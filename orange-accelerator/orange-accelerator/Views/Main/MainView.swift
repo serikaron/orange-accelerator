@@ -38,7 +38,7 @@ struct MainView: View {
             NavigationLink(destination: MemberStoreView(), isActive: $nav.showMemberStore) {
                 EmptyView()
             }
-            NavigationLink(destination: ResetPasswordView(), isActive: $nav.showResetPassword) {
+            NavigationLink(destination: ResetPasswordView().environmentObject(accountService), isActive: $nav.showResetPassword) {
                 EmptyView()
             }
             NavigationLink(destination: InviteView().environmentObject(accountService),
