@@ -28,7 +28,7 @@ struct NodeListView: View {
                     do {
                         let endpoints = try await EndpointList.all
                             .filtered(isVip: accountService.account?.isVip ?? false)
-                            .ping()
+//                            .ping()
                         var dict = [String: [NodeItem]]()
                         endpoints.forEach { endpoint in
                             if dict[endpoint.group] == nil {

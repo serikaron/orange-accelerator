@@ -64,6 +64,14 @@ class ConnectionService: ObservableObject {
         status = .disconnected
         await NETunnelProviderManager.stop()
     }
+    
+    func refresh() async {
+        do {
+            try await EndpointList.refresh()
+        } catch {
+            Box.sendError("刷新失败")
+        }
+    }
 }
 
 private func duration(from startTime: Date) -> String {

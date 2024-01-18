@@ -23,6 +23,14 @@ extension String {
         f.dateFormat = format
         return f.date(from: self)
     }
+    
+    func base64Decoded() throws -> String {
+        guard let data = Data(base64Encoded: self.data(using: .utf8)!) else {
+            throw "not base64 string (\(self))"
+        }
+        
+        return String(data: data, encoding: .utf8)!
+    }
 }
 
 extension Date {

@@ -38,29 +38,43 @@ struct MainContentView: View {
                 ConnectionStatusView()
             }
             Spacer()
+//            Button {
+//                nav.showMemberStore = true
+//            } label: {
+//                HStack {
+//                    Image("button.member")
+//                    VStack(alignment: .leading) {
+//                        Text("开通会员")
+//                            .orangeText(size: 18, color: .white, weight: .bold)
+//                        Text("立即解锁高速连接")
+//                            .orangeText(size: 15, color: .white)
+//                    }
+//                    Spacer()
+//                    Image(systemName: "chevron.right")
+//                        .foregroundColor(.white)
+//                        .padding(.trailing)
+//                }
+//                .padding(.horizontal)
+//                .frame(height: 82)
+//                .frame(maxWidth: .infinity)
+//                .background(Color.main)
+//                .cornerRadius(10)
+//                .padding(.horizontal)
+//                .padding(.bottom, 40)
+//            }
             Button {
-                nav.showMemberStore = true
-            } label: {
-                HStack {
-                    Image("button.member")
-                    VStack(alignment: .leading) {
-                        Text("开通会员")
-                            .orangeText(size: 18, color: .white, weight: .bold)
-                        Text("立即解锁高速连接")
-                            .orangeText(size: 15, color: .white)
-                    }
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .foregroundColor(.white)
-                        .padding(.trailing)
+                Task {
+                    await conn.refresh()
                 }
-                .padding(.horizontal)
-                .frame(height: 82)
-                .frame(maxWidth: .infinity)
-                .background(Color.main)
-                .cornerRadius(10)
-                .padding(.horizontal)
-                .padding(.bottom, 40)
+            } label: {
+                Text("更新")
+                    .frame(width: 200, height: 50)
+                    .foregroundColor(Color.main)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 25)
+                            .stroke(Color.main, lineWidth: 1)
+                    )
+                    .padding(.bottom, 40)
             }
         }
         .onAppear {

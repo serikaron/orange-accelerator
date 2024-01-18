@@ -8,7 +8,7 @@
 	</array>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.orange.dev</string>
+		<string>group.com.rps.app.ios1</string>
 	</array>
 </dict>
 </plist>

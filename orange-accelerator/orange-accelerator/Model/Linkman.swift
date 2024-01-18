@@ -79,8 +79,7 @@ class Linkman{
             .with(\.path, setTo: "/v1/api/server/list")
             .with(\.method, setTo: .GET)
             .with(\.standaloneResponse, setTo: standaloneResponse([
-                ServerResonse(id: 1, name: "live", group: "", ip: "us.60cdn.com", port: "10233", server_type: 1, sort: 0),
-//                ServerResonse(id: 2, name: "dead", group: "", ip: "124.71.122.218", port: "10233", server_type: 2, sort: 0),
+                ServerResonse(id: 1, name: "live", group: "", ip: "hk-a.50cdn.com", port: "20137", server_type: 2, sort: 0),
             ]))
             .with(\.forceStandalone, setTo: true)
             .make()
